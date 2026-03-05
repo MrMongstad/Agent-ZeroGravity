@@ -68,13 +68,15 @@ To maximize velocity, The Night Watch can delegate work through two channels:
 - `QUEUED` **Example: Auto-backup critical configs** — Script that backs up .env files, credentials, and settings to encrypted cloud storage on a schedule.
 - `PARKED` **finish the Sonic Reader App** — Find back the Sonic Reader app code and get it ready for launch. Located here: `C:\Users\steph\.gemini\antigravity\02_Active_Workspaces\Sonic_Reader`
 - `QUEUED` **Front page / landing page for the SaaS (Sonic Reader)** — Code a page where I can make the app available for the public to use, and start making some money from it.
-- `QUEUED` **Build Sonic Reader v2** — "I want to build Sonic Reader v2. We are migrating to Vite, rewriting the Rust backend to handle the Chrome Legacy Window bug natively, and implementing a strict DOM isolation layer. Draft the plan." (Note: Execution must strictly follow the PR-First Workflow).
+- `IN_PROGRESS` **Build Sonic Reader v2** — Phase 1 (scaffold) approved. Phase 2 (engine) in progress: text_sanitizer.rs, process_manager.rs, tts.rs, IPC bindings. Branch: `feature/sonic-v2-phase2-engine`.
 
 ### From Antigravity (Automation Opportunities)
 - `DONE` **API Key Health Monitor** — Scheduled task that pings each API endpoint nightly and flags expired/depleted keys in the morning report. Eliminates manual "does this key still work?" checks.
 - `DONE` **Git Auto-Commit for Agent Zero Workdir** — Agent Zero's `usr/workdir` isn't version controlled. Auto-commit changes after each completed task so you can review diffs in the morning report.
 - `DONE` **Conversation Archive Compressor** — Extract key decisions into KIs and compress old conversations.
 - `DONE` **Integrate Agent Zero Dispatcher** — Linked Antigravity to the primary Agent Zero instance via `comms/dispatch.py`. Allows for cross-agent task delegation.
+- `DONE` **Morning Report Web Dashboard** — Premium HTML dashboard at `ops/morning-report/index.html` that renders `report-data.json` live. Served at `localhost:8888`.
+- `DONE` **Subagent Profiles** — Created `frontend_dev` and `backend_arch` agent profiles under `agent_zero/usr/agents/` for Hive Mind delegation.
 
 ---
 

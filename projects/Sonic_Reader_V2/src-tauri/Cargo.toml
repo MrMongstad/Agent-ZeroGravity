@@ -25,6 +25,8 @@ uiautomation = "0.12"
 tts = "0.26"
 tokio = { version = "1.0", features = ["full"] }
 lazy_static = "1.4"
+rodio = "0.17"
+tempfile = "3.8"
 
 [lib]
 name = "sonic_reader_v2_lib"
