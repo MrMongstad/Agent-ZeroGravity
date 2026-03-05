@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morning Report — The Night Watch</title>
+    <meta name="description" content="Autonomous Operations Dashboard for The Night Watch protocol.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-card: #111118;
+            --bg-card-hover: #16161f;
+            --bg-input: #0d0d14;
+            --border: rgba(255, 255, 255, 0.06);
+            --border-accent: rgba(99, 102, 241, 0.3);
+            --text-primary: #e4e4ec;
+            --text-secondary: #8888a0;
+            --text-muted: #55556a;
+            --accent-indigo: #6366f1;
+            --accent-purple: #a855f7;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --accent-cyan: #06b6d4;
+            --glow-indigo: rgba(99, 102, 241, 0.15);
+            --glow-emerald: rgba(16, 185, 129, 0.15);
+            --glow-amber: rgba(245, 158, 11, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* === AMBIENT BACKGROUND === */
+        .ambient {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .ambient .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            animation: drift 20s ease-in-out infinite alternate;
+        }
+
+        .ambient .orb-1 {
+            width: 500px;
+            height: 500px;
+            top: -15%;
+            left: -10%;
+            background: rgba(99, 102, 241, 0.08);
+        }
+
+        .ambient .orb-2 {
+            width: 400px;
+            height: 400px;
+            bottom: -10%;
+            right: -5%;
+            background: rgba(168, 85, 247, 0.06);
+            animation-delay: -7s;
+        }
+
+        .ambient .orb-3 {
+            width: 300px;
+            height: 300px;
+            top: 40%;
+            right: 20%;
+            background: rgba(6, 182, 212, 0.04);
+            animation-delay: -14s;
+        }
+
+        @keyframes drift {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(30px, -20px) scale(1.1);
+            }
+        }
+
+        /* === LAYOUT === */
+        .shell {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        /* === HEADER === */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px var(--glow-indigo);
+            font-size: 20px;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .header h1 span {
+            color: var(--accent-indigo);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .badge {
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-review {
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--accent-amber);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .badge-date {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        /* === SUMMARY CARD === */
+        .summary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-indigo), var(--accent-purple), transparent);
+        }
+
+        .summary-card h2 {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .summary-card p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+
+        /* === GRID === */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        @media (max-width: 700px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* === SECTION CARDS === */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--border-accent);
+            box-shadow: 0 0 40px var(--glow-indigo);
+        }
+
+        .card-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .card-title .dot-indigo {
+            background: var(--accent-indigo);
+        }
+
+        .card-title .dot-emerald {
+            background: var(--accent-emerald);
+        }
+
+        .card-title .dot-amber {
+            background: var(--accent-amber);
+        }
+
+        .card-title .dot-cyan {
+            background: var(--accent-cyan);
+        }
+
+        /* === COMMITS === */
+        .commit-list {
+            list-style: none;
+        }
+
+        .commit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .commit-item:last-child {
+            border-bottom: none;
+        }
+
+        .commit-hash {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--accent-indigo);
+            background: rgba(99, 102, 241, 0.08);
+            padding: 3px 8px;
+            border-radius: 6px;
+            white-space: nowrap;
+            margin-top: 1px;
+        }
+
+        .commit-msg {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* === FILE TABLE === */
+        .file-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .file-table th {
+            text-align: left;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            padding: 0 0 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .file-table td {
+            padding: 10px 12px 10px 0;
+            font-size: 13px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            vertical-align: top;
+        }
+
+        .file-table td:first-child {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--accent-cyan);
+            max-width: 280px;
+            word-break: break-all;
+        }
+
+        /* === AGENTS === */
+        .agent-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .agent-row:last-child {
+            border-bottom: none;
+        }
+
+        .agent-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .agent-avatar-0 {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+            color: white;
+        }
+
+        .agent-avatar-1 {
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .agent-avatar-2 {
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--accent-amber);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .agent-avatar-3 {
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--accent-emerald);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .agent-info {
+            flex: 1;
+        }
+
+        .agent-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .agent-action {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .agent-result {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--accent-emerald);
+            background: var(--glow-emerald);
+            padding: 4px 10px;
+            border-radius: 8px;
+        }
+
+        /* === BACKLOG === */
+        .backlog-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .backlog-item:last-child {
+            border-bottom: none;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-done {
+            background: var(--accent-emerald);
+            box-shadow: 0 0 8px var(--glow-emerald);
+        }
+
+        .status-in_progress {
+            background: var(--accent-amber);
+            box-shadow: 0 0 8px var(--glow-amber);
+            animation: pulse-dot 2s infinite;
+        }
+
+        .status-queued {
+            background: var(--text-muted);
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        .backlog-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            flex: 1;
+        }
+
+        .backlog-badge {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 3px 10px;
+            border-radius: 6px;
+        }
+
+        .backlog-badge-done {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-emerald);
+        }
+
+        .backlog-badge-in_progress {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--accent-amber);
+        }
+
+        .backlog-badge-queued {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+        }
+
+        /* === NEXT STEPS === */
+        .next-list {
+            list-style: none;
+            counter-reset: step;
+        }
+
+        .next-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            counter-increment: step;
+        }
+
+        .next-item:last-child {
+            border-bottom: none;
+        }
+
+        .next-item::before {
+            content: counter(step);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-indigo);
+            background: rgba(99, 102, 241, 0.1);
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .next-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* === FULL-WIDTH TABLE CARD === */
+        .card-full {
+            margin-bottom: 32px;
+        }
+
+        /* === FOOTER === */
+        .footer {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 0.4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ambient">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="shell" id="app">
+        <!-- Rendered by JS -->
+    </div>
+
+    <script>
+        (async () => {
+            let data;
+            try {
+                const resp = await fetch('./report-data.json');
+                data = await resp.json();
+            } catch (e) {
+                document.getElementById('app').innerHTML = `<p style="color: var(--accent-rose); padding: 40px;">Failed to load report-data.json: ${e.message}</p>`;
+                return;
+            }
+
+            const m = data.meta;
+            const statusLabel = {
+                'PR_STAGED_AWAITING_REVIEW': 'Awaiting Review',
+                'APPROVED': 'Approved',
+                'MERGED': 'Merged'
+            };
+
+            const agentAvatars = ['A0', 'FE', 'BE', 'AZ'];
+
+            const app = document.getElementById('app');
+            app.innerHTML = `
+            <!-- HEADER -->
+            <header class="header">
+                <div class="header-left">
+                    <div class="logo">☀️</div>
+                    <h1>Morning <span>Report</span></h1>
+                </div>
+                <div class="header-right">
+                    <span class="badge badge-date">${m.date}</span>
+                    <span class="badge badge-review">${statusLabel[m.status] || m.status}</span>
+                </div>
+            </header>
+
+            <!-- SUMMARY -->
+            <div class="summary-card">
+                <h2>Executive Summary</h2>
+                <p>${data.summary}</p>
+            </div>
+
+            <!-- COMMITS + AGENTS -->
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title"><span class="dot dot-indigo"></span>Commits on <code style="font-family:'JetBrains Mono';font-size:11px;color:var(--accent-cyan);margin-left:4px">${m.branch}</code></div>
+                    <ul class="commit-list">
+                        ${data.commits.map(c => `
+                            <li class="commit-item">
+                                <span class="commit-hash">${c.hash}</span>
+                                <span class="commit-msg">${c.message}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-title"><span class="dot dot-cyan"></span>Hive Mind Activity</div>
+                    ${data.agents.map((a, i) => `
+                        <div class="agent-row">
+                            <div class="agent-avatar agent-avatar-${i}">${agentAvatars[i] || '??'}</div>
+                            <div class="agent-info">
+                                <div class="agent-name">${a.name}</div>
+                                <div class="agent-action">${a.action}</div>
+                            </div>
+                            <span class="agent-result">${a.result}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+
+            <!-- FILES: FRONTEND -->
+            <div class="card card-full">
+                <div class="card-title"><span class="dot dot-emerald"></span>Files Created — Frontend</div>
+                <table class="file-table">
+                    <thead><tr><th>Path</th><th>Purpose</th></tr></thead>
+                    <tbody>
+                        ${data.files_created.frontend.map(f => `<tr><td>${f.path}</td><td>${f.purpose}</td></tr>`).join('')}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- FILES: BACKEND -->
+            <div class="card card-full">
+                <div class="card-title"><span class="dot dot-amber"></span>Files Created — Backend</div>
+                <table class="file-table">
+                    <thead><tr><th>Path</th><th>Purpose</th></tr></thead>
+                    <tbody>
+                        ${data.files_created.backend.map(f => `<tr><td>${f.path}</td><td>${f.purpose}</td></tr>`).join('')}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- FILES: INFRASTRUCTURE -->
+            <div class="card card-full">
+                <div class="card-title"><span class="dot dot-indigo"></span>Files Created — Infrastructure</div>
+                <table class="file-table">
+                    <thead><tr><th>Path</th><th>Purpose</th></tr></thead>
+                    <tbody>
+                        ${data.files_created.infrastructure.map(f => `<tr><td>${f.path}</td><td>${f.purpose}</td></tr>`).join('')}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- BACKLOG + NEXT STEPS -->
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title"><span class="dot dot-emerald"></span>Backlog Status</div>
+                    ${data.backlog.map(b => `
+                        <div class="backlog-item">
+                            <span class="status-dot status-${b.status}"></span>
+                            <span class="backlog-label">${b.item}${b.note ? ` <span style="color:var(--text-muted);font-size:12px">— ${b.note}</span>` : ''}</span>
+                            <span class="backlog-badge backlog-badge-${b.status}">${b.status.replace('_', ' ')}</span>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="card">
+                    <div class="card-title"><span class="dot dot-amber"></span>Next Steps (Pending Approval)</div>
+                    <ol class="next-list">
+                        ${data.next_steps.map(s => `
+                            <li class="next-item"><span class="next-text">${s}</span></li>
+                        `).join('')}
+                    </ol>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="footer">
+                The Night Watch &middot; Generated by Antigravity &middot; Branch: ${m.branch}
+            </div>
+        `;
+        })();
+    </script>
+</body>
+
+</html>
