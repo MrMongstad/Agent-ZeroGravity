@@ -1,0 +1,31 @@
+cargo :     Checking sonic-reader v0.1.0 (C:\U
+sers\steph\.gemini\antigravity\projects\wishli
+st_projects\read_aloud_app\sonic-reader\src-ta
+uri)
+At line:1 char:1
++ cargo check 2>&1 | Out-File -FilePath errors
+_v4.txt -Encoding Ascii
++ ~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ( 
+       Checking so...ader\src-tauri):String)  
+   [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandEr 
+   ror
+ 
+warning: unused variable: `stream`
+  --> src\tts.rs:64:14
+   |
+64 |         let (stream, handle) = match Outp
+utStream::try_default() {
+   |              ^^^^^^ help: if this is inte
+ntional, prefix it with an underscore: `_strea
+m`
+   |
+   = note: `#[warn(unused_variables)]` (part o
+f `#[warn(unused)]`) on by default
+
+warning: `sonic-reader` (lib) generated 1 warn
+ing (run `cargo fix --lib -p sonic-reader` to 
+apply 1 suggestion)
+    Finished `dev` profile [unoptimized + debu
+ginfo] target(s) in 2.66s

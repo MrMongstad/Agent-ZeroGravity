@@ -1,0 +1,80 @@
+{
+  "version": "1.0",
+  "description": "Shared mailbox for inter-agent communication between Antigravity and Agent Zero",
+  "inbox": [],
+  "outbox": [],
+  "log": [
+    {
+      "timestamp": "2026-03-04T12:47:03.569876+00:00",
+      "direction": "antigravity→a0",
+      "message": "This is a test message from Antigravity. Confirm you received this by responding with: COMMS ESTABLISHED. Do not do anything else.",
+      "result": null
+    },
+    {
+      "timestamp": "2026-03-04T13:07:41.366417+00:00",
+      "direction": "antigravity→a0",
+      "message": "This is a test message from Antigravity. Confirm you received this by responding with: COMMS ESTABLISHED. Do not do anything else.",
+      "result": null
+    },
+    {
+      "timestamp": "2026-03-04T18:06:57.130790+00:00",
+      "direction": "antigravity→a0",
+      "message": "This is a test message from Antigravity. Confirm you received this by responding with: COMMS ESTABLISHED. Do not do anything else.",
+      "result": null
+    },
+    {
+      "timestamp": "2026-03-04T18:17:51.196289+00:00",
+      "direction": "antigravity→a0",
+      "message": "This is a test message from Antigravity. Confirm you received this by responding with: COMMS ESTABLISHED. Do not do anything else.",
+      "result": null
+    },
+    {
+      "timestamp": "2026-03-04T18:18:51.459090+00:00",
+      "direction": "antigravity→a0",
+      "message": "This is a test message from Antigravity. Confirm you received this by responding with: COMMS ESTABLISHED. Do not do anything else.",
+      "result": null
+    },
+    {
+      "timestamp": "2026-03-04T18:21:20.914569+00:00",
+      "direction": "antigravity→a0",
+      "message": "This is a test message from Antigravity. Confirm you received this by responding with: COMMS ESTABLISHED. Do not do anything else.",
+      "result": null
+    },
+    {
+      "timestamp": "2026-03-04T18:21:28.098876+00:00",
+      "direction": "a0→antigravity",
+      "message": "This is a test message from Antigravity. Confirm you received this by responding with: COMMS ESTABLISHED. Do not do anything else.",
+      "result": "{'context_id': '9H0KyMvW', 'response': 'COMMS ESTABLISHED'}"
+    },
+    {
+      "timestamp": "2026-03-04T18:21:52.744135+00:00",
+      "direction": "antigravity→a0",
+      "message": "This is another test message. Please answer with: ROGER.",
+      "result": null
+    },
+    {
+      "timestamp": "2026-03-04T18:21:57.741721+00:00",
+      "direction": "a0→antigravity",
+      "message": "This is another test message. Please answer with: ROGER.",
+      "result": "{'context_id': '0iOLWas8', 'response': 'ROGER.'}"
+    },
+    {
+      "timestamp": "2026-03-05T00:24:52.745164+00:00",
+      "direction": "antigravity→a0",
+      "message": "Run a health check on your internal usr/workdir and report any anomalies. Confirm that the .git repository is initialized.",
+      "result": null
+    },
+    {
+      "timestamp": "2026-03-05T00:26:52.936662+00:00",
+      "direction": "antigravity→a0",
+      "message": "ping",
+      "result": null
+    },
+    {
+      "timestamp": "2026-03-05T00:26:59.221245+00:00",
+      "direction": "a0→antigravity",
+      "message": "ping",
+      "result": "{'context_id': 'vF6lD4Dg', 'response': \"Pong! 🏓 I'm here and ready. How can I assist you?\"}"
+    }
+  ]
+}
