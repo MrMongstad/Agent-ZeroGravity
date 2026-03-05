@@ -67,7 +67,7 @@ To maximize velocity, The Night Watch can delegate work through two channels:
 ### From Stephan (Strategic Initiatives)
 - `QUEUED` **Example: Auto-backup critical configs** — Script that backs up .env files, credentials, and settings to encrypted cloud storage on a schedule.
 - `PARKED` **finish the Sonic Reader App** — Find back the Sonic Reader app code and get it ready for launch. Located here: `C:\Users\steph\.gemini\antigravity\02_Active_Workspaces\Sonic_Reader`
-- `QUEUED` **Front page / landing page for the SaaS (Sonic Reader)** — Code a page where I can make the app available for the public to use, and start making some money from it.
+- `IN_PROGRESS` **Front page / landing page for the SaaS (Sonic Reader)** — Premium dark-mode landing page with hero, features grid, 3-step how-it-works, 3-tier pricing ($0/Free, $9/Pro, $79/Lifetime), FAQ accordion, CTA. Branch: `feature/sonic-reader-landing-page`.
 - `IN_PROGRESS` **Build Sonic Reader v2** — Phase 1 (scaffold) ✅ Phase 2 (engine) ✅ Phase 3 (UI polish + settings + build config) ✅. Full frontend + backend staged. Branch: `feature/sonic-v2-phase2-engine`.
 
 ### From Antigravity (Automation Opportunities)
