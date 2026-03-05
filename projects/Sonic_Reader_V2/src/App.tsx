@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 import { Play, Square, Pause, Settings, Cpu, Zap } from 'lucide-react';
 import GhostOverlay from './components/GhostOverlay';
+import SettingsPanel from './components/SettingsPanel';
 
 type EngineStatus = 'idle' | 'scraping' | 'reading' | 'paused' | 'error';
 
@@ -21,6 +22,7 @@ const App = () => {
     const [status, setStatus] = useState<EngineStatus>('idle');
     const [lastError, setLastError] = useState<string>('');
     const [chunkCount, setChunkCount] = useState(0);
+    const [settingsOpen, setSettingsOpen] = useState(false);
 
     const handleScrapeAndRead = useCallback(async () => {
         try {
@@ -110,6 +112,7 @@ const App = () => {
     return (
         <div className="min-h-screen bg-neutral-950 text-neutral-100 font-sans selection:bg-indigo-500/30">
             <GhostOverlay />
+            <SettingsPanel isOpen={settingsOpen} onClose={() => setSettingsOpen(false)} />
 
             {/* Ambient Background */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -133,7 +136,7 @@ const App = () => {
                             <Zap className="w-3 h-3 inline mr-1 text-amber-500" />{chunkCount} chunks
                         </span>
                     )}
-                    <button className="p-2 hover:bg-white/5 rounded-full transition-colors group">
+                    <button onClick={() => setSettingsOpen(true)} className="p-2 hover:bg-white/5 rounded-full transition-colors group">
                         <Settings className="w-5 h-5 text-neutral-400 group-hover:text-white transition-colors" />
                     </button>
                 </div>

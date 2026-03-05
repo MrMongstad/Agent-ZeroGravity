@@ -68,7 +68,7 @@ To maximize velocity, The Night Watch can delegate work through two channels:
 - `QUEUED` **Example: Auto-backup critical configs** — Script that backs up .env files, credentials, and settings to encrypted cloud storage on a schedule.
 - `PARKED` **finish the Sonic Reader App** — Find back the Sonic Reader app code and get it ready for launch. Located here: `C:\Users\steph\.gemini\antigravity\02_Active_Workspaces\Sonic_Reader`
 - `QUEUED` **Front page / landing page for the SaaS (Sonic Reader)** — Code a page where I can make the app available for the public to use, and start making some money from it.
-- `IN_PROGRESS` **Build Sonic Reader v2** — Phase 1 (scaffold) approved. Phase 2 (engine) in progress: text_sanitizer.rs, process_manager.rs, tts.rs, IPC bindings. Branch: `feature/sonic-v2-phase2-engine`.
+- `IN_PROGRESS` **Build Sonic Reader v2** — Phase 1 (scaffold) ✅ Phase 2 (engine) ✅ Phase 3 (UI polish + settings + build config) ✅. Full frontend + backend staged. Branch: `feature/sonic-v2-phase2-engine`.
 
 ### From Antigravity (Automation Opportunities)
 - `DONE` **API Key Health Monitor** — Scheduled task that pings each API endpoint nightly and flags expired/depleted keys in the morning report. Eliminates manual "does this key still work?" checks.
