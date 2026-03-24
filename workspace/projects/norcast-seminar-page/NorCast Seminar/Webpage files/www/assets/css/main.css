@@ -1152,7 +1152,9 @@ div.gallery img { width: 16em; height: 18em; border-radius: 15px; }
 .flex-wrap { flex-wrap: wrap !important; }
 .justify-content-center { justify-content: center !important; }
 .align-items-center { align-items: center !important; }
-.w-45 { width: 45% !important; }
-.w-33 { width: 33.333333% !important; }
+.w-45 { width: 45% !important; flex: 0 0 45% !important; max-width: 45% !important; }
+.w-33 { width: 33.333333% !important; flex: 0 0 33.333333% !important; max-width: 33.333333% !important; }
 .w-100 { width: 100% !important; }
 .px-1-5 { padding-left: 1.5em !important; padding-right: 1.5em !important; }
+
+#committee img { border: 1px solid #000; }
