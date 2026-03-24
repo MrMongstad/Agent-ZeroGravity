@@ -289,7 +289,7 @@
                         <div class="table_row">
                             <div class="table_time">13:00 - 13:40</div>
                             <div class="table_content">
-                                <img class="image dgs" src="images/DGS/Johan Berg.jpg" alt="Johan Berg" />
+                                <img class="image dgs" src="images/Special invitee images/Johan Berg.jpg" alt="Johan Berg" />
                                 <div class="pt-55px overflow-hidden">
                                     <h5 class="mb-0">Mr. Johan Berg, Senior Vice President,</h5>
                                     <p class="mt-0 fs-italic">Head of Primary Production Norway, <br>
@@ -459,7 +459,7 @@
                             <p>S/S Solrik</p>
                         </div>
                         <div class="prog bt boyleslie">
-                            <img src="images/msoya.png" alt="M/S Oya" />
+                            <img src="images/msoya.jpg" alt="M/S Oya" />
                             <p>M/S Øya</p>
                         </div>
                     </div>
@@ -729,7 +729,7 @@
                         <div class="table_row">
                             <div class="table_time">11:55 - 12:40</div>
                             <div class="table_content">
-                                <img class="image dgs" src="images/DGS/mr hisham.jpg" alt="Mr. Hisham" />
+                                <img class="image dgs" src="images/Special invitee images/mr hisham.jpg" alt="Mr. Hisham" />
                                 <h5 class="mb-0 pt-12px">Mr. Hisham Yousif Alkooheji, CMO-Chief Marketing Officer.</h5>
                                 <p class="mt-0">Alba- Aluminium Bahrain, <br>
                                 Kingdom of Bahrain.</p>

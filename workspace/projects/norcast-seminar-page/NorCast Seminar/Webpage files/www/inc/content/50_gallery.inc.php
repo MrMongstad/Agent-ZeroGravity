@@ -5,7 +5,7 @@
           <header>
             <h2>NorCast Gallery</h2>
           </header>
-					<h2 class="text-center fs-1-5em fw-400">NorCast Conference 2024</h2>
+					<h2 class="text-center fs-1-5em fw-400">NorCast Conference 2026</h2>
 					<div class="gallery_flex">
 						<p>
 							<div class="responsive"><div class="gallery"><a rel="lightbox-c2024" href="images/NC2024/01.jpg" title="Arendal Old Town Hall where you attended NorCast’s annual dinner and with sailing boats in the harbour "><img src="images/NC2024/01.jpg" /></a></div></div>
