@@ -1147,3 +1147,12 @@ div.gallery img { width: 16em; height: 18em; border-radius: 15px; }
 .fs-15px { font-size: 15px !important; }
 .no-underline { text-decoration: none !important; }
 .text-highlight { font-size: 1.2em; line-height: 1.5em; letter-spacing: 0.05em; font-weight: bold; color: var(--color-slate); }
+
+.d-flex { display: flex !important; }
+.flex-wrap { flex-wrap: wrap !important; }
+.justify-content-center { justify-content: center !important; }
+.align-items-center { align-items: center !important; }
+.w-45 { width: 45% !important; }
+.w-33 { width: 33.333333% !important; }
+.w-100 { width: 100% !important; }
+.px-1-5 { padding-left: 1.5em !important; padding-right: 1.5em !important; }
