@@ -16,9 +16,7 @@ header("Content-Type: text/html; charset=utf-8");
 global $rootdir;
 $rootdir = "./";
 
-$page = $_GET['page'];
-if (!$page)
-	$page = 1;
+$page = !empty($_GET['page']) ? $_GET['page'] : 1;
 
 //ini_set("display_errors","2");
 //ERROR_REPORTING(E_ALL);
