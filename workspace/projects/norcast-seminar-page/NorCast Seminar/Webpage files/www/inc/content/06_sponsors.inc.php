@@ -201,7 +201,7 @@
 				
 					<h6 class="sponsor-bronze">Bronze Sponsor</h6><br />
 					<p>
-						<a href="https://www.ergolines.it/" target="_blank"><img class="logo-bronze" src="images/sponsors/ergolines.png" style="max-width: 250px;" /></a>
+						<a href="https://www.ergolines.it/" target="_blank"><img class="logo-bronze mw-250px" src="images/sponsors/ergolines.png" /></a>
 					</p>
 					<h2>ErgoLines Lab, s.r.l., Italy</h2><br>
 					<p><strong>Ergolines Lab srl is an Italian company that specializes in the development of advanced solutions that improve efficiency, operators’ safety, final product quality, process control and sustainability	   </p></strong>
@@ -386,10 +386,9 @@
 					<h6 class="sponsor-bronze">Bronze Sponsor</h6><br />
 					<p>
 						<a href="https://www.cetag.swiss/" target="_blank">
-							<img class="logo-bronze" 
+							<img class="logo-bronze mw-140px" 
 								 src="images/sponsors2020/cetag.png" 
-								 alt="CETAG Logo" 
-								 style="max-width: 140px;" /> 
+								 alt="CETAG Logo" /> 
 						</a>
 					</p>
 					</p>
