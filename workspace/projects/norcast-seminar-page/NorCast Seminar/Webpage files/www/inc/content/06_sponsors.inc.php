@@ -7,11 +7,13 @@
           </header>
 		  			<!-- Hertwich -->							  
 
-					<h6 class="sponsor-gold">Joint-Gold Sponsor</h6><br />
-					<p>
-						<a href="http://www.hertwich.com/" target="_blank"><img src="images/sponsors2020/hertwich.png" /></a>
+					<h6 class="sponsor-gold m-0">Joint-Gold Sponsor</h6>
+					<p class="mt-1">
+						<a href="http://www.hertwich.com/" target="_blank">
+                            <img src="images/sponsors2020/hertwich.png" class="mw-250px" alt="Hertwich Logo" />
+                        </a>
 					</p>
-					<h2>Hertwich Engineering GmbH, Austria</h2>
+					<h2 class="mt-1">Hertwich Engineering GmbH, Austria</h2>
 					<p><strong><br />
 					As a global innovation leader in recycling technology for aluminium scrap and systems in the aluminium industry, quality and innovation is in our DNA. Hertwich Engineering, a company of SMS group, regularly presents new developments and improvements to existing applications and products.
 					</strong></p>
@@ -50,12 +52,14 @@
 					
 					<div id="hiddenContent"></div>
 					
-					<h6 class="sponsor-gold">Joint-Gold Sponsor</h6><br />
+					<h6 class="sponsor-gold m-0">Joint-Gold Sponsor</h6>
 					<!-- HOESCH Group -->
-					<p>
-						<a href="https://www.hoesch-metallurgie.com/" target="_blank"><img class="logo-silver" src="images/sponsors2020/hoesch.png" /></a>
+					<p class="mt-1">
+						<a href="https://www.hoesch-metallurgie.com/" target="_blank">
+                            <img class="logo-silver" src="images/sponsors2020/hoesch.png" alt="HOESCH Logo" />
+                        </a>
 					</p>
-					<h2>HOESCH Metallurgie GmbH, Germany</h2>
+					<h2 class="mt-1">HOESCH Metallurgie GmbH, Germany</h2>
 					<p><strong><br />
 						HOESCH is the leading partner for the aluminum cast house industry worldwide; providing solutions for alloying and melt treatment as well as metallurgical consulting of highest
 						quality. With its great variety of products and services HOESCH is your partner for tailor made solutions including:

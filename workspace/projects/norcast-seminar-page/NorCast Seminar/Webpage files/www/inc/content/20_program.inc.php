@@ -29,17 +29,9 @@
                                 </p>
                                 
                                 <div class="text-right pr-20px">
-                                    <p class="silversponsor m-0">
-                                        Silver Sponsor <b id="silverstrong"><img src="images/sponsors/CCMA-logo.jpg" alt="CCMA Logo"></b>
+                                    <p class="silversponsor m-0 d-flex align-items-center justify-content-end gap-15px">
+                                        Silver Sponsor <b id="silverstrong" class="p-0 float-none"><img src="images/sponsors/CCMA-logo.jpg" alt="CCMA Logo"></b>
                                     </p>
-                                    
-                                    <table class="mw-500px my-1 float-right ml-auto">
-                                        <tbody id="hiddenContent">
-                                            <tr>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </div>
