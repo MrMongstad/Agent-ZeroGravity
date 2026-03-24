@@ -5,13 +5,9 @@
           <header>
             <h2>Physical Conference</h2>
           </header>
-					<h2></h2>
-					<p style="font-size: 15px;"><strong>
+					<p class="fs-15px font-bold">
 					NorCast has been a combined physical and virtual conference since 2021. However, NorCast 2026 will be a physical conferernce (not virtual) 
-					
-					
-				
-					</strong></p>
+					</p>
 					
 				
 
