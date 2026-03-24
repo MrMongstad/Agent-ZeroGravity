@@ -1143,4 +1143,6 @@ div.gallery img { width: 16em; height: 18em; border-radius: 15px; }
 .fs-1-8em { font-size: 1.8em !important; }
 .fs-1-5em { font-size: 1.5em !important; }
 .fs-1-4em { font-size: 1.4em !important; }
+.fs-1-2em { font-size: 1.2em !important; }
+.no-underline { text-decoration: none !important; }
 .text-highlight { font-size: 1.2em; line-height: 1.5em; letter-spacing: 0.05em; font-weight: bold; color: var(--color-slate); }
