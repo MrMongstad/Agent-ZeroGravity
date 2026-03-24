@@ -1208,3 +1208,4 @@ div.gallery img { width: 16em; height: 18em; border-radius: 15px; }
 .fs-italic { font-style: italic !important; }
 .fs-1-5em { font-size: 1.5em !important; }
 .fw-400 { font-weight: 400 !important; }
+.mh-200px { max-height: 200px !important; }

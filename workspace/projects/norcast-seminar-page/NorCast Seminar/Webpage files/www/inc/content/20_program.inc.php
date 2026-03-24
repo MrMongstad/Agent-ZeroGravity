@@ -458,11 +458,11 @@
                     <br>
                     <div class="d-flex justify-content-center gap-15px flex-wrap mb-20px">
                         <div class="text-center">
-                            <img src="images/program2020/solrik2.jpg" alt="S/S Solrik" class="d-block mb-10px mw-100" style="max-height: 200px;" />
+                            <img src="images/program2020/solrik2.jpg" alt="S/S Solrik" class="d-block mb-10px mw-100 mh-200px" />
                             <p class="font-bold">S/S Solrik</p>
                         </div>
                         <div class="text-center">
-                            <img src="images/msoya.jpg" alt="M/S Oya" class="d-block mb-10px mw-100" style="max-height: 200px;" />
+                            <img src="images/msoya.jpg" alt="M/S Oya" class="d-block mb-10px mw-100 mh-200px" />
                             <p class="font-bold">M/S Øya</p>
                         </div>
                     </div>
@@ -473,26 +473,21 @@
                     
                     <div class="program_flex"></div><br />
                     
-                    <table class="mw-500px w-100 m-0-auto text-center">
-                        <tr>
-                            <td class="p-15px"><img src="images/sponsors/pyrotek.png" class="mw-200px mh-80px" alt="Pyrotek"/></td>
-                            <td class="p-15px"><img src="images/sponsors/stas logo.png" class="mw-200px mh-60px" alt="Stas"/></td>
-                            <td class="p-15px"><img src="images/sponsors2022/drache.png" class="mw-200px mh-60px" alt="Drache"/></td>
-                        </tr>
-                        <tr>
-                            <td class="p-15px"><img src="images/sponsors/storvik logo.jpg" class="mw-200px mh-80px" alt="Storvik"/></td>
-                            <td class="p-15px"><img src="images/sponsors/ria.jpg" class="mw-200px mh-80px" alt="RIA"/></td>
-                            <td class="p-15px"><img src="images/sponsors/Ergolines Logo.png" class="mw-200px mh-80px" alt="Ergolines"/></td>
-                        </tr>
-                        <tr>
-                            <td class="p-15px"><img src="images/sponsors/precimeter logo.jpg" class="mw-200px mh-80px" alt="Precimeter"/></td>
-                            <td class="p-15px"><img src="images/sponsors/mqp.png" class="mw-200px mh-60px" alt="MQP"/></td>
-                            <td class="p-15px"><img src="images/sponsors/ottojunker.jpg" class="mw-200px mh-60px" alt="Otto Junker"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" class="p-15px text-center"><img src="images/sponsors/hycast logo.png" class="mw-200px mh-80px" alt="Hycast"/></td>
-                        </tr>
-                    </table>
+                    <div class="d-flex flex-wrap justify-content-center mw-500px w-100 m-0-auto text-center align-items-center">
+                        <div class="w-33 p-15"><img src="images/sponsors/pyrotek.png" class="mw-200px mh-80px" alt="Pyrotek"/></div>
+                        <div class="w-33 p-15"><img src="images/sponsors/stas logo.png" class="mw-200px mh-60px" alt="Stas"/></div>
+                        <div class="w-33 p-15"><img src="images/sponsors2022/drache.png" class="mw-200px mh-60px" alt="Drache"/></div>
+                        
+                        <div class="w-33 p-15"><img src="images/sponsors/storvik logo.jpg" class="mw-200px mh-80px" alt="Storvik"/></div>
+                        <div class="w-33 p-15"><img src="images/sponsors/ria.jpg" class="mw-200px mh-80px" alt="RIA"/></div>
+                        <div class="w-33 p-15"><img src="images/sponsors/Ergolines Logo.png" class="mw-200px mh-80px" alt="Ergolines"/></div>
+                        
+                        <div class="w-33 p-15"><img src="images/sponsors/precimeter logo.jpg" class="mw-200px mh-80px" alt="Precimeter"/></div>
+                        <div class="w-33 p-15"><img src="images/sponsors/mqp.png" class="mw-200px mh-60px" alt="MQP"/></div>
+                        <div class="w-33 p-15"><img src="images/sponsors/ottojunker.jpg" class="mw-200px mh-60px" alt="Otto Junker"/></div>
+                        
+                        <div class="w-100 p-15"><img src="images/sponsors/hycast logo.png" class="mw-200px mh-80px" alt="Hycast"/></div>
+                    </div>
 
                     <br>
                     <hr /><br /><br/><br/><br/>

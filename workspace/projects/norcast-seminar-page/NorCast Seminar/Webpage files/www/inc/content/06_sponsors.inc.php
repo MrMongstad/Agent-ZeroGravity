@@ -739,8 +739,8 @@
 					<h6 class="sponsor-bronze">Bronze Sponsor</h6><br />
 
 					<p>
-						<a href="http://www.foundry-ecocer.com/" target="_blank">
-							<img class="logo-bronze" src="images/sponsors/Foundry_Ecocer_logo.png"" alt="Foundry Ecocer s.r.l. Logo" />
+						<a href="https://www.foundry-ecocer.com/" target="_blank">
+							<img class="logo-bronze" src="images/sponsors/Foundry_Ecocer_HD.png" alt="Foundry Ecocer s.r.l. Logo" />
 						</a>
 					</p>
 
