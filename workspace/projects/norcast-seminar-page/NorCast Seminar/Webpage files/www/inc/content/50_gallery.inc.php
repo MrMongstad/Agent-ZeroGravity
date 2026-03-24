@@ -5,7 +5,7 @@
           <header>
             <h2>NorCast Gallery</h2>
           </header>
-					<h2 style="text-align: center; font-size: 1.5em; font-weight: 400;">NorCast Conference 2024</h2>
+					<h2 class="text-center fs-1-5em fw-400">NorCast Conference 2024</h2>
 					<div class="gallery_flex">
 						<p>
 							<div class="responsive"><div class="gallery"><a rel="lightbox-c2024" href="images/NC2024/01.jpg" title="Arendal Old Town Hall where you attended NorCast’s annual dinner and with sailing boats in the harbour "><img src="images/NC2024/01.jpg" /></a></div></div>
@@ -69,7 +69,7 @@
 						</p>
 					</div><br />
 					
-					<h2 style="text-align: center; font-size: 1.5em; font-weight: 400;">NorCast Conference 2023</h2>
+					<h2 class="text-center fs-1-5em fw-400">NorCast Conference 2023</h2>
 					<div class="gallery_flex">
 						<p>
 							<div class="responsive"><div class="gallery"><a rel="lightbox-c2023" href="images/NC2023/Images/img 1.jpg" title="Arendal has 300 Year anniversary in 2023."><img src="images/NC2023/Images/img 1.jpg" /></a></div></div>
@@ -140,7 +140,7 @@
 					</div><br />
 					
 					
-					<h2 style="text-align: center; font-size: 1.5em; font-weight: 400;">NorCast Conference 2022</h2>
+					<h2 class="text-center fs-1-5em fw-400">NorCast Conference 2022</h2>
 					<div class="gallery_flex">
 						<p>
 							<div class="responsive"><div class="gallery"><a rel="lightbox-c2022" href="images/NC2022/Images/2.1.jpg" title="Conference hall at Clarion Hotel Tyholmen being prepared"><img src="images/NC2022/Images/2.1.jpg" /></a></div></div>
@@ -183,7 +183,7 @@
 							<div class="clearfix"></div>
 						</p>
 					</div><br />
-					<h2 style="text-align: center; font-size: 1.5em; font-weight: 400;">NorCast Conference 2021</h2>
+					<h2 class="text-center fs-1-5em fw-400">NorCast Conference 2021</h2>
 					<div class="gallery_flex">
 						<p>
 							<div class="responsive"><div class="gallery"><a rel="lightbox-c2021" href="images/NC2021/2021_01.jpg" title="NorCast2021 Welcome poster"><img src="images/NC2021/2021_01.jpg" /></a></div></div>
@@ -220,7 +220,7 @@
 							<div class="clearfix"></div>
 						</p>
 					</div><br />
-					<h2 style="text-align: center; font-size: 1.5em; font-weight: 400;">NorCast Conference 2019</h2>
+					<h2 class="text-center fs-1-5em fw-400">NorCast Conference 2019</h2>
 					<div class="gallery_flex">
 						<p>
 							<div class="responsive"><div class="gallery"><a rel="lightbox-c2019" href="images/NC2019/2019_01.jpg" title="NorCast 2019 - Conference hall prepared."><img src="images/NC2019/2019_01.jpg" /></a></div></div>
@@ -258,7 +258,7 @@
 							<div class="clearfix"></div>
 						</p>
 					</div><br />
-					<h2 style="text-align: center; font-size: 1.5em; font-weight: 400;">NorCast Conference 2018</h2>
+					<h2 class="text-center fs-1-5em fw-400">NorCast Conference 2018</h2>
 					<div class="gallery_flex">
 						<p>
 							<div class="responsive"><div class="gallery"><a rel="lightbox-c2018" href="images/NC2018/2018_01.jpg" title="Norcast 2018 Conference - prepared"><img src="images/NC2018/2018_01.jpg" /></a></div></div>
@@ -290,7 +290,7 @@
 							<div class="clearfix"></div>
 						</p>
 					</div><br />
-						<h2 style="text-align: center; font-size: 1.5em; font-weight: 400;">NorCast Conference 2017</h2>
+						<h2 class="text-center fs-1-5em fw-400">NorCast Conference 2017</h2>
 					<div class="gallery_flex">
 						<p>
 							<div class="responsive"><div class="gallery"><a rel="lightbox-c2017" href="images/NC2015/2015_02.jpg" title="Conference hall is prepared"><img src="images/NC2015/2015_02.jpg" /></a></div></div>
@@ -310,11 +310,11 @@
 							<div class="clearfix"></div>
 						</p>
 					</div><br />
-						<h2 style="text-align: center; font-size: 1.5em; font-weight: 400;">NorCast Conference 2016</h2>
-						<p style="text-align: center;">
+						<h2 class="text-center fs-1-5em fw-400">NorCast Conference 2016</h2>
+						<p class="text-center">
 							No NorCast Conference was held in 2016
 						</p><br />
-						<h2 style="text-align: center; font-size: 1.5em; font-weight: 400;">NorCast Conference 2015</h2>
+						<h2 class="text-center fs-1-5em fw-400">NorCast Conference 2015</h2>
 					<div class="gallery_flex">
 						<p>
 							<div class="responsive"><div class="gallery"><a rel="lightbox-c2015" href="images/NC2015/2015_01.jpg" title="Welcome to NorCast 2015"><img src="images/NC2015/2015_01.jpg" /></a></div></div>
@@ -344,7 +344,7 @@
 							<div class="clearfix"></div>
 					</div>
 						</p><br />
-						<h2 style="text-align: center; font-size: 1.5em; font-weight: 400;">NorCast Conference 2014</h2>
+						<h2 class="text-center fs-1-5em fw-400">NorCast Conference 2014</h2>
 					<div class="gallery_flex">
 						<p>
 							<div class="responsive"><div class="gallery"><a rel="lightbox-c2014" href="images/NC2014/2014_02.jpg" title="Conference in session"><img src="images/NC2014/2014_02.jpg" /></a></div></div>
@@ -368,7 +368,7 @@
 							<div class="clearfix"></div>
 						</p>
 					</div><br />
-						<h2 style="text-align: center; font-size: 1.5em; font-weight: 400;">NorCast Conference 2013</h2>
+						<h2 class="text-center fs-1-5em fw-400">NorCast Conference 2013</h2>
 					<div class="gallery_flex">
 						<p>
 							<div class="responsive"><div class="gallery"><a rel="lightbox-c2013" href="images/NC2013/2013_01.jpg" title="Audience during the Conference"><img src="images/NC2013/2013_01.jpg" /></a></div></div>
@@ -387,7 +387,7 @@
 							<div class="clearfix"></div>
 					</div>
 						</p><br />
-						<h2 style="text-align: center; font-size: 1.5em; font-weight: 400;">NorCast Conference 2012</h2>
+						<h2 class="text-center fs-1-5em fw-400">NorCast Conference 2012</h2>
 					<div class="gallery_flex">
 						<p>
 							<div class="responsive"><div class="gallery"><a rel="lightbox-c2012" href="images/NC2012/2012_08.jpg" title="Mr Arne Schaathun, Conference Coordinator"><img src="images/NC2012/2012_08.jpg" /></a></div></div>
@@ -410,7 +410,7 @@
 							<div class="clearfix"></div>
 					</div>
 						</p><br />
-						<h2 style="text-align: center; font-size: 1.5em; font-weight: 400;">NorCast Conference 2011</h2>
+						<h2 class="text-center fs-1-5em fw-400">NorCast Conference 2011</h2>
 					<div class="gallery_flex">
 						<p>
 							<div class="responsive"><div class="gallery"><a rel="lightbox-c2011" href="images/NC2011/2011_01.jpg" title="Conference Hall"><img src="images/NC2011/2011_01.jpg" /></a></div></div>

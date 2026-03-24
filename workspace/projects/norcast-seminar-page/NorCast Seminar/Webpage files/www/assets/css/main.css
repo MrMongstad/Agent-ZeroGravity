@@ -1161,3 +1161,50 @@ div.gallery img { width: 16em; height: 18em; border-radius: 15px; }
 .mw-250px { max-width: 250px !important; }
 
 #committee img { border: 1px solid #000; max-height: 180px; max-width: 100%; object-fit: contain; }
+
+.text-right { text-align: right !important; }
+.m-0 { margin: 0 !important; }
+.mt-0 { margin-top: 0 !important; }
+.my-1 { margin-top: 1em !important; margin-bottom: 1em !important; }
+.ml-auto { margin-left: auto !important; }
+.mr-auto { margin-right: auto !important; }
+.float-right { float: right !important; }
+.float-none { float: none !important; }
+.w-40 { width: 40% !important; }
+.w-58 { width: 58% !important; }
+.align-top { vertical-align: top !important; }
+.d-block { display: block !important; }
+.d-inline-block { display: inline-block !important; }
+.d-flex { display: flex !important; }
+.align-items-center { align-items: center !important; }
+.align-items-stretch { align-items: stretch !important; }
+.justify-content-space-between { justify-content: space-between !important; }
+.gap-15px { gap: 15px !important; }
+.mb-10px { margin-bottom: 10px !important; }
+.mb-15px { margin-bottom: 15px !important; }
+.mb-20px { margin-bottom: 20px !important; }
+.mb-3-5em { margin-bottom: 3.5em !important; }
+.pr-20px { padding-right: 20px !important; }
+.pt-12px { padding-top: 12px !important; }
+.pb-12px { padding-bottom: 12px !important; }
+.pt-55px { padding-top: 55px !important; }
+.p-0 { padding: 0 !important; }
+.color-bronze { color: #cd7f32 !important; }
+.color-dark { color: #3a444a !important; }
+.mw-500px { max-width: 500px !important; }
+.mw-200px { max-width: 200px !important; }
+.mw-180px { max-width: 180px !important; }
+.mw-130px { max-width: 130px !important; }
+.mh-150px { max-height: 150px !important; }
+.mh-100px { max-height: 100px !important; }
+.mh-80px { max-height: 80px !important; }
+.mh-60px { max-height: 60px !important; }
+.mh-55px { max-height: 55px !important; }
+.w-220px { width: 220px !important; }
+.ml-2em { margin-left: 2em !important; }
+.m-0-auto { margin: 0 auto !important; }
+.overflow-hidden { overflow: hidden !important; }
+.fs-1-35em { font-size: 1.35em !important; }
+.fs-italic { font-style: italic !important; }
+.fs-1-5em { font-size: 1.5em !important; }
+.fw-400 { font-weight: 400 !important; }

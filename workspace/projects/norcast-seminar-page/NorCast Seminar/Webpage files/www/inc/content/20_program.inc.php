@@ -28,12 +28,12 @@
                                     Greek Restaurant Symposium, located in Pollen, at a short distance from the Conference Hotel.
                                 </p>
                                 
-                                <div style="text-align: right;">
-                                    <p class="silversponsor" style="margin: 0;">
+                                <div class="text-right">
+                                    <p class="silversponsor m-0">
                                         Silver Sponsor <b id="silverstrong"><img src="images/sponsors/CCMA-logo.jpg" alt="CCMA Logo"></b>
                                     </p>
                                     
-                                    <table style="max-width: 500px; margin: 1em 0 1em auto; float: right;">
+                                    <table class="mw-500px my-1 float-right ml-auto">
                                         <tbody id="hiddenContent">
                                             <tr>
                                                 <td></td>
@@ -130,9 +130,9 @@
                             <div class="table_time"> </div>
                             <div class="table_content">
                                 <h5>Coffee Break (20 min)</h5>
-                                <img class="image sponsor" src="images/sponsors/Foundry_Ecocer_logo.png" style="max-width:180px; max-height:150px !important;" alt="Foundry Ecocer">
-                                <div style="float: right; width: 220px; text-align: center; margin-left: 2em;">
-                                    <p style="margin: 0;"><b style="color: #cd7f32;">Bronze Sponsor</b></p>
+                                <img class="image sponsor mw-180px mh-150px" src="images/sponsors/Foundry_Ecocer_logo.png" alt="Foundry Ecocer">
+                                <div class="float-right w-220px text-center ml-2em">
+                                    <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
                                 </div>
                             </div>
                         </div>
@@ -202,9 +202,9 @@
                             <div class="table_time"> </div>
                             <div class="table_content">
                                 <h5>Coffee Break (20 min)</h5>
-                                <img class="image sponsor" src="images/sponsors/Foundry_Ecocer_logo.png" style="max-width:180px; max-height:150px !important;" alt="Foundry Ecocer">
-                                <div style="float: right; width: 220px; text-align: center; margin-left: 2em;">
-                                    <p style="margin: 0;"><b style="color: #cd7f32;">Bronze Sponsor</b></p>
+                                <img class="image sponsor mw-180px mh-150px" src="images/sponsors/Foundry_Ecocer_logo.png" alt="Foundry Ecocer">
+                                <div class="float-right w-220px text-center ml-2em">
+                                    <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
                                 </div>
                             </div>
                         </div>
@@ -251,16 +251,16 @@
                         <div class="table_row">
                             <div class="table_time">12:00 - 13:00</div>
                             <div class="table_content">
-                                <div style="display: inline-block; width: 40%; vertical-align: top;">
+                                <div class="d-inline-block w-40 align-top">
                                     <h5>Lunch at the Conference Hotel</h5>
                                 </div>
 
-                                <div style="display: inline-block; width: 58%; vertical-align: top; text-align: right;">
-                                    <h5 style="text-align: center; display: block; margin-bottom: 10px;">
+                                <div class="d-inline-block w-58 align-top text-right">
+                                    <h5 class="text-center d-block mb-10px">
                                         <b>Host - Silver Sponsor: </b>
                                     </h5>
-                                    <div style="text-align: center; margin-bottom: 15px;">
-                                        <img class="image silversponsor" src="images/sponsors/VESUVIUS logo.jpg" alt="Vesuvius" style="height: 100px; width: auto; float: none; margin: 0 auto;" />
+                                    <div class="text-center mb-15px">
+                                        <img class="image silversponsor mh-100px float-none m-0-auto" src="images/sponsors/VESUVIUS logo.jpg" alt="Vesuvius" />
                                     </div>
                                 </div>
                             </div>
@@ -290,9 +290,9 @@
                             <div class="table_time">13:00 - 13:40</div>
                             <div class="table_content">
                                 <img class="image dgs" src="images/DGS/Johan Berg.jpg" alt="Johan Berg" />
-                                <div style="overflow: hidden; padding-top: 55px;">
-                                    <h5 style="margin-bottom: 0;">Mr. Johan Berg, Senior Vice President,</h5>
-                                    <p style="font-style: italic; margin-top: 0;">Head of Primary Production Norway, <br>
+                                <div class="pt-55px overflow-hidden">
+                                    <h5 class="mb-0">Mr. Johan Berg, Senior Vice President,</h5>
+                                    <p class="mt-0 fs-italic">Head of Primary Production Norway, <br>
                                     Hydro Aluminium Metal, <br>
                                     Oslo</p>
                                 </div>
@@ -327,9 +327,9 @@
                             <div class="table_time"></div>
                             <div class="table_content">
                                 <h5>Coffee Break (20 min)</h5>
-                                <img class="image sponsor" src="images/sponsors/nippon gases.png" style="max-width:130px;" alt="Nippon Gases" />
-                                <div style="float: right; width: 220px; text-align: center; margin-left: 2em;">
-                                    <p style="margin: 0;"><b style="color: #cd7f32;">Bronze Sponsor</b></p>
+                                <img class="image sponsor mw-130px" src="images/sponsors/nippon gases.png" alt="Nippon Gases" />
+                                <div class="float-right w-220px text-center ml-2em">
+                                    <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
                                 </div>
                             </div>
                         </div>
@@ -387,9 +387,9 @@
                             <div class="table_time"></div>
                             <div class="table_content">
                                 <h5>Coffee Break (20 min)</h5>
-                                <img class="image sponsor" src="images/sponsors/nippon gases.png" style="max-width:130px;" alt="Nippon Gases" />
-                                <div style="float: right; width: 220px; text-align: center; margin-left: 2em;">
-                                    <p style="margin: 0;"><b style="color: #cd7f32;">Bronze Sponsor</b></p>
+                                <img class="image sponsor mw-130px" src="images/sponsors/nippon gases.png" alt="Nippon Gases" />
+                                <div class="float-right w-220px text-center ml-2em">
+                                    <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
                                 </div>
                             </div>
                         </div>
@@ -464,30 +464,30 @@
                         </div>
                     </div>
 
-                    <h3 style="color: #3a444a !important; padding-bottom: 12px !important;">Sponsored by the following</h3>
-					<h3 style="color: #cd7f32 !important;">Bronze Sponsors</h3>
+                    <h3 class="color-dark pb-12px">Sponsored by the following</h3>
+					<h3 class="color-bronze">Bronze Sponsors</h3>
                     <br />
                     
                     <div class="program_flex"></div><br />
                     
-                    <table style="max-width: 500px; margin:1em auto; text-align: center;">
+                    <table class="mw-500px w-100 m-0-auto text-center">
                         <tr>
-                            <td style="padding: 15px;"><img src="images/sponsors/pyrotek.png" style="max-width: 200px; max-height:80px;" alt="Pyrotek"/></td>
-                            <td style="padding: 15px;"><img src="images/sponsors/stas logo.png" style="max-width: 200px; max-height:60px;" alt="Stas"/></td>
-                            <td style="padding: 15px;"><img src="images/sponsors2022/drache.png" style="max-width: 200px; max-height:60px;" alt="Drache"/></td>
+                            <td class="p-15px"><img src="images/sponsors/pyrotek.png" class="mw-200px mh-80px" alt="Pyrotek"/></td>
+                            <td class="p-15px"><img src="images/sponsors/stas logo.png" class="mw-200px mh-60px" alt="Stas"/></td>
+                            <td class="p-15px"><img src="images/sponsors2022/drache.png" class="mw-200px mh-60px" alt="Drache"/></td>
                         </tr>
                         <tr>
-                            <td style="padding: 15px;"><img src="images/sponsors/storvik logo.jpg" style="max-width: 200px; max-height:80px;" alt="Storvik"/></td>
-                            <td style="padding: 15px;"><img src="images/sponsors/ria.jpg" style="max-width: 200px; max-height:80px;" alt="RIA"/></td>
-                            <td style="padding: 15px;"><img src="images/sponsors/Ergolines Logo.png" style="max-width: 200px; max-height:80px;" alt="Ergolines"/></td>
+                            <td class="p-15px"><img src="images/sponsors/storvik logo.jpg" class="mw-200px mh-80px" alt="Storvik"/></td>
+                            <td class="p-15px"><img src="images/sponsors/ria.jpg" class="mw-200px mh-80px" alt="RIA"/></td>
+                            <td class="p-15px"><img src="images/sponsors/Ergolines Logo.png" class="mw-200px mh-80px" alt="Ergolines"/></td>
                         </tr>
                         <tr>
-                            <td style="padding: 15px;"><img src="images/sponsors/precimeter logo.jpg" style="max-width: 200px; max-height:80px;" alt="Precimeter"/></td>
-                            <td style="padding: 15px;"><img src="images/sponsors/mqp.png" style="max-width: 200px; max-height:60px;" alt="MQP"/></td>
-                            <td style="padding: 15px;"><img src="images/sponsors/ottojunker.jpg" style="max-width: 200px; max-height:60px;" alt="Otto Junker"/></td>
+                            <td class="p-15px"><img src="images/sponsors/precimeter logo.jpg" class="mw-200px mh-80px" alt="Precimeter"/></td>
+                            <td class="p-15px"><img src="images/sponsors/mqp.png" class="mw-200px mh-60px" alt="MQP"/></td>
+                            <td class="p-15px"><img src="images/sponsors/ottojunker.jpg" class="mw-200px mh-60px" alt="Otto Junker"/></td>
                         </tr>
                         <tr>
-                            <td colspan="3" style="padding: 15px; text-align: center;"><img src="images/sponsors/hycast logo.png" style="max-width: 200px; max-height:80px;" alt="Hycast"/></td>
+                            <td colspan="3" class="p-15px text-center"><img src="images/sponsors/hycast logo.png" class="mw-200px mh-80px" alt="Hycast"/></td>
                         </tr>
                     </table>
 
@@ -495,22 +495,22 @@
                     <hr /><br /><br/><br/><br/>
                     
                    <h2>NorCast Annual Dinner at Arendal Old Town Hall at 19:45 hrs</h2>
-                    <p style="font-size: 1.25em; padding-top: 12px; margin-bottom: 3.5em;">Dress code: Smart Casual</p>
+                    <p class="fs-1-2em pt-12px mb-3-5em">Dress code: Smart Casual</p>
                     <br />
 
-                    <div class="program_flex" style="justify-content: center; align-items: stretch;">
-                        <div style="text-align: center; margin: 0 30px; display: flex; flex-direction: column;">
-                            <h4 style="margin: 0 0 20px 0;">Joint-Gold Sponsor</h4>
-                            <div style="margin: auto 0;"><img src="images/sponsors2022/hertwich.png" style="max-width: 250px; display: block;" alt="Hertwich"/></div>
+                    <div class="program_flex justify-content-center align-items-stretch">
+                        <div class="text-center mx-30px d-flex flex-column">
+                            <h4 class="mb-20px mt-0">Joint-Gold Sponsor</h4>
+                            <div class="my-auto"><img src="images/sponsors2022/hertwich.png" class="mw-250px d-block" alt="Hertwich"/></div>
                         </div>
 
-                        <div style="margin: 0 30px; display: flex; align-items: center;">
-                            <h3 style="font-size: 1.35em; margin: 0; color: #3a444a !important;">Sponsored by:</h3>
+                        <div class="mx-30px d-flex align-items-center">
+                            <h3 class="fs-1-35em m-0 color-dark">Sponsored by:</h3>
                         </div>
 
-                        <div style="text-align: center; margin: 0 30px; display: flex; flex-direction: column;">
-                            <h4 style="margin: 0 0 20px 0;">Joint-Gold Sponsor</h4>
-                            <div style="margin: auto 0;"><img src="images/sponsors/hoesch_logo.png" style="max-width: 200px; display: block;" alt="Hoesch"/></div>
+                        <div class="text-center mx-30px d-flex flex-column">
+                            <h4 class="mb-20px mt-0">Joint-Gold Sponsor</h4>
+                            <div class="my-auto"><img src="images/sponsors/hoesch_logo.png" class="mw-200px d-block" alt="Hoesch"/></div>
                         </div>
                     </div>
 					
@@ -608,9 +608,9 @@
                             <div class="table_time"> </div>
                             <div class="table_content">
                                 <h5>Coffee Break (20 min)</h5>
-                                <img class="image sponsor" src="images/sponsors/Tomorrow tech logo.jpg" style="max-width:130px;" alt="Tomorrow Tech" />
-                                <div style="float: right; width: 220px; text-align: center; margin-left: 2em;">
-                                    <p style="margin: 0;"><b style="color: #cd7f32;">Bronze Sponsor</b></p>
+                                <img class="image sponsor mw-130px" src="images/sponsors/Tomorrow tech logo.jpg" alt="Tomorrow Tech" />
+                                <div class="float-right w-220px text-center ml-2em">
+                                    <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
                                 </div>
                             </div>
                         </div>
@@ -677,9 +677,9 @@
                             <div class="table_time"> </div>
                             <div class="table_content">
                                 <h5>Coffee Break (20 min)</h5>
-                                <img class="image sponsor" src="images/sponsors/Tomorrow tech logo.jpg" style="max-width:130px;" alt="Tomorrow Tech" />
-                                <div style="float: right; width: 220px; text-align: center; margin-left: 2em;">
-                                    <p style="margin: 0;"><b style="color: #cd7f32;">Bronze Sponsor</b></p>
+                                <img class="image sponsor mw-130px" src="images/sponsors/Tomorrow tech logo.jpg" alt="Tomorrow Tech" />
+                                <div class="float-right w-220px text-center ml-2em">
+                                    <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
                                 </div>
                             </div>
                         </div>
@@ -730,8 +730,8 @@
                             <div class="table_time">11:55 - 12:40</div>
                             <div class="table_content">
                                 <img class="image dgs" src="images/DGS/mr hisham.jpg" alt="Mr. Hisham" />
-                                <h5 style="margin-bottom: 0; padding-top: 12 px;">Mr. Hisham Yousif Alkooheji, CMO-Chief Marketing Officer.</h5>
-                                <p style="margin-top: 0;">Alba- Aluminium Bahrain, <br>
+                                <h5 class="mb-0 pt-12px">Mr. Hisham Yousif Alkooheji, CMO-Chief Marketing Officer.</h5>
+                                <p class="mt-0">Alba- Aluminium Bahrain, <br>
                                 Kingdom of Bahrain.</p>
                             </div>
                         </div>
@@ -751,13 +751,13 @@
                         <div class="table_row">
 						<div class="table_time">13:00</div>
 						<div class="table_content">
-							<div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding-right: 20px;">
-                                <h5 style="margin: 0;">Lunch at the Conference Hotel</h5>
+							<div class="table-hosts-wrapper justify-content-space-between w-100 pr-20px">
+                                <h5 class="m-0">Lunch at the Conference Hotel</h5>
                                 
-                                <div style="display: flex; align-items: center; gap: 15px;">
-                                    <h5 style="margin: 0; color: #cd7f32 !important;">Hosts - Bronze sponsors</h5>
-                                    <img src="images/sponsors/cetag.png" alt="Cetag" style="max-height: 55px; margin: 0; padding: 0;" />
-                                    <img src="images/sponsors/wagstaff.png" alt="Wagstaff" style="max-height: 55px; margin: 0; padding: 0;" />
+                                <div class="table-hosts-wrapper">
+                                    <h5 class="m-0 color-bronze">Hosts - Bronze sponsors</h5>
+                                    <img src="images/sponsors/cetag.png" alt="Cetag" class="mh-55px m-0 p-0" />
+                                    <img src="images/sponsors/wagstaff.png" alt="Wagstaff" class="mh-55px m-0 p-0" />
                                 </div>
                             </div>
 					</div>
