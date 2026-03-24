@@ -28,7 +28,7 @@
                                     Greek Restaurant Symposium, located in Pollen, at a short distance from the Conference Hotel.
                                 </p>
                                 
-                                <div class="text-right">
+                                <div class="text-right pr-20px">
                                     <p class="silversponsor m-0">
                                         Silver Sponsor <b id="silverstrong"><img src="images/sponsors/CCMA-logo.jpg" alt="CCMA Logo"></b>
                                     </p>
@@ -129,10 +129,12 @@
                         <div class="table_row">
                             <div class="table_time"> </div>
                             <div class="table_content">
-                                <h5>Coffee Break (20 min)</h5>
-                                <img class="image sponsor mw-180px mh-150px" src="images/sponsors/Foundry_Ecocer_logo.png" alt="Foundry Ecocer">
-                                <div class="float-right w-220px text-center ml-2em">
-                                    <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
+                                <div class="d-flex justify-content-space-between align-items-center w-100 pr-20px">
+                                    <h5 class="m-0">Coffee Break (20 min)</h5>
+                                    <div class="d-flex align-items-center gap-15px">
+                                        <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
+                                        <img class="sponsor-logo-inline wide" src="images/sponsors/Foundry_Ecocer_HD.png" alt="Foundry Ecocer">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -201,10 +203,12 @@
                         <div class="table_row">
                             <div class="table_time"> </div>
                             <div class="table_content">
-                                <h5>Coffee Break (20 min)</h5>
-                                <img class="image sponsor mw-180px mh-150px" src="images/sponsors/Foundry_Ecocer_logo.png" alt="Foundry Ecocer">
-                                <div class="float-right w-220px text-center ml-2em">
-                                    <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
+                                <div class="d-flex justify-content-space-between align-items-center w-100 pr-20px">
+                                    <h5 class="m-0">Coffee Break (20 min)</h5>
+                                    <div class="d-flex align-items-center gap-15px">
+                                        <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
+                                        <img class="sponsor-logo-inline wide" src="images/sponsors/Foundry_Ecocer_HD.png" alt="Foundry Ecocer">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -251,16 +255,11 @@
                         <div class="table_row">
                             <div class="table_time">12:00 - 13:00</div>
                             <div class="table_content">
-                                <div class="d-inline-block w-40 align-top">
-                                    <h5>Lunch at the Conference Hotel</h5>
-                                </div>
-
-                                <div class="d-inline-block w-58 align-top text-right">
-                                    <h5 class="text-center d-block mb-10px">
-                                        <b>Host - Silver Sponsor: </b>
-                                    </h5>
-                                    <div class="text-center mb-15px">
-                                        <img class="image silversponsor mh-100px float-none m-0-auto" src="images/sponsors/VESUVIUS logo.jpg" alt="Vesuvius" />
+                                <div class="d-flex justify-content-space-between align-items-center w-100 pr-20px">
+                                    <h5 class="m-0">Lunch at the Conference Hotel</h5>
+                                    <div class="d-flex align-items-center gap-15px">
+                                        <p class="m-0"><b class="color-silver">Host - Silver Sponsor:</b></p>
+                                        <img class="sponsor-logo-inline tall" src="images/sponsors/VESUVIUS logo.jpg" alt="Vesuvius" />
                                     </div>
                                 </div>
                             </div>
@@ -326,10 +325,12 @@
                         <div class="table_row">
                             <div class="table_time"></div>
                             <div class="table_content">
-                                <h5>Coffee Break (20 min)</h5>
-                                <img class="image sponsor mw-130px" src="images/sponsors/nippon gases.png" alt="Nippon Gases" />
-                                <div class="float-right w-220px text-center ml-2em">
-                                    <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
+                                <div class="d-flex justify-content-space-between align-items-center w-100 pr-20px">
+                                    <h5 class="m-0">Coffee Break (20 min)</h5>
+                                    <div class="d-flex align-items-center gap-15px">
+                                        <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
+                                        <img class="sponsor-logo-inline standard" src="images/sponsors/nippon gases.png" alt="Nippon Gases" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -386,10 +387,12 @@
                         <div class="table_row">
                             <div class="table_time"></div>
                             <div class="table_content">
-                                <h5>Coffee Break (20 min)</h5>
-                                <img class="image sponsor mw-130px" src="images/sponsors/nippon gases.png" alt="Nippon Gases" />
-                                <div class="float-right w-220px text-center ml-2em">
-                                    <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
+                                <div class="d-flex justify-content-space-between align-items-center w-100 pr-20px">
+                                    <h5 class="m-0">Coffee Break (20 min)</h5>
+                                    <div class="d-flex align-items-center gap-15px">
+                                        <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
+                                        <img class="sponsor-logo-inline standard" src="images/sponsors/nippon gases.png" alt="Nippon Gases" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -453,14 +456,14 @@
                         Canapes, wine, beer and finger food will be served onboard.
                     </p>
                     <br>
-                    <div class="prog bt imgcont">
-                        <div class="prog bt solrik">
-                            <img src="images/program2020/solrik2.jpg" alt="S/S Solrik" />
-                            <p>S/S Solrik</p>
+                    <div class="d-flex justify-content-center gap-15px flex-wrap mb-20px">
+                        <div class="text-center">
+                            <img src="images/program2020/solrik2.jpg" alt="S/S Solrik" class="d-block mb-10px mw-100" style="max-height: 200px;" />
+                            <p class="font-bold">S/S Solrik</p>
                         </div>
-                        <div class="prog bt boyleslie">
-                            <img src="images/msoya.jpg" alt="M/S Oya" />
-                            <p>M/S Øya</p>
+                        <div class="text-center">
+                            <img src="images/msoya.jpg" alt="M/S Oya" class="d-block mb-10px mw-100" style="max-height: 200px;" />
+                            <p class="font-bold">M/S Øya</p>
                         </div>
                     </div>
 
@@ -607,10 +610,12 @@
                         <div class="table_row">
                             <div class="table_time"> </div>
                             <div class="table_content">
-                                <h5>Coffee Break (20 min)</h5>
-                                <img class="image sponsor mw-130px" src="images/sponsors/Tomorrow tech logo.jpg" alt="Tomorrow Tech" />
-                                <div class="float-right w-220px text-center ml-2em">
-                                    <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
+                                <div class="d-flex justify-content-space-between align-items-center w-100 pr-20px">
+                                    <h5 class="m-0">Coffee Break (20 min)</h5>
+                                    <div class="d-flex align-items-center gap-15px">
+                                        <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
+                                        <img class="sponsor-logo-inline block" src="images/sponsors/Tomorrow tech logo.jpg" alt="Tomorrow Tech" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -676,10 +681,12 @@
                         <div class="table_row">
                             <div class="table_time"> </div>
                             <div class="table_content">
-                                <h5>Coffee Break (20 min)</h5>
-                                <img class="image sponsor mw-130px" src="images/sponsors/Tomorrow tech logo.jpg" alt="Tomorrow Tech" />
-                                <div class="float-right w-220px text-center ml-2em">
-                                    <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
+                                <div class="d-flex justify-content-space-between align-items-center w-100 pr-20px">
+                                    <h5 class="m-0">Coffee Break (20 min)</h5>
+                                    <div class="d-flex align-items-center gap-15px">
+                                        <p class="m-0"><b class="color-bronze">Bronze Sponsor</b></p>
+                                        <img class="sponsor-logo-inline block" src="images/sponsors/Tomorrow tech logo.jpg" alt="Tomorrow Tech" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -751,16 +758,16 @@
                         <div class="table_row">
 						<div class="table_time">13:00</div>
 						<div class="table_content">
-							<div class="table-hosts-wrapper justify-content-space-between w-100 pr-20px">
+							<div class="d-flex justify-content-space-between align-items-center w-100 pr-20px">
                                 <h5 class="m-0">Lunch at the Conference Hotel</h5>
                                 
-                                <div class="table-hosts-wrapper">
-                                    <h5 class="m-0 color-bronze">Hosts - Bronze sponsors</h5>
-                                    <img src="images/sponsors/cetag.png" alt="Cetag" class="mh-55px m-0 p-0" />
-                                    <img src="images/sponsors/wagstaff.png" alt="Wagstaff" class="mh-55px m-0 p-0" />
+                                <div class="d-flex align-items-center gap-15px">
+                                    <p class="m-0"><b class="color-bronze">Hosts - Bronze sponsors</b></p>
+                                    <img src="images/sponsors/cetag.png" alt="Cetag" class="sponsor-logo-inline tall" />
+                                    <img src="images/sponsors/wagstaff.png" alt="Wagstaff" class="sponsor-logo-inline tall" />
                                 </div>
                             </div>
-					</div>
+					    </div>
 
                         
                     </div>
