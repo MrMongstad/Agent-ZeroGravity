@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2026-03-25T15:54:13.748269+00:00",
+  "session_id": null,
+  "current_task": null,
+  "last_checkpoint": null,
+  "agent_status": {
+    "jarvis": "idle",
+    "cline": "idle",
+    "nexus": "idle"
+  },
+  "heartbeat_count": 0,
+  "last_heartbeat": null,
+  "error_count": 0,
+  "last_error": null
+}
