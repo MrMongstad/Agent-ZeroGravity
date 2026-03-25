@@ -29,11 +29,9 @@ Build a digital empire powered by autonomous agentic systems. The system should 
 ## Agent Ecosystem
 | Agent | Role | LLM |
 |:---|:---|:---|
-| Antigravity (Jarvis) | Primary Controller / Orchestrator | Gemini 2.0 Pro |
-| Agent Zero | Tier-2 Specialist (research, code exec, browser) | Gemini 2.0 Flash |
-| Cline | High-logic Coding Specialist | Claude 3.5 Sonnet |
-| `frontend_dev` | Agent Zero sub-agent (UI/UX) | Gemini 2.0 Flash |
-| `backend_arch` | Agent Zero sub-agent (Rust/Tauri) | Gemini 2.0 Flash |
+| Antigravity (Jarvis) | Primary Controller / Orchestrator | gemini-2.5-pro (GaG native) |
+| Cline | Tier-2 Coding Specialist | gemini-3.1-pro-preview (AI Studio) |
+| Nexus | Comms Hub / Vortex Router | gemini-2.0-flash (GaG native) |
 
 ## Active Projects
 | Project | Status | Location |
