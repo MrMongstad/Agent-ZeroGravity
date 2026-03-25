@@ -66,15 +66,6 @@
 | `Drift Analysis` | AI Alignment | The process of detecting deviation between the agent's current actions and its original objective. |
 | `Sentinel` | Monitoring | A specialized service or agent dedicated to watching for failures and enforcing state integrity. |
 
-## Observability & Telemetry
-
-| Term | Standard | Definition |
-|:---|:---|:---|
-| `Observability` | SRE/DevOps | Ability to measure system state via logs, metrics, and traces. |
-| `Telemetry` | Industry | Automatic recording and transmission of operational data for analysis. |
-| `JSONL` | RFC 8259 | JSON Lines — one JSON object per line. Standard for structured logging. |
-| `Drift Analysis` | AI Safety | Detecting deviation between agent actions and the original objective. |
-
 ## XML Execution Tags
 
 | Tag | Framework | Function |
