@@ -1,0 +1,58 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+% Custom Colors
+\definecolor{primary}{HTML}{2C3E50}
+\definecolor{secondary}{HTML}{E74C3C}
+
+\title{\LARGE \textbf{\textcolor{primary}{Strategic Agent OS Report}} \\ \large \textit{Optimal Configuration for Dedicated Agent Control}}
+\author{Jarvis (Prompt Architect)}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Executive Summary}
+To maximize ROI and remove operational friction, a separate computer for agentic control (Agent Zero, OpenClaw, and general autonomous frameworks) is highly recommended. This report identifies the optimal hardware-software stack to ensure 24/7 persistence, security, and performance.
+
+\section{Agent-Specific Requirements}
+
+\subsection{Agent Zero}
+\begin{itemize}
+    \item \textbf{Setup:} Primarily Docker-based for safety and isolation.
+    \item \textbf{OS Preference:} Native Linux (Ubuntu) is the gold standard for performance.
+\end{itemize}
+
+\subsection{OpenClaw (Optimized Setup)}
+As researched from the Moritz Kremb power-user interview:
+\begin{itemize}
+    \item \textbf{Persistence:} Deploy with a 30-minute heartbeat for state retention.
+    \item \textbf{Interface:} Telegram-native UI is superior for multi-device control.
+    \item \textbf{Savings:} OAuth via existing ChatGPT/Anthropic subscriptions drastically reduces costs.
+\end{itemize}
+
+\subsection{GaG / Autonomous Frameworks}
+Refers to high-autonomy frameworks (GAIA-like):
+\begin{itemize}
+    \item \textbf{Core need:} Stable background processes and local LLM support via Ollama.
+\end{itemize}
+
+\section{OS Comparison Analysis}
+
+\begin{itemize}
+    \item \textbf{Ubuntu 24.04 LTS (Winner):} Flawless Docker support and lowest resource overhead.
+    \item \textbf{Proxmox VE (Alpha Choice):} Superior for power users who need snapshots and multi-agent isolation.
+    \item \textbf{Windows 11 + WSL2:} Viable if familiar GUI is required, but less efficient for 24/7 headless duty.
+\end{itemize}
+
+\section{Course of Action}
+\textbf{Hardware:} Dedicated Mini-PC (i7/32GB RAM). \\
+\textbf{OS:} \textcolor{secondary}{\textbf{Ubuntu 24.04 LTS}}. \\
+\textbf{Remote Access:} \textbf{Tailscale} for secure connection from your main Windows machine.
+
+\end{document}

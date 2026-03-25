@@ -28,10 +28,9 @@
                                     Greek Restaurant Symposium, located in Pollen, at a short distance from the Conference Hotel.
                                 </p>
                                 
-                                <div class="text-right pr-20px">
-                                    <p class="silversponsor m-0 d-flex align-items-center justify-content-end gap-15px">
-                                        Silver Sponsor <b id="silverstrong" class="p-0 float-none"><img src="images/sponsors/CCMA-logo.jpg" alt="CCMA Logo"></b>
-                                    </p>
+                                <div class="d-flex justify-content-space-between align-items-center w-100 pr-30px">
+                                    <div></div>
+                                    <img src="images/sponsors/CCMA-logo.jpg" class="sponsor-logo-inline silver" alt="CCMA Logo">
                                 </div>
                             </div>
                         </div>
@@ -59,13 +58,17 @@
                         <div class="table_row">
                             <div class="table_time">08:00 - 08:10</div>
                             <div class="table_content">
-                                <img class="image forvalter" src="images/sponsors/Arendalvapen.png" alt="Arendal Vapen" />
-                                <h5>Opening of Conference.</h5>
-                                <p>
-                                    Mr Robert Cornels Nordli <br />
-                                    Mayor<br>
-                                    Arendal.
-                                </p>
+                                <div class="d-flex justify-content-space-between align-items-center w-100 pr-20px">
+                                    <div class="m-0">
+                                        <h5>Opening of Conference.</h5>
+                                        <p class="m-0">
+                                            Mr Robert Cornels Nordli <br />
+                                            Mayor<br>
+                                            Arendal.
+                                        </p>
+                                    </div>
+                                    <img class="sponsor-logo-inline crest" src="images/sponsors/Arendalvapen.png" alt="Arendal Crest">
+                                </div>
                             </div>
                         </div>
 
@@ -466,19 +469,19 @@
                     <div class="program_flex"></div><br />
                     
                     <div class="d-flex flex-wrap justify-content-center mw-500px w-100 m-0-auto text-center align-items-center">
-                        <div class="w-33 p-15"><img src="images/sponsors/pyrotek.png" class="mw-200px mh-80px" alt="Pyrotek"/></div>
+                        <div class="w-33 p-15"><img src="images/sponsors/pyrotek.png" class="mw-200px mh-60px" alt="Pyrotek"/></div>
                         <div class="w-33 p-15"><img src="images/sponsors/stas logo.png" class="mw-200px mh-60px" alt="Stas"/></div>
                         <div class="w-33 p-15"><img src="images/sponsors2022/drache.png" class="mw-200px mh-60px" alt="Drache"/></div>
                         
-                        <div class="w-33 p-15"><img src="images/sponsors/storvik logo.jpg" class="mw-200px mh-80px" alt="Storvik"/></div>
-                        <div class="w-33 p-15"><img src="images/sponsors/ria.jpg" class="mw-200px mh-80px" alt="RIA"/></div>
-                        <div class="w-33 p-15"><img src="images/sponsors/Ergolines Logo.png" class="mw-200px mh-80px" alt="Ergolines"/></div>
+                        <div class="w-33 p-15"><img src="images/sponsors/storvik logo.jpg" class="mw-200px mh-60px" alt="Storvik"/></div>
+                        <div class="w-33 p-15"><img src="images/sponsors/ria.jpg" class="mw-200px mh-60px" alt="RIA"/></div>
+                        <div class="w-33 p-15"><img src="images/sponsors/Ergolines Logo.png" class="mw-200px mh-60px" alt="Ergolines"/></div>
                         
-                        <div class="w-33 p-15"><img src="images/sponsors/precimeter logo.jpg" class="mw-200px mh-80px" alt="Precimeter"/></div>
+                        <div class="w-33 p-15"><img src="images/sponsors/precimeter logo.jpg" class="mw-200px mh-60px" alt="Precimeter"/></div>
                         <div class="w-33 p-15"><img src="images/sponsors/mqp.png" class="mw-200px mh-60px" alt="MQP"/></div>
                         <div class="w-33 p-15"><img src="images/sponsors/ottojunker.jpg" class="mw-200px mh-60px" alt="Otto Junker"/></div>
                         
-                        <div class="w-100 p-15"><img src="images/sponsors/hycast logo.png" class="mw-200px mh-80px" alt="Hycast"/></div>
+                        <div class="w-100 p-15"><img src="images/sponsors/hycast logo.png" class="mw-200px mh-60px" alt="Hycast"/></div>
                     </div>
 
                     <br>

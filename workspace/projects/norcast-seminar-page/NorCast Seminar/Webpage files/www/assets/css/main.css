@@ -903,9 +903,9 @@ input.button { padding: 0.75em 1.5em 0.75em 1.5em; }
 .sponsor-gold { font-family: 'Roboto Condensed'; padding: 0px 0px 3px 0px; margin: 20px 0px 2px 0px; font-size: 2.0em; font-weight: 700; text-align: left; color: var(--color-gold); }
 .sponsor-silver { font-family: 'Roboto Condensed'; padding: 0px 0px 3px 0px; margin: 20px 0px 2px 0px; font-size: 2.0em; font-weight: 700; text-align: left; color: var(--color-silver); }
 .sponsor-bronze { font-family: 'Roboto Condensed'; padding: 0px 0px 3px 0px; margin: 20px 0px 2px 0px; font-size: 2.0em; font-weight: 700; text-align: left; color: var(--color-bronze); }
-.logo-bronze { max-height: 130px; max-width: 180px; }
+.logo-bronze { max-height: 60px; max-width: 180px; }
 .logo-bronze-precimeter { max-height: 85px; max-width: 180px; }
-.logo-silver { max-width: 250px; max-height: 150px; }
+.logo-silver { max-width: 250px; max-height: 80px; }
 .sponsor-li { list-style-type: disc; margin-left: 1.5em; }
 
 /* Gallery */
@@ -1100,12 +1100,17 @@ div.gallery img { width: 16em; height: 18em; border-radius: 15px; }
     object-fit: contain;
 }
 
-/* Optical Volume Modifiers - Recalibrated */
-.sponsor-logo-inline.wide { height: 100px; }      /* Bumped for extremely wide logos (Foundry Ecocer) */
-.sponsor-logo-inline.tall { height: 80px; }       /* For stacked/vertical logos (Vesuvius, Cetag, Wagstaff) */
-.sponsor-logo-inline.crest { height: 110px; }     /* New: For municipal badges with internal padding (Arendal) */
-.sponsor-logo-inline.standard { height: 35px; }   /* Locked: Perfect for Nippon Gases */
-.sponsor-logo-inline.block { height: 40px; }      /* Locked: Perfect for Tomorrow Tech */
+/* Optical Volume Modifiers - Recalibrated to Live Audit */
+.sponsor-logo-inline.wide { height: 60px; }      /* Found: Bronze target size (Pyrotek, Stas, drache) */
+.sponsor-logo-inline.tall { height: 55px; }       /* For stacked/vertical bronze (Vesuvius, Cetag, Wagstaff) */
+.sponsor-logo-inline.crest { height: 110px; }     /* Municipal badges (Arendal) */
+.sponsor-logo-inline.silver { height: 80px; }    /* Gold/Silver target (CCMA) */
+.sponsor-logo-inline.block { height: 40px; }      /* Locked: Tomorrow Tech */
+
+.text-content { color: #555; line-height: 1.6; margin-bottom: 1.25em; }
+.mb-3-5em { margin-bottom: 3.5em !important; }
+.sponsor-li { list-style: disc inside; margin-bottom: 0.5em; color: #555; }
+.sponsor-li.font-bold { color: var(--color-slate); }
 
 /* === NorCast Utilities (Phase 1) === */
 .text-center { text-align: center; }
@@ -1146,7 +1151,7 @@ div.gallery img { width: 16em; height: 18em; border-radius: 15px; }
 .fs-1-2em { font-size: 1.2em !important; }
 .fs-15px { font-size: 15px !important; }
 .no-underline { text-decoration: none !important; }
-.text-highlight { font-size: 1.2em; line-height: 1.5em; letter-spacing: 0.05em; font-weight: bold; color: var(--color-slate); }
+.text-highlight { font-size: 1.15em; line-height: 1.6; letter-spacing: 0.02em; font-weight: 600; color: var(--color-slate); margin-bottom: 1em; }
 
 .d-flex { display: flex !important; }
 .flex-wrap { flex-wrap: wrap !important; }
@@ -1209,3 +1214,5 @@ div.gallery img { width: 16em; height: 18em; border-radius: 15px; }
 .fs-1-5em { font-size: 1.5em !important; }
 .fw-400 { font-weight: 400 !important; }
 .mh-200px { max-height: 200px !important; }
+.justify-content-end { justify-content: flex-end !important; }
+.justify-content-center { justify-content: center !important; }

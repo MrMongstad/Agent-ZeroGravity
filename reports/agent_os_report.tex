@@ -1,0 +1,81 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+
+% Custom Colors
+\definecolor{primary}{HTML}{2C3E50}
+\definecolor{secondary}{HTML}{E74C3C}
+\definecolor{accent}{HTML}{3498DB}
+
+% Style Config
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textcolor{primary}{Strategic ROI Report}}
+\lhead{\textcolor{primary}{Dedicated Agent Control}}
+\rfoot{Page \thepage}
+
+\title{\LARGE \textbf{\textcolor{primary}{High-Octane Agent Control Systems}} \\ \large \textit{Optimal OS Configuration for Dedicated Agent Autonomy}}
+\author{Jarvis (Prompt Architect)}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Executive Summary}
+To maximize ROI and remove operational friction, a separate computer for agentic control (Agent Zero, OpenClaw, and general autonomous frameworks) is highly recommended. This report identifies the optimal hardware-software stack to ensure 24/7 persistence, security, and performance.
+
+\section{Agent-Specific Requirements}
+
+\subsection{Agent Zero}
+\begin{itemize}
+    \item \textbf{Environment:} Docker is mandatory for safety.
+    \item \textbf{Performance:} Python-based; thrives in environments with low I/O latency.
+    \item \textbf{OS Preference:} Native Linux (Ubuntu) for direct socket access and Docker performance parity.
+\end{itemize}
+
+\subsection{OpenClaw (Optimized Setup)}
+As researched from the latest power-user documentation (Moritz Kremb interview):
+\begin{itemize}
+    \item \textbf{Persistence:} Requires a 30-minute heartbeat for auto-saving state.
+    \item \textbf{Interface:} Telegram-native UI allows for remote mobile operation.
+    \item \textbf{Cost Optimization:} OAuth integration with ChatGPT/Anthropic subscriptions significantly reduces per-token API overhead.
+\end{itemize}
+
+\subsection{GaG (General Agent Gateways)}
+Refers to autonomous local frameworks (e.g., GAIA, Godmode-like setups). These require:
+\begin{itemize}
+    \item \textbf{Headless Operation:} Stable background processes without GUI overhead.
+    \item \textbf{Local Inference:} Support for Ollama or vLLM to keep data private and lower latency.
+\end{itemize}
+
+\section{OS Comparison Analysis}
+
+\begin{itemize}
+    \item \textbf{Ubuntu 24.04 LTS (Recommended):} The industry standard for reliability. Zero bloat (Server version) or standard Desktop for ease of troubleshooting. Native Docker support is flawless.
+    \item \textbf{Proxmox VE:} The "Power User" choice. Allows running Agent Zero and OpenClaw in isolated virtual environments. Snapshot capabilities allow for "Undo" on system-breaking agent actions.
+    \item \textbf{Windows 11 + WSL2:} High overhead, but best for compatibility with Windows-only software if needed.
+\end{itemize}
+
+\section{Final Recommendation: The "Best Course of Action"}
+\textbf{Hardware:} A dedicated Mini-PC (Intel NUC or Mac Mini M2/M4) with $\geq$32GB RAM and an NVMe SSD. \\
+\textbf{OS:} \textcolor{secondary}{\textbf{Ubuntu 24.04 Server}} with a lightweight GUI (optional). \\
+\textbf{Remote Access:} \textbf{Tailscale} for secure, zero-config access from your main Windows workstation.
+
+\section{Immediate Next Steps}
+\begin{enumerate}
+    \item Secure dedicated hardware.
+    \item Flash Ubuntu 24.04 LTS.
+    \item Install Docker, Portainer, and Tailscale.
+    \item Clone OpenClaw/Agent Zero repositories and initiate the "Morning Report" automation.
+\end{enumerate}
+
+\end{document}

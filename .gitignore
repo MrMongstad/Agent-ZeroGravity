@@ -1,0 +1,23 @@
+# Git Ignore: Antigravity and Agent 0
+
+# Secrets
+.env
+*.env.*
+
+# Logs
+*.log
+workspace/memory/logs/
+
+# LaTeX build artifacts
+*.aux
+*.synctex.gz
+
+# System
+.DS_Store
+Thumbs.db
+*.pyc
+__pycache__/
+
+# IDE
+.vscode/
+.idea/

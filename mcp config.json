@@ -130,6 +130,15 @@
         "https://agent.wreckwired.com/mcp"
       ],
       "env": {}
+    },
+    "scratchpad": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/JoshuaOliphant/scratchpad_mcp.git",
+        "mcp-server-scratchpad"
+      ],
+      "env": {}
     }
   }
 }

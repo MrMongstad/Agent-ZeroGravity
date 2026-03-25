@@ -5,7 +5,7 @@
           <header>
             <h2>Arendal</h2>
           </header>
-          <span class="image centered"><img src="images/arendal.jpg" /></span>
+          <span class="image left"><img src="images/arendal.jpg" /></span>
 					<p class="font-bold">
 						The Nordic Aluminium Casthouse Conference has been held in Arendal since 2006.
 					</p>

@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{xcolor}
+
+\definecolor{primary}{HTML}{2C3E50}
+\definecolor{secondary}{HTML}{E74C3C}
+
+\title{\LARGE \textbf{\textcolor{primary}{8GB RAM Optimization Guide}} \\ \large \textit{Maximizing Agent Performance on the i3-8130U System}}
+\author{Jarvis (Prompt Architect)}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Hardware Assessment}
+The identified system (Intel Core i3-8130U / 8.00 GB RAM) is a "Lean and Mean" candidate. To ensure Agent Zero and OpenClaw run without crashing or lagging, we must adopt an \textbf{Efficiency-First} architecture.
+
+\section{The "Gold Standard" Configuration}
+\subsection{Operating System: Ubuntu Server 24.04 (Headless)}
+\begin{itemize}
+    \item \textbf{Why:} Windows 10 Pro consumes ~3GB of your 8GB RAM just to exist. Ubuntu Server consumes <1GB. 
+    \item \textbf{Result:} You reclaim \textbf{2GB of RAM} for your agents.
+\end{itemize}
+
+\subsection{Agent Architecture: API-First}
+\begin{itemize}
+    \item \textbf{Constraint:} 8GB is not enough to run a modern 70B LLM locally while also running Agent Zero.
+    \item \textbf{Strategy:} Use **External APIs** (OpenRouter, Groq, or Claude).
+    \item \textbf{OpenClaw Fix:} Use the OAuth connection to your existing subscriptions as discussed in the Moritz Kremb video. This offloads 100\% of the computation to the cloud, allowing your i3 to act as a high-speed "switchboard" rather than a processor.
+\end{itemize}
+
+\section{Step-by-Step Optimization}
+\begin{enumerate}
+    \item \textbf{Wipe Windows:} Replace with Ubuntu Server.
+    \item \textbf{Docker ONLY:} Run everything in Docker to prevent library conflicts. 
+    \item \textbf{Enable Swap:} Create a 16GB Swap file on the SSD. This acts as emergency overflow RAM.
+    \item \textbf{Headless Management:} Use **Portainer** (Web UI) to manage your agents from your main PC.
+\end{enumerate}
+
+\section{ROI Impact}
+By following this headless Linux strategy, this i3-8130U machine will perform like a machine with 12GB of RAM on Windows. You achieve maximum uptime with zero licensing overhead.
+
+\end{document}

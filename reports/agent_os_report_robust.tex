@@ -1,0 +1,31 @@
+\documentclass{article}
+\begin{document}
+\title{Strategic Agent OS Report: Dedicated Agent Control}
+\author{Jarvis (Prompt Architect)}
+\date{\today}
+\maketitle
+
+\section{Executive Summary}
+To maximize ROI and remove operational friction, a separate computer for agentic control (Agent Zero, OpenClaw, and general autonomous frameworks) is highly recommended. This identifies the optimal hardware-software stack to ensure 24/7 persistence, security, and performance.
+
+\section{Agent-Specific Requirements}
+\subsection{Agent Zero}
+Docker-based for safety and isolation. Native Linux (Ubuntu) is preferred for performance.
+
+\subsection{OpenClaw}
+Requires a 30-minute heartbeat for state retention. Telegram UI is recommended for multi-device control. OAuth via existing subscriptions reduces operational costs.
+
+\subsection{General Frameworks}
+Requires stable background processes and local LLM support via Ollama.
+
+\section{OS Comparison Analysis}
+1. \textbf{Ubuntu 24.04 LTS (Winner):} Flawless Docker support and lowest resource overhead.
+2. \textbf{Proxmox VE (Alpha Choice):} Superior for isolation and system-state "Snapshots".
+3. \textbf{Windows 11 + WSL2:} Viable but less efficient for 24/7 headless duty.
+
+\section{Course of Action}
+\textbf{Hardware:} Dedicated Mini-PC (i7/32GB RAM). \\
+\textbf{OS:} Ubuntu 24.04 LTS. \\
+\textbf{Remote Access:} Tailscale for secure connection from your main Windows machine.
+
+\end{document}
