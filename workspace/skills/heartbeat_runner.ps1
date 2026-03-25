@@ -12,6 +12,18 @@ $ErrorLog = Join-Path $LogsDir "error.log"
 New-Item -ItemType Directory -Path $LogsDir -Force | Out-Null
 
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+$isoTimestamp = Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ"
+$StateFile = Join-Path $BaseDir "workspace\state.json"
+
+# 0. State Update: Update heartbeat in state.json
+if (Test-Path $StateFile) {
+    $state = Get-Content $StateFile | ConvertFrom-Json
+    $state.heartbeat_count = [int]$state.heartbeat_count + 1
+    $state.last_heartbeat = $isoTimestamp
+    $state.last_updated = $isoTimestamp
+    $state | ConvertTo-Json -Depth 10 | Set-Content $StateFile -Encoding UTF8
+    Write-Host "[$timestamp] Heartbeat count updated in state.json"
+}
 
 # 1. Memory Maintenance: Ensure today's session file exists
 if (-not (Test-Path $SessionFile)) {

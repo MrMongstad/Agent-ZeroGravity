@@ -123,6 +123,37 @@ def trigger_agent_loop(task):
     """Triggers the appropriate agent loop for the task."""
     log_sentinel("TRIGGER", f"Executing task from {task['source']}: {task['content'][:50]}...")
     
+    # --- Protocol Phase 4: Cache & Budget Check ---
+    # 1. Cache Check
+    try:
+        from cache_check import check_cache
+        match_found, existing_id = check_cache(task['content'])
+        if match_found:
+            log_sentinel("CACHE_HIT", f"Task already processed: {existing_id}. Skipping.")
+            print(f"[-] Cache Hit: {existing_id}. Skipping redundant task.")
+            save_processed_task(task['id'])
+            return
+    except ImportError:
+        log_sentinel("WARNING", "cache_check.py not found in path. Skipping cache audit.")
+    except Exception as e:
+        log_sentinel("ERROR", f"Cache check failed: {str(e)}")
+
+    # 2. Token Terminator (Budget Enforcement)
+    try:
+        # We run this as a subprocess to handle the sys.exit(1) on budget failure
+        result = subprocess.run(
+            ["python", "workspace/skills/token_terminator.py", "--check", "--mission", task['content']],
+            capture_output=True,
+            text=True
+        )
+        if result.returncode != 0:
+            log_sentinel("BUDGET_EXCEEDED", f"Task {task['id']} blocked by Token-Terminator.")
+            print(f"[!] BUDGET EXCEEDED: {result.stdout}")
+            return # Don't process this task
+    except Exception as e:
+        log_sentinel("ERROR", f"Token-Terminator check failed: {str(e)}")
+    # -----------------------------------------------
+
     print(f"[*] Dispatching task to Nexus/Cline: {task['content'][:100]}...")
     
     if not os.path.exists(QUEUE_DIR):
@@ -165,6 +196,14 @@ def main_loop():
     try:
         while True:
             try:
+                # Update Heartbeat in state.json
+                with open(STATE_JSON_PATH, "r", encoding="utf-8") as f:
+                    state = json.load(f)
+                state["heartbeat_count"] = state.get("heartbeat_count", 0) + 1
+                state["last_heartbeat"] = datetime.now(timezone.utc).isoformat()
+                with open(STATE_JSON_PATH, "w", encoding="utf-8") as f:
+                    json.dump(state, f, indent=2)
+
                 tasks = []
                 tasks.extend(check_vortex_directives())
                 tasks.extend(check_night_watch_backlog())
