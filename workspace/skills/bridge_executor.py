@@ -8,7 +8,7 @@ import hashlib
 
 # Configuration
 VORTEX_STATE_PATH = "workspace/comms/vortex_state.json"
-NIGHT_WATCH_PATH = "workspace/memory/night_watch.md"
+NIGHT_WATCH_PATH = "workspace/protocols/night_watch.md"
 LOG_DIR = "workspace/memory/logs/vault"
 ERROR_LOG = "error_utf8.log"
 PROCESSED_TASKS_PATH = "workspace/memory/processed_tasks.json"
@@ -19,7 +19,7 @@ def update_state(updates):
     if not os.path.exists(STATE_JSON_PATH):
         return
     try:
-        with open(STATE_JSON_PATH, "r", encoding="utf-8") as f:
+        with open(STATE_JSON_PATH, "r", encoding="utf-8-sig") as f:
             state = json.load(f)
         
         for key, value in updates.items():
@@ -38,7 +38,7 @@ def update_state(updates):
 def load_processed_tasks():
     if os.path.exists(PROCESSED_TASKS_PATH):
         try:
-            with open(PROCESSED_TASKS_PATH, "r", encoding="utf-8") as f:
+            with open(PROCESSED_TASKS_PATH, "r", encoding="utf-8-sig") as f:
                 return set(json.load(f))
         except:
             return set()
@@ -77,7 +77,7 @@ def check_vortex_directives():
         return []
 
     try:
-        with open(VORTEX_STATE_PATH, "r", encoding="utf-8") as f:
+        with open(VORTEX_STATE_PATH, "r", encoding="utf-8-sig") as f:
             state = json.load(f)
             
         new_tasks = []
@@ -208,6 +208,13 @@ def main_loop():
                 tasks.extend(check_vortex_directives())
                 tasks.extend(check_night_watch_backlog())
                 
+                # Check for completions (2-way handshake)
+                try:
+                    from queue_reader import process_queue
+                    process_queue()
+                except Exception as e:
+                    log_sentinel("ERROR", f"Queue Reader failure: {e}")
+
                 current_task_info = None
                 
                 if tasks:

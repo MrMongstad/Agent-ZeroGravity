@@ -41,7 +41,7 @@ def process_queue():
                 
                 # 2. Update vortex_state.json
                 if os.path.exists(VORTEX_STATE_PATH):
-                    with open(VORTEX_STATE_PATH, "r", encoding="utf-8") as f:
+                    with open(VORTEX_STATE_PATH, "r", encoding="utf-8-sig") as f:
                         vortex = json.load(f)
                     
                     # Log finding the completion
@@ -50,7 +50,7 @@ def process_queue():
                     # Update status in vortex (Simplified logic: finding the conversation)
                     # For now, we update the master state.
                     if os.path.exists(STATE_JSON_PATH):
-                        with open(STATE_JSON_PATH, "r", encoding="utf-8") as f:
+                        with open(STATE_JSON_PATH, "r", encoding="utf-8-sig") as f:
                             state = json.load(f)
                         state["agent_status"]["cline"] = "idle"
                         state["current_task"] = None
