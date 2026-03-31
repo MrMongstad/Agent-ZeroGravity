@@ -1,0 +1,120 @@
+{
+  "active_conversations": {
+    "A2A_EXEC_TEST_001": {
+      "history": [
+        {
+          "sender": "jarvis",
+          "recipient": "cline",
+          "type": "DIRECTIVE",
+          "timestamp": "2026-03-30T05:13:00Z",
+          "content": "Create a file at workspace/comms/a2a_proof.md. It must contain: (1) a heading '# A2A Execution Proof', (2) the current UTC timestamp, (3) a bullet list of all files in workspace/comms/, (4) confirmation line: 'CLINE AUTONOMOUS EXECUTION CONFIRMED'. Use your tools to read the directory and write the file."
+        },
+        {
+          "sender": "cline",
+          "recipient": "jarvis",
+          "type": "STATUS",
+          "timestamp": "2026-03-30T05:27:10.302867+00:00",
+          "status": "ERROR",
+          "tool_calls": 0,
+          "rounds": 1,
+          "content": "API ERROR: {'code': 404, 'message': 'This model models/gemini-2.0-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.', 'status': 'NOT_FOUND'}"
+        },
+        {
+          "sender": "cline",
+          "recipient": "jarvis",
+          "type": "STATUS",
+          "timestamp": "2026-03-30T05:29:29.193654+00:00",
+          "status": "COMPLETE",
+          "tool_calls": 0,
+          "rounds": 1,
+          "content": ""
+        },
+        {
+          "sender": "cline",
+          "recipient": "jarvis",
+          "type": "STATUS",
+          "timestamp": "2026-03-30T05:32:52.270171+00:00",
+          "status": "COMPLETE",
+          "tool_calls": 10,
+          "rounds": 10,
+          "content": ""
+        },
+        {
+          "sender": "cline",
+          "recipient": "jarvis",
+          "type": "STATUS",
+          "timestamp": "2026-03-30T05:36:23.116122+00:00",
+          "status": "COMPLETE",
+          "tool_calls": 10,
+          "rounds": 10,
+          "content": ""
+        }
+      ]
+    },
+    "A2A_LIVE_DEMO_2BA7E45A": {
+      "created_at": "2026-03-30T05:39:59.764224+00:00",
+      "status": "active",
+      "agents": [
+        "jarvis",
+        "cline"
+      ],
+      "history": [
+        {
+          "sender": "jarvis",
+          "recipient": "cline",
+          "type": "DIRECTIVE",
+          "timestamp": "2026-03-30T05:39:59.764241+00:00",
+          "content": "Create a file in workspace/comms/a2a_live_demo.md. Inside it, write a short ASCII art of a bridge. Then, use your list_directory tool on the workspace root and list out all the files/folders you find below the ASCII art."
+        },
+        {
+          "sender": "cline",
+          "recipient": "jarvis",
+          "type": "STATUS",
+          "timestamp": "2026-03-30T05:40:30.267672+00:00",
+          "status": "COMPLETE",
+          "tool_calls": 10,
+          "rounds": 10,
+          "content": ""
+        }
+      ]
+    },
+    "FETCH_MACRO_A18E44BF": {
+      "created_at": "2026-03-30T05:49:43.446810+00:00",
+      "status": "active",
+      "agents": [
+        "jarvis",
+        "cline"
+      ],
+      "history": [
+        {
+          "sender": "jarvis",
+          "recipient": "cline",
+          "type": "DIRECTIVE",
+          "timestamp": "2026-03-30T05:49:43.446829+00:00",
+          "content": "Use your fetch MCP server to read https://news.ycombinator.com and extract the top 3 story titles. Save the results in workspace/comms/hn_fetch_results.md."
+        },
+        {
+          "sender": "cline",
+          "recipient": "jarvis",
+          "type": "STATUS",
+          "timestamp": "2026-03-30T05:50:32.866781+00:00",
+          "status": "COMPLETE",
+          "tool_calls": 10,
+          "rounds": 10,
+          "content": ""
+        }
+      ]
+    }
+  },
+  "last_updated": "2026-03-31T22:42:40.534479Z",
+  "task_queue": [
+    {
+      "id": "T001",
+      "source": "telegram",
+      "content": "Check the status of the current workspace and report any orphans.",
+      "status": "processing",
+      "created_at": "2026-04-01T00:41:00Z",
+      "picked_up_at": "2026-03-31T22:42:40.534299Z"
+    }
+  ]
+}

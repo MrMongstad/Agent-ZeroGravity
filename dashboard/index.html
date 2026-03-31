@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antigravity Central Dashboard v2.0</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        /* Phase 2 Addon Styles */
+        .gauge-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+        }
+        .gauge-svg { transform: rotate(-90deg); }
+        .gauge-bg { fill: none; stroke: rgba(255, 255, 255, 0.05); stroke-width: 10; }
+        .gauge-fill { 
+            fill: none; 
+            stroke: var(--accent-blue); 
+            stroke-width: 10; 
+            stroke-linecap: round; 
+            transition: stroke-dasharray 1s ease-in-out;
+        }
+        .gauge-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .terminal-panel {
+            background: rgba(0, 0, 0, 0.4);
+            font-family: 'Fira Code', 'Courier New', monospace;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            height: 250px;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: #00ff88;
+        }
+        .command-bar {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        .command-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 10px 15px;
+            color: white;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+        .command-input:focus { border-color: var(--accent-blue); }
+        .btn-dispatch {
+            background: var(--accent-blue);
+            border: none;
+            border-radius: 8px;
+            padding: 0 20px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        .btn-dispatch:hover { opacity: 0.8; }
+        
+        /* Animated Mesh Background */
+        @keyframes mesh-pulse {
+            0% { transform: scale(1) translate(0, 0); }
+            50% { transform: scale(1.1) translate(5%, 5%); }
+            100% { transform: scale(1) translate(0, 0); }
+        }
+        .mesh-bg::after {
+            animation: mesh-pulse 20s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="mesh-bg"></div>
+    
+    <header>
+        <h1>Antigravity Dashboard</h1>
+        <p style="color: var(--text-dim); font-size: 0.9rem;">Autonomous Workspace Command Center</p>
+    </header>
+
+    <main class="dashboard-container">
+        <!-- Neural Bus Section -->
+        <section class="glass-panel" id="neural-bus">
+            <h2><span class="status-indicator status-online" id="bus-light"></span> Neural Bus Monitor</h2>
+            <div id="bus-content">
+                <div class="label">Latest Task Trace</div>
+                <div id="bus-list" style="max-height: 300px; overflow-y: auto;">
+                    <div style="color: var(--text-dim); font-style: italic;">Synchronizing...</div>
+                </div>
+            </div>
+            
+            <div class="command-bar">
+                <input type="text" id="cmd-input" class="command-input" placeholder="Dispatch task to Jarvis...">
+                <button id="btn-dispatch" class="btn-dispatch">SEND</button>
+            </div>
+        </section>
+
+        <!-- System Health + Credit Gauge -->
+        <section class="glass-panel" id="system-health">
+            <h2>System Pulse & Credits</h2>
+            
+            <div class="gauge-container">
+                <svg class="gauge-svg" width="150" height="150">
+                    <circle class="gauge-bg" cx="75" cy="75" r="60"></circle>
+                    <circle id="gauge-fill" class="gauge-fill" cx="75" cy="75" r="60" stroke-dasharray="0 377"></circle>
+                </svg>
+                <div class="gauge-text">
+                    <div class="value" id="credit-spent">$0.00</div>
+                    <div class="label">Spent</div>
+                </div>
+            </div>
+
+            <div class="bus-item" style="margin-top: 1rem;">
+                <div class="label">Vertex AI Connectivity</div>
+                <div class="value" id="vertex-status">Verified</div>
+            </div>
+            <div class="bus-item">
+                <div class="label">Telegram Bot Uplink</div>
+                <div class="value" id="telegram-status">Active</div>
+            </div>
+        </section>
+
+        <!-- Mercury Terminal Addon -->
+        <section class="glass-panel" id="mercury-terminal" style="grid-column: span 1 / -1;">
+            <h2>Mercury Terminal (Live Logs)</h2>
+            <div id="log-terminal" class="terminal-panel">
+                Initializing Mercury stream...
+            </div>
+        </section>
+
+        <!-- Morning Report Section -->
+        <section class="glass-panel" id="morning-report" style="grid-column: span 1 / -1;">
+            <h2>Daily Intelligence Briefing</h2>
+            <div id="morning-report-content">
+                <p>Establishing link to Morning Reports...</p>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="./main.js"></script>
+</body>
+</html>
