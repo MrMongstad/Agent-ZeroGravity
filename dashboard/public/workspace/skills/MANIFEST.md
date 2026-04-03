@@ -12,9 +12,7 @@
 | Morning Report | `morning-report/` | ✅ Active | ✅ Local HTML/JSON |
 | Sentinel Trace | `sentinel_trace.py` | ✅ Active | ✅ Local JSONL logging, no external calls |
 | Scratchpad | `mcp-server-scratchpad` | ✅ Active | ✅ uvx-powered reasoning log |
-| **Imperial Master Bridge v1.2** | `bridge_executor.py` | **✅ MASTER** | **Real-time 5s Synchronicity** |
-| Context Reset | `context_reset.py` | ✅ Active | ✅ Local JSON archival & templating |
-| **Shared Soul** | `sync_soul.py` | **✅ SYNCED** | **Cross-Agent Context Sync** |
+| Cline-Nexus Bridge | `bridge_executor.py` | ⚠️ Stub | ✅ Local-only, Python |
 
 ## Active Agent Profiles
 

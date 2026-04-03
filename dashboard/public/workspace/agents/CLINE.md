@@ -44,4 +44,3 @@ Cline checks `vortex_state.json` at session start and picks up any `OPEN` conver
 ## Communication Bus
 - **Receives from:** `workspace/comms/vortex_state.json` (type: `DELEGATE`)
 - **Reports to:** `workspace/comms/vortex_state.json` (type: `STATUS` or `ERROR`)
-- **Handshake:** Write a file to `workspace/comms/queue/[task_id].done` containing a summary of the work to signal completion to JARVIS.

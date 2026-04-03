@@ -63,18 +63,13 @@ To maximize velocity, The Night Watch can delegate work through:
 > **Status Legend:**
 > - `IDEA` — Raw thought, not yet evaluated
 > - `QUEUED` — Approved, ready for The Night Watch to pick up overnight
-> - `IN_PROGRESS` — Currently being worked on (TOP PRIORITY)
+> - `IN_PROGRESS` — Currently being worked on
 > - `DONE` — Completed, see morning report for details
 > - `PARKED` — Good idea, not a priority right now
 
 ### From Stephan (Strategic Initiatives)
-- `IN_PROGRESS` **[PRIORITY #1] NORCAST_VISUAL_FIDELITY** — Achieve 100% parity with norcast-seminar.no. Focus on social section reordering, spacing, and logo alignment.
-- `IN_PROGRESS` **API_BILLING_SYNC** — Nightly audit of Sonnet/Gemini burn ratios.
-- `QUEUED` **MORNING_EMAIL_AUDIT** — Initial IMAP handshake (Requires Credentials).
-- `QUEUED` **SDK_MODERNIZATION** — Transition from deprecated `google.generativeai` to `google.genai` SDK.
-- `QUEUED` **AUDIT_SUB_AGENTS** — Evaluate purpose and health of all local sub-agents.
-- `DONE` **HEARTBEAT_TEST_CLINE** — Test task to verify heartbeat parsing. Verified functional.
-- `DONE` **Example: Auto-backup critical configs** — Heartbeat now monitors .env and workspace integrity.
+- `IN_PROGRESS` **HEARTBEAT_TEST_CLINE** — Test task to verify heartbeat parsing. If you see this, the heartbeat works.
+- `IN_PROGRESS` **Example: Auto-backup critical configs** — Script that backs up .env files, credentials, and settings to encrypted cloud storage on a schedule.
 - `PARKED` **finish the Sonic Reader App** — Find back the Sonic Reader app code and get it ready for launch. Located here: `C:\Users\steph\.gemini\antigravity\02_Active_Workspaces\Sonic_Reader`
 - `DONE` **Front page / landing page for the SaaS (Sonic Reader)** — Premium dark-mode landing at `projects/Sonic_Reader_Landing/index.html`. Hero, features grid, 3-tier pricing, FAQ, CTA. Zero dependencies.
 - `DONE` **Test Heartbeat Connectivity** — Verify that the new mailbox-based dispatch is triggering correctly.

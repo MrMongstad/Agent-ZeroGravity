@@ -10,28 +10,10 @@ DISPATCH_PATH = os.path.join(BASE_DIR, "workspace", "skills", "dispatch.py")
 
 def log(msg):
     # Print to console and optionally to a log file
-    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    iso_timestamp = datetime.now().isoformat()
-    out = f"[{timestamp}] {msg}"
+    out = f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {msg}"
     print(out)
-    
-    # 1. Standard night_watch.log
-    log_dir = os.path.join(BASE_DIR, "workspace", "memory", "logs")
-    os.makedirs(log_dir, exist_ok=True)
-    with open(os.path.join(log_dir, "night_watch.log"), "a", encoding="utf-8") as f:
+    with open(os.path.join(BASE_DIR, "workspace", "memory", "logs", "night_watch.log"), "a", encoding="utf-8") as f:
         f.write(out + "\n")
-        
-    # 2. Sentinel JSONL for Morning Report integration
-    vault_dir = os.path.join(log_dir, "vault")
-    os.makedirs(vault_dir, exist_ok=True)
-    sentinel_file = os.path.join(vault_dir, f"sentinel_{datetime.now().strftime('%Y-%m-%d')}.jsonl")
-    log_entry = {
-        "timestamp": iso_timestamp,
-        "event": "HEARTBEAT_MAINTENANCE",
-        "details": msg
-    }
-    with open(sentinel_file, "a", encoding="utf-8") as f:
-        f.write(json.dumps(log_entry) + "\n")
 
 def check_for_work():
     if not os.path.exists(NIGHT_WATCH_PATH):
@@ -66,8 +48,8 @@ def check_for_work():
         with open(NIGHT_WATCH_PATH, "w", encoding="utf-8") as f:
             f.writelines(lines)
             
-        log("DISPATCH: Agent Zero decommissioned. Task marked as IN_PROGRESS for Bridge Executor processing.")
-        log("The [Cline-Nexus Bridge] will now ingest this task from the protocols backlog.")
+        log("DISPATCH DISABLED: Agent Zero has been decommissioned. Task remains in IN_PROGRESS status.")
+        log("Manual intervention or new executor (Cline) required for task execution.")
     else:
         log("No QUEUED tasks found in backlog.")
 

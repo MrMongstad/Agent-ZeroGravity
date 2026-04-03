@@ -6,10 +6,8 @@ import argparse
 from datetime import datetime
 
 # Protocol Config
-# Protocol Config
-HOME_TURF_MODELS = ["gemini-1.5-pro", "gemini-2.5-pro", "gemini-2.0-pro-exp", "gemini-2.0-flash"]
-FLAGSHIP_MODELS_STRICT = ["claude-3-opus", "gpt-4"]
-COST_EFFICIENT_MODELS = ["claude-3-haiku", "gpt-3.5-turbo"]
+FLAGSHIP_MODELS = ["claude-3-opus", "gemini-1.5-pro", "gemini-2.5-pro", "gpt-4"]
+COST_EFFICIENT_MODELS = ["claude-3-haiku", "gemini-1.5-flash", "gemini-2.0-flash", "gpt-3.5-turbo"]
 
 STATE_FILE = "workspace/state.json"
 
@@ -28,12 +26,8 @@ def token_terminator_audit(mission_description, active_model, override_budget=Fa
     logging.info("Initiating Pre-Task Audit (Token-Terminator)")
     
     # 1. Check Model Tier against standard operations
-    if any(m in active_model.lower() for m in HOME_TURF_MODELS):
-        print(f"Token-Terminator: Home-Turf Model Detected ({active_model}). High-Octane Audit Passed.")
-        return True
-
-    if any(m in active_model.lower() for m in FLAGSHIP_MODELS_STRICT) and not override_budget:
-        error_msg = f"PAUSED (BUDGET OVERRIDE NEEDED): Strict Flagship model detected ({active_model}) for standard operation."
+    if any(m in active_model.lower() for m in FLAGSHIP_MODELS) and not override_budget:
+        error_msg = f"PAUSED (BUDGET OVERRIDE NEEDED): Flagship model detected ({active_model}) for standard operation."
         print(f"ERROR: {error_msg}")
         update_state_status(error_msg)
         sys.exit(1)

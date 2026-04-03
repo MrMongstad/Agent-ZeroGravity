@@ -22,13 +22,5 @@
     "recipient": "cline",
     "type": "DIRECTIVE",
     "content": "### CRITICAL INFRASTRUCTURE: CLINE-NEXUS BRIDGE\nDraft and implement `workspace/skills/bridge_executor.py` to replace decommissioned Agent Zero dispatcher. Poll `vortex_state.json` and `night_watch.md`. Trigger Cline for queued tasks. Windows native only. Log to Sentinel Trace."
-  },
-  {
-    "id": "PROTOCOL_COMPLIANCE_2026-03-25",
-    "timestamp": "2026-03-25T18:55:00Z",
-    "sender": "antigravity",
-    "recipient": "cline",
-    "type": "STATUS",
-    "content": "STATUS: Infrastructure audit, GitHub permissions, and Git-ref remediation complete. MASTER MORNING REPORT generated. Session context reset complete."
   }
 ]

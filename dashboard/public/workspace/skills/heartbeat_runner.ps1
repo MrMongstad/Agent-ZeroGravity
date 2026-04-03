@@ -77,20 +77,4 @@ if (Test-Path $gitignorePath) {
     }
 }
 
-# 5. Maintenance: Execute Log Rotation and Archival
-$MaintenanceScript = Join-Path $BaseDir "workspace\skills\log_maintenance.ps1"
-if (Test-Path $MaintenanceScript) {
-    powershell.exe -ExecutionPolicy Bypass -File $MaintenanceScript | Out-Null
-    Write-Host "[$timestamp] Log maintenance cycle executed."
-}
-
-# 6. Reporting: Generate Morning Report if missing for today
-$ShortDate = Get-Date -Format "yy-MM-dd"
-$ReportPattern = Join-Path $MemoryDir "MORNING_REPORT_#*_${ShortDate}.md"
-if (-not (Test-Path $ReportPattern)) {
-    Write-Host "[$timestamp] First heartbeat of the day detected. Generating Morning Report..."
-    python (Join-Path $BaseDir "workspace\skills\report_generator.py") | Out-Null
-    Write-Host "[$timestamp] Morning Report generated."
-}
-
 Write-Host "[$timestamp] Heartbeat cycle complete."
