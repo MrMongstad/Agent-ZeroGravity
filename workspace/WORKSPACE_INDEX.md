@@ -195,6 +195,8 @@
     +-- [DIR] logs/
         +-- night_watch.log  (67 KB)
     +-- [DIR] prompt_library/
+        +-- CREATIVE_PROMPTS.md  (291 KB)
+        +-- DEV_PROMPTS.md  (44 KB)
     +-- MORNING_REPORT_#1_26-03-05.md  (4 KB)
     +-- MORNING_REPORT_#1_26-03-06.md  (4 KB)
     +-- MORNING_REPORT_#1_26-03-23.md  (2 KB)
@@ -598,7 +600,7 @@
 +-- state.json  (478 B)
 +-- task.md  (383 B)
 +-- user.md  (3 KB)
-+-- WORKSPACE_INDEX.md  (143 KB)
++-- WORKSPACE_INDEX.md  (155 KB)
 ```
 
 ---
