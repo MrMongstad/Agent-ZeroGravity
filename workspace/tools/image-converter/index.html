@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ImageForge — Format Converter & Resizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0f14;
+      --surface: #161920;
+      --surface2: #1e2230;
+      --border: #2a2f42;
+      --accent: #4f7ef7;
+      --accent2: #7c5cbf;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --text: #e8ecf0;
+      --muted: #6b7280;
+      --radius: 12px;
+      --transition: 0.2s ease;
+    }
+
+    html, body {
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    body {
+      background: radial-gradient(ellipse at 20% 0%, rgba(79,126,247,0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 100%, rgba(124,92,191,0.08) 0%, transparent 50%),
+                  var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 80px;
+    }
+
+    /* ─── Header ─── */
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .logo-icon {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .logo-text {
+      font-size: 26px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .tagline {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /* ─── Main Card ─── */
+    .card {
+      width: 100%;
+      max-width: 900px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.05) inset;
+    }
+
+    /* ─── Drop Zone ─── */
+    .drop-zone {
+      padding: 60px 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background var(--transition);
+      position: relative;
+    }
+    .drop-zone.dragging {
+      background: rgba(79,126,247,0.07);
+    }
+    .drop-zone:hover { background: rgba(255,255,255,0.02); }
+
+    .drop-icon {
+      width: 64px; height: 64px;
+      border: 2px dashed var(--border);
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      font-size: 28px;
+      margin-bottom: 16px;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .drop-zone:hover .drop-icon,
+    .drop-zone.dragging .drop-icon {
+      border-color: var(--accent);
+      transform: scale(1.05);
+    }
+    .drop-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+    .drop-sub { font-size: 13px; color: var(--muted); }
+    .drop-sub span {
+      color: var(--accent);
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .drop-formats {
+      display: flex; gap: 8px; justify-content: center; margin-top: 16px; flex-wrap: wrap;
+    }
+    .format-badge {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    #file-input { display: none; }
+
+    /* ─── Controls Panel ─── */
+    .controls-panel {
+      display: none;
+      padding: 32px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .controls-panel.active { display: block; }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .controls-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 600px) { .controls-grid { grid-template-columns: 1fr; } }
+
+    .control-group { display: flex; flex-direction: column; gap: 8px; }
+    label { font-size: 13px; font-weight: 500; color: var(--text); }
+    label .hint { font-size: 11px; color: var(--muted); font-weight: 400; margin-left: 4px; }
+
+    select, input[type="number"], input[type="range"] {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+      width: 100%;
+    }
+    select:focus, input[type="number"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(79,126,247,0.15);
+    }
+    select { cursor: pointer; }
+
+    .dim-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+    .dim-separator { color: var(--muted); font-size: 18px; text-align: center; }
+    .lock-btn {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--muted);
+      cursor: pointer; user-select: none; margin-top: 4px;
+    }
+    .lock-btn input[type="checkbox"] { accent-color: var(--accent); width: 14px; height: 14px; }
+    .lock-btn:hover { color: var(--text); }
+
+    .quality-row { display: flex; flex-direction: column; gap: 8px; }
+    .quality-header { display: flex; justify-content: space-between; align-items: center; }
+    #quality-val {
+      font-size: 13px; font-weight: 600; color: var(--accent);
+      background: rgba(79,126,247,0.1);
+      padding: 2px 8px; border-radius: 4px;
+    }
+    input[type="range"] {
+      -webkit-appearance: none;
+      height: 4px;
+      background: var(--border);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px; height: 16px;
+      background: var(--accent);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 0 3px rgba(79,126,247,0.2);
+    }
+    input[type="range"]:focus { box-shadow: none; border: none; }
+
+    /* Divider */
+    .divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+    /* File info bar */
+    .file-info-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--surface2);
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+    }
+    .file-info-bar .fi-icon { font-size: 22px; }
+    .fi-details { flex: 1; min-width: 0; }
+    .fi-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .fi-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .fi-remove {
+      background: none; border: none; color: var(--muted); font-size: 18px;
+      cursor: pointer; padding: 4px; border-radius: 6px; line-height: 1;
+      transition: color var(--transition), background var(--transition);
+    }
+    .fi-remove:hover { color: var(--danger); background: rgba(239,68,68,0.1); }
+
+    /* ─── Preview & Output ─── */
+    .preview-panel {
+      display: none;
+      padding: 32px 40px;
+    }
+    .preview-panel.active { display: block; }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 600px) { .preview-grid { grid-template-columns: 1fr; } }
+
+    .preview-box {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .preview-header {
+      padding: 10px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .preview-header .dim-tag {
+      font-size: 10px; background: var(--surface);
+      border-radius: 4px; padding: 2px 6px; color: var(--text);
+    }
+    .preview-img-wrap {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 180px; padding: 20px;
+      background: repeating-conic-gradient(rgba(255,255,255,0.04) 0% 25%, transparent 0% 50%) 0 0 / 16px 16px;
+    }
+    .preview-img-wrap img, .preview-img-wrap canvas {
+      max-width: 100%; max-height: 200px;
+      border-radius: 4px;
+      object-fit: contain;
+    }
+    .preview-placeholder {
+      color: var(--muted); font-size: 13px; text-align: center;
+    }
+
+    /* Convert Button */
+    .convert-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 16px rgba(79,126,247,0.3);
+      margin-bottom: 12px;
+    }
+    .convert-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(79,126,247,0.4); }
+    .convert-btn:active { transform: translateY(0); }
+    .convert-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    .download-btn {
+      display: none;
+      width: 100%;
+      padding: 14px;
+      background: var(--surface2);
+      color: var(--success);
+      font-size: 15px;
+      font-weight: 600;
+      border: 1px solid var(--success);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+      text-align: center;
+    }
+    .download-btn:hover { background: rgba(34,197,94,0.1); transform: translateY(-1px); }
+    .download-btn.visible { display: block; }
+
+    canvas#output-canvas { display: none; }
+
+    /* Footer */
+    .footer {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">🔧</div>
+      <span class="logo-text">ImageForge</span>
+    </div>
+    <p class="tagline">Local image converter & resizer — no upload, no server, fully private.</p>
+  </header>
+
+  <div class="card">
+
+    <!-- Drop Zone -->
+    <div class="drop-zone" id="drop-zone">
+      <div class="drop-icon">📂</div>
+      <div class="drop-title">Drop your image here</div>
+      <div class="drop-sub">or <span id="browse-link">browse files</span></div>
+      <div class="drop-formats">
+        <span class="format-badge">SVG</span>
+        <span class="format-badge">PNG</span>
+        <span class="format-badge">JPG</span>
+        <span class="format-badge">WebP</span>
+        <span class="format-badge">GIF</span>
+        <span class="format-badge">BMP</span>
+        <span class="format-badge">ICO</span>
+      </div>
+      <input type="file" id="file-input" accept="image/*,.svg" />
+    </div>
+
+    <!-- Controls Panel (shown after file load) -->
+    <div class="controls-panel" id="controls-panel">
+
+      <!-- File Info -->
+      <div class="file-info-bar" id="file-info-bar">
+        <span class="fi-icon">🖼️</span>
+        <div class="fi-details">
+          <div class="fi-name" id="fi-name">filename.png</div>
+          <div class="fi-meta" id="fi-meta">0 × 0 px &nbsp;·&nbsp; 0 KB &nbsp;·&nbsp; image/png</div>
+        </div>
+        <button class="fi-remove" id="fi-remove" title="Remove file">✕</button>
+      </div>
+
+      <!-- Format & Quality -->
+      <div class="section-title">Output Format</div>
+      <div class="controls-grid">
+        <div class="control-group">
+          <label for="out-format">Export as</label>
+          <select id="out-format">
+            <option value="png">PNG (lossless)</option>
+            <option value="jpeg">JPEG (lossy)</option>
+            <option value="webp">WebP</option>
+          </select>
+        </div>
+        <div class="control-group quality-row">
+          <label for="quality">
+            <div class="quality-header">
+              <span>Quality <span class="hint">(JPG / WebP)</span></span>
+              <span id="quality-val">92%</span>
+            </div>
+          </label>
+          <input type="range" id="quality" min="10" max="100" value="92" />
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Resize -->
+      <div class="section-title">Resize <span style="font-weight:400;text-transform:none;color:var(--muted);font-size:11px;">(leave blank to keep original)</span></div>
+      <div class="dim-row" style="margin-bottom:10px;">
+        <div class="control-group">
+          <label for="out-w">Width (px)</label>
+          <input type="number" id="out-w" min="1" max="10000" placeholder="auto" />
+        </div>
+        <div class="dim-separator">×</div>
+        <div class="control-group">
+          <label for="out-h">Height (px)</label>
+          <input type="number" id="out-h" min="1" max="10000" placeholder="auto" />
+        </div>
+      </div>
+      <label class="lock-btn">
+        <input type="checkbox" id="lock-ratio" checked />
+        Lock aspect ratio
+      </label>
+    </div>
+
+    <!-- Preview Panel -->
+    <div class="preview-panel" id="preview-panel">
+
+      <div class="preview-grid">
+        <div class="preview-box">
+          <div class="preview-header">
+            <span>Original</span>
+            <span class="dim-tag" id="orig-dim-tag">—</span>
+          </div>
+          <div class="preview-img-wrap">
+            <img id="orig-preview" src="" alt="original" style="display:none" />
+            <div class="preview-placeholder" id="orig-placeholder">Load a file to preview</div>
+          </div>
+        </div>
+        <div class="preview-box">
+          <div class="preview-header">
+            <span>Output</span>
+            <span class="dim-tag" id="out-dim-tag">—</span>
+          </div>
+          <div class="preview-img-wrap">
+            <img id="out-preview" src="" alt="output" style="display:none" />
+            <div class="preview-placeholder" id="out-placeholder">Convert to preview</div>
+          </div>
+        </div>
+      </div>
+
+      <canvas id="output-canvas"></canvas>
+      <button class="convert-btn" id="convert-btn">⚡ Convert &amp; Preview</button>
+      <button class="download-btn" id="download-btn">⬇ Download Output</button>
+    </div>
+
+  </div>
+
+  <div class="footer">All processing is done locally in your browser. No files leave your machine.</div>
+
+<script>
+(function () {
+
+  const dropZone    = document.getElementById('drop-zone');
+  const fileInput   = document.getElementById('file-input');
+  const browseLink  = document.getElementById('browse-link');
+  const ctrlPanel   = document.getElementById('controls-panel');
+  const prevPanel   = document.getElementById('preview-panel');
+  const fiName      = document.getElementById('fi-name');
+  const fiMeta      = document.getElementById('fi-meta');
+  const fiRemove    = document.getElementById('fi-remove');
+  const origPreview = document.getElementById('orig-preview');
+  const origPlaceholder = document.getElementById('orig-placeholder');
+  const outPreview  = document.getElementById('out-preview');
+  const outPlaceholder  = document.getElementById('out-placeholder');
+  const origDimTag  = document.getElementById('orig-dim-tag');
+  const outDimTag   = document.getElementById('out-dim-tag');
+  const outFormat   = document.getElementById('out-format');
+  const quality     = document.getElementById('quality');
+  const qualityVal  = document.getElementById('quality-val');
+  const outW        = document.getElementById('out-w');
+  const outH        = document.getElementById('out-h');
+  const lockRatio   = document.getElementById('lock-ratio');
+  const canvas      = document.getElementById('output-canvas');
+  const ctx         = canvas.getContext('2d');
+  const convertBtn  = document.getElementById('convert-btn');
+  const downloadBtn = document.getElementById('download-btn');
+
+  let currentFile = null;
+  let origNatW = 0, origNatH = 0;
+  let aspectRatio = 1;
+  let lockingAspect = true;
+  let outputDataUrl = null;
+
+  // ── File Handling ──────────────────────────────
+
+  browseLink.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('click', (e) => {
+    if (e.target !== browseLink) fileInput.click();
+  });
+
+  fileInput.addEventListener('change', e => {
+    if (e.target.files[0]) loadFile(e.target.files[0]);
+  });
+
+  dropZone.addEventListener('dragover', e => {
+    e.preventDefault();
+    dropZone.classList.add('dragging');
+  });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragging'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('dragging');
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) loadFile(file);
+  });
+
+  fiRemove.addEventListener('click', resetTool);
+
+  function loadFile(file) {
+    currentFile = file;
+    outputDataUrl = null;
+
+    const url = URL.createObjectURL(file);
+
+    // For SVG, draw via Image to canvas to get natural size
+    const img = new Image();
+    img.onload = () => {
+      origNatW = img.naturalWidth || img.width || 400;
+      origNatH = img.naturalHeight || img.height || 100;
+      aspectRatio = origNatW / origNatH;
+
+      // Show original preview
+      origPreview.src = url;
+      origPreview.style.display = 'block';
+      origPlaceholder.style.display = 'none';
+      origDimTag.textContent = `${origNatW} × ${origNatH}`;
+
+      // Populate file info
+      fiName.textContent = file.name;
+      fiMeta.textContent = `${origNatW} × ${origNatH} px  ·  ${formatBytes(file.size)}  ·  ${file.type || 'image/svg'}`;
+
+      // Pre-fill width/height
+      outW.value = origNatW;
+      outH.value = origNatH;
+
+      // Hide old output
+      outPreview.style.display = 'none';
+      outPlaceholder.style.display = 'block';
+      outPlaceholder.textContent = 'Convert to preview';
+      outDimTag.textContent = '—';
+      downloadBtn.classList.remove('visible');
+
+      // Show panels
+      ctrlPanel.classList.add('active');
+      prevPanel.classList.add('active');
+    };
+    img.src = url;
+  }
+
+  function resetTool() {
+    currentFile = null;
+    outputDataUrl = null;
+    fileInput.value = '';
+    origPreview.src = '';
+    origPreview.style.display = 'none';
+    origPlaceholder.style.display = 'block';
+    outPreview.src = '';
+    outPreview.style.display = 'none';
+    outPlaceholder.style.display = 'block';
+    outPlaceholder.textContent = 'Convert to preview';
+    ctrlPanel.classList.remove('active');
+    prevPanel.classList.remove('active');
+    downloadBtn.classList.remove('visible');
+    outW.value = '';
+    outH.value = '';
+    outDimTag.textContent = '—';
+    origDimTag.textContent = '—';
+  }
+
+  // ── Quality Slider ──────────────────────────────
+
+  quality.addEventListener('input', () => {
+    qualityVal.textContent = quality.value + '%';
+  });
+
+  // ── Aspect Ratio Lock ──────────────────────────
+
+  lockRatio.addEventListener('change', e => {
+    lockingAspect = e.target.checked;
+  });
+
+  outW.addEventListener('input', () => {
+    if (!lockingAspect || !lockRatio.checked) return;
+    const w = parseInt(outW.value);
+    if (w && aspectRatio) outH.value = Math.round(w / aspectRatio);
+  });
+
+  outH.addEventListener('input', () => {
+    if (!lockingAspect || !lockRatio.checked) return;
+    const h = parseInt(outH.value);
+    if (h && aspectRatio) outW.value = Math.round(h * aspectRatio);
+  });
+
+  // ── Convert ────────────────────────────────────
+
+  convertBtn.addEventListener('click', () => {
+    if (!currentFile) return;
+    convert();
+  });
+
+  function convert() {
+    const mime  = `image/${outFormat.value === 'jpeg' ? 'jpeg' : outFormat.value}`;
+    const q     = parseInt(quality.value) / 100;
+    const targetW = parseInt(outW.value) || origNatW;
+    const targetH = parseInt(outH.value) || origNatH;
+
+    convertBtn.disabled = true;
+    convertBtn.textContent = '⏳ Processing…';
+
+    const url = URL.createObjectURL(currentFile);
+    const img = new Image();
+
+    img.onload = () => {
+      canvas.width  = targetW;
+      canvas.height = targetH;
+      ctx.clearRect(0, 0, targetW, targetH);
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(img, 0, 0, targetW, targetH);
+
+      const dataUrl = canvas.toDataURL(mime, q);
+      outputDataUrl = dataUrl;
+
+      // Show output preview
+      outPreview.src = dataUrl;
+      outPreview.style.display = 'block';
+      outPlaceholder.style.display = 'none';
+      outDimTag.textContent = `${targetW} × ${targetH}`;
+
+      // Approximate output size
+      const base64Len = dataUrl.length - dataUrl.indexOf(',') - 1;
+      const approxBytes = Math.floor(base64Len * 0.75);
+      outPlaceholder.textContent = '';
+
+      downloadBtn.classList.add('visible');
+      downloadBtn.textContent = `⬇ Download  —  ${formatBytes(approxBytes)}  ·  ${targetW}×${targetH}  ·  ${outFormat.value.toUpperCase()}`;
+
+      convertBtn.disabled = false;
+      convertBtn.textContent = '⚡ Convert & Preview';
+      URL.revokeObjectURL(url);
+    };
+
+    img.onerror = () => {
+      alert('Failed to load image for conversion.');
+      convertBtn.disabled = false;
+      convertBtn.textContent = '⚡ Convert & Preview';
+    };
+
+    img.src = url;
+  }
+
+  // ── Download ───────────────────────────────────
+
+  downloadBtn.addEventListener('click', () => {
+    if (!outputDataUrl) return;
+    const ext = outFormat.value === 'jpeg' ? 'jpg' : outFormat.value;
+    const baseName = currentFile.name.replace(/\.[^.]+$/, '');
+    const a = document.createElement('a');
+    a.href = outputDataUrl;
+    a.download = `${baseName}_converted.${ext}`;
+    a.click();
+  });
+
+  // ── Utils ──────────────────────────────────────
+
+  function formatBytes(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024 * 1024) return (b / 1024).toFixed(1) + ' KB';
+    return (b / (1024 * 1024)).toFixed(2) + ' MB';
+  }
+
+})();
+</script>
+</body>
+</html>

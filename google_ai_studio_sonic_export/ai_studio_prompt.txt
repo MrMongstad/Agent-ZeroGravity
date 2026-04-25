@@ -1,0 +1,15 @@
+Here is the prompt you can use in Google AI Studio:
+
+I have uploaded a single text file (`sonic_reader_v2_full_codebase.txt`) containing the entire source code and directory structure for my project, **Sonic Reader V2**.
+
+**Your Objective:**
+Please perform a comprehensive debugging, UX, and optimization audit of this codebase. 
+
+**Areas of Focus:**
+1. **Logic Bugs & Edge Cases:** Identify any potential bugs, race conditions, or unhandled errors.
+2. **UX Friction:** Point out areas where the user experience could be improved (e.g., status indicators, transitions, intuitive controls).
+3. **Performance Optimization:** Look for rendering bottlenecks, inefficient data fetching, or heavy computations that could be optimized.
+4. **Code Quality:** Suggest structural improvements, better separation of concerns, or modern best practices.
+
+**Output Format:**
+Please provide a structured report categorizing your findings by the areas above. For any issues you find, provide the specific file name, the lines of code involved, and a clear, actionable recommendation or code snippet to fix it.

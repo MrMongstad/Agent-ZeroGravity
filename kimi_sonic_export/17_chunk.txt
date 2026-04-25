@@ -1,0 +1,619 @@
+=== SONIC READER V2 : CODE CHUNK 17 ===
+
+--- File: src-tauri\target\debug\.fingerprint\windows-sys-ef6e3e6bc6d500c8\lib-windows_sys.json ---
+{"rustc":8323788817864214825,"features":"[\"Win32\", \"Win32_Foundation\", \"Win32_Security\", \"Win32_Storage\", \"Win32_Storage_FileSystem\", \"Win32_System\", \"Win32_System_Diagnostics\", \"Win32_System_Diagnostics_Debug\", \"Win32_System_Registry\", \"Win32_System_Time\", \"default\"]","declared_features":"[\"Wdk\", \"Wdk_Devices\", \"Wdk_Devices_Bluetooth\", \"Wdk_Devices_HumanInterfaceDevice\", \"Wdk_Foundation\", \"Wdk_Graphics\", \"Wdk_Graphics_Direct3D\", \"Wdk_NetworkManagement\", \"Wdk_NetworkManagement_Ndis\", \"Wdk_NetworkManagement_WindowsFilteringPlatform\", \"Wdk_Storage\", \"Wdk_Storage_FileSystem\", \"Wdk_Storage_FileSystem_Minifilters\", \"Wdk_System\", \"Wdk_System_IO\", \"Wdk_System_Memory\", \"Wdk_System_OfflineRegistry\", \"Wdk_System_Registry\", \"Wdk_System_SystemInformation\", \"Wdk_System_SystemServices\", \"Wdk_System_Threading\", \"Win32\", \"Win32_Data\", \"Win32_Data_HtmlHelp\", \"Win32_Data_RightsManagement\", \"Win32_Devices\", \"Win32_Devices_AllJoyn\", \"Win32_Devices_BiometricFramework\", \"Win32_Devices_Bluetooth\", \"Win32_Devices_Communication\", \"Win32_Devices_DeviceAndDriverInstallation\", \"Win32_Devices_DeviceQuery\", \"Win32_Devices_Display\", \"Win32_Devices_Enumeration\", \"Win32_Devices_Enumeration_Pnp\", \"Win32_Devices_Fax\", \"Win32_Devices_HumanInterfaceDevice\", \"Win32_Devices_PortableDevices\", \"Win32_Devices_Properties\", \"Win32_Devices_Pwm\", \"Win32_Devices_Sensors\", \"Win32_Devices_SerialCommunication\", \"Win32_Devices_Tapi\", \"Win32_Devices_Usb\", \"Win32_Devices_WebServicesOnDevices\", \"Win32_Foundation\", \"Win32_Gaming\", \"Win32_Globalization\", \"Win32_Graphics\", \"Win32_Graphics_Dwm\", \"Win32_Graphics_Gdi\", \"Win32_Graphics_GdiPlus\", \"Win32_Graphics_Hlsl\", \"Win32_Graphics_OpenGL\", \"Win32_Graphics_Printing\", \"Win32_Graphics_Printing_PrintTicket\", \"Win32_Management\", \"Win32_Management_MobileDeviceManagementRegistration\", \"Win32_Media\", \"Win32_Media_Audio\", \"Win32_Media_DxMediaObjects\", \"Win32_Media_KernelStreaming\", \"Win32_Media_Multimedia\", \"Win32_Media_Streaming\", \"Win32_Media_WindowsMediaFormat\", \"Win32_NetworkManagement\", \"Win32_NetworkManagement_Dhcp\", \"Win32_NetworkManagement_Dns\", \"Win32_NetworkManagement_InternetConnectionWizard\", \"Win32_NetworkManagement_IpHelper\", \"Win32_NetworkManagement_Multicast\", \"Win32_NetworkManagement_Ndis\", \"Win32_NetworkManagement_NetBios\", \"Win32_NetworkManagement_NetManagement\", \"Win32_NetworkManagement_NetShell\", \"Win32_NetworkManagement_NetworkDiagnosticsFramework\", \"Win32_NetworkManagement_P2P\", \"Win32_NetworkManagement_QoS\", \"Win32_NetworkManagement_Rras\", \"Win32_NetworkManagement_Snmp\", \"Win32_NetworkManagement_WNet\", \"Win32_NetworkManagement_WebDav\", \"Win32_NetworkManagement_WiFi\", \"Win32_NetworkManagement_WindowsConnectionManager\", \"Win32_NetworkManagement_WindowsFilteringPlatform\", \"Win32_NetworkManagement_WindowsFirewall\", \"Win32_NetworkManagement_WindowsNetworkVirtualization\", \"Win32_Networking\", \"Win32_Networking_ActiveDirectory\", \"Win32_Networking_Clustering\", \"Win32_Networking_HttpServer\", \"Win32_Networking_Ldap\", \"Win32_Networking_WebSocket\", \"Win32_Networking_WinHttp\", \"Win32_Networking_WinInet\", \"Win32_Networking_WinSock\", \"Win32_Networking_WindowsWebServices\", \"Win32_Security\", \"Win32_Security_AppLocker\", \"Win32_Security_Authentication\", \"Win32_Security_Authentication_Identity\", \"Win32_Security_Authorization\", \"Win32_Security_Credentials\", \"Win32_Security_Cryptography\", \"Win32_Security_Cryptography_Catalog\", \"Win32_Security_Cryptography_Certificates\", \"Win32_Security_Cryptography_Sip\", \"Win32_Security_Cryptography_UI\", \"Win32_Security_DiagnosticDataQuery\", \"Win32_Security_DirectoryServices\", \"Win32_Security_EnterpriseData\", \"Win32_Security_ExtensibleAuthenticationProtocol\", \"Win32_Security_Isolation\", \"Win32_Security_LicenseProtection\", \"Win32_Security_NetworkAccessProtection\", \"Win32_Security_WinTrust\", \"Win32_Security_WinWlx\", \"Win32_Storage\", \"Win32_Storage_Cabinets\", \"Win32_Storage_CloudFilters\", \"Win32_Storage_Compression\", \"Win32_Storage_DistributedFileSystem\", \"Win32_Storage_FileHistory\", \"Win32_Storage_FileSystem\", \"Win32_Storage_Imapi\", \"Win32_Storage_IndexServer\", \"Win32_Storage_InstallableFileSystems\", \"Win32_Storage_IscsiDisc\", \"Win32_Storage_Jet\", \"Win32_Storage_Nvme\", \"Win32_Storage_OfflineFiles\", \"Win32_Storage_OperationRecorder\", \"Win32_Storage_Packaging\", \"Win32_Storage_Packaging_Appx\", \"Win32_Storage_ProjectedFileSystem\", \"Win32_Storage_StructuredStorage\", \"Win32_Storage_Vhd\", \"Win32_Storage_Xps\", \"Win32_System\", \"Win32_System_AddressBook\", \"Win32_System_Antimalware\", \"Win32_System_ApplicationInstallationAndServicing\", \"Win32_System_ApplicationVerifier\", \"Win32_System_ClrHosting\", \"Win32_System_Com\", \"Win32_System_Com_Marshal\", \"Win32_System_Com_StructuredStorage\", \"Win32_System_Com_Urlmon\", \"Win32_System_ComponentServices\", \"Win32_System_Console\", \"Win32_System_CorrelationVector\", \"Win32_System_DataExchange\", \"Win32_System_DeploymentServices\", \"Win32_System_DeveloperLicensing\", \"Win32_System_Diagnostics\", \"Win32_System_Diagnostics_Ceip\", \"Win32_System_Diagnostics_Debug\", \"Win32_System_Diagnostics_Debug_Extensions\", \"Win32_System_Diagnostics_Etw\", \"Win32_System_Diagnostics_ProcessSnapshotting\", \"Win32_System_Diagnostics_ToolHelp\", \"Win32_System_Diagnostics_TraceLogging\", \"Win32_System_DistributedTransactionCoordinator\", \"Win32_System_Environment\", \"Win32_System_ErrorReporting\", \"Win32_System_EventCollector\", \"Win32_System_EventLog\", \"Win32_System_EventNotificationService\", \"Win32_System_GroupPolicy\", \"Win32_System_HostCompute\", \"Win32_System_HostComputeNetwork\", \"Win32_System_HostComputeSystem\", \"Win32_System_Hypervisor\", \"Win32_System_IO\", \"Win32_System_Iis\", \"Win32_System_Ioctl\", \"Win32_System_JobObjects\", \"Win32_System_Js\", \"Win32_System_Kernel\", \"Win32_System_LibraryLoader\", \"Win32_System_Mailslots\", \"Win32_System_Mapi\", \"Win32_System_Memory\", \"Win32_System_Memory_NonVolatile\", \"Win32_System_MessageQueuing\", \"Win32_System_MixedReality\", \"Win32_System_Ole\", \"Win32_System_PasswordManagement\", \"Win32_System_Performance\", \"Win32_System_Performance_HardwareCounterProfiling\", \"Win32_System_Pipes\", \"Win32_System_Power\", \"Win32_System_ProcessStatus\", \"Win32_System_Recovery\", \"Win32_System_Registry\", \"Win32_System_RemoteDesktop\", \"Win32_System_RemoteManagement\", \"Win32_System_RestartManager\", \"Win32_System_Restore\", \"Win32_System_Rpc\", \"Win32_System_Search\", \"Win32_System_Search_Common\", \"Win32_System_SecurityCenter\", \"Win32_System_Services\", \"Win32_System_SetupAndMigration\", \"Win32_System_Shutdown\", \"Win32_System_StationsAndDesktops\", \"Win32_System_SubsystemForLinux\", \"Win32_System_SystemInformation\", \"Win32_System_SystemServices\", \"Win32_System_Threading\", \"Win32_System_Time\", \"Win32_System_TpmBaseServices\", \"Win32_System_UserAccessLogging\", \"Win32_System_Variant\", \"Win32_System_VirtualDosMachines\", \"Win32_System_WindowsProgramming\", \"Win32_System_Wmi\", \"Win32_UI\", \"Win32_UI_Accessibility\", \"Win32_UI_ColorSystem\", \"Win32_UI_Controls\", \"Win32_UI_Controls_Dialogs\", \"Win32_UI_HiDpi\", \"Win32_UI_Input\", \"Win32_UI_Input_Ime\", \"Win32_UI_Input_KeyboardAndMouse\", \"Win32_UI_Input_Pointer\", \"Win32_UI_Input_Touch\", \"Win32_UI_Input_XboxController\", \"Win32_UI_InteractionContext\", \"Win32_UI_Magnification\", \"Win32_UI_Shell\", \"Win32_UI_Shell_Common\", \"Win32_UI_Shell_PropertiesSystem\", \"Win32_UI_TabletPC\", \"Win32_UI_TextServices\", \"Win32_UI_WindowsAndMessaging\", \"Win32_Web\", \"Win32_Web_InternetExplorer\", \"default\", \"docs\"]","target":7306158158326771440,"profile":16739268672764549369,"path":2124173917933833185,"deps":[[14322346790800707264,"windows_targets",false,8629620468486732060]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\windows-sys-ef6e3e6bc6d500c8\\dep-lib-windows_sys","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\windows-targets-6c400e2acf690d50\lib-windows_targets.json ---
+{"rustc":8323788817864214825,"features":"[]","declared_features":"[]","target":12110220207092481134,"profile":14508822251238124762,"path":13094603390732158547,"deps":[[4937765985372346599,"windows_x86_64_msvc",false,687489642210877494]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\windows-targets-6c400e2acf690d50\\dep-lib-windows_targets","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\windows-targets-bfad33bd630c1b3c\lib-windows_targets.json ---
+{"rustc":8323788817864214825,"features":"[]","declared_features":"[]","target":12110220207092481134,"profile":10185594453327162546,"path":13941556838990995271,"deps":[[6520462792382062950,"windows_x86_64_msvc",false,11963469617314745414]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\windows-targets-bfad33bd630c1b3c\\dep-lib-windows_targets","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\windows-threading-4ee95c7ec942a061\lib-windows_threading.json ---
+{"rustc":8323788817864214825,"features":"[]","declared_features":"[]","target":15560764667452110620,"profile":15657897354478470176,"path":11435316167408228318,"deps":[[11505586985402185701,"windows_link",false,12277129158205642893]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\windows-threading-4ee95c7ec942a061\\dep-lib-windows_threading","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\windows-version-ff1c0733db983b30\lib-windows_version.json ---
+{"rustc":8323788817864214825,"features":"[]","declared_features":"[]","target":1968241332739449982,"profile":14508822251238124762,"path":7252431176652777132,"deps":[[6959378045035346538,"windows_link",false,8153491444891900661]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\windows-version-ff1c0733db983b30\\dep-lib-windows_version","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\windows_x86_64_msvc-21d5b550e6be9f77\build-script-build-script-build.json ---
+{"rustc":8323788817864214825,"features":"[]","declared_features":"[]","target":5408242616063297496,"profile":15690309238241248693,"path":7519389409655644025,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\windows_x86_64_msvc-21d5b550e6be9f77\\dep-build-script-build-script-build","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\windows_x86_64_msvc-38540bf3181b7a31\build-script-build-script-build.json ---
+{"rustc":8323788817864214825,"features":"[]","declared_features":"[]","target":5408242616063297496,"profile":2225463790103693989,"path":5290447501807129096,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\windows_x86_64_msvc-38540bf3181b7a31\\dep-build-script-build-script-build","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\windows_x86_64_msvc-3b036064a14243f2\run-build-script-build-script-build.json ---
+{"rustc":8323788817864214825,"features":"","declared_features":"","target":0,"profile":0,"path":0,"deps":[[6520462792382062950,"build_script_build",false,11283883693583639323]],"local":[{"Precalculated":"0.52.6"}],"rustflags":[],"config":0,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\windows_x86_64_msvc-638dd05bdfa4b60c\lib-windows_x86_64_msvc.json ---
+{"rustc":8323788817864214825,"features":"[]","declared_features":"[]","target":3306771437825829530,"profile":15657897354478470176,"path":14841696885159037139,"deps":[[6520462792382062950,"build_script_build",false,6289100610339352527]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\windows_x86_64_msvc-638dd05bdfa4b60c\\dep-lib-windows_x86_64_msvc","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\windows_x86_64_msvc-c436b3094bd0c174\lib-windows_x86_64_msvc.json ---
+{"rustc":8323788817864214825,"features":"[]","declared_features":"[]","target":3306771437825829530,"profile":14508822251238124762,"path":7928391260334963397,"deps":[[4937765985372346599,"build_script_build",false,12882483683188744116]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\windows_x86_64_msvc-c436b3094bd0c174\\dep-lib-windows_x86_64_msvc","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\windows_x86_64_msvc-cad928dbe54d46bb\run-build-script-build-script-build.json ---
+{"rustc":8323788817864214825,"features":"","declared_features":"","target":0,"profile":0,"path":0,"deps":[[4937765985372346599,"build_script_build",false,15971134755618069340]],"local":[{"Precalculated":"0.53.1"}],"rustflags":[],"config":0,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\winnow-1effec3731633717\lib-winnow.json ---
+{"rustc":8323788817864214825,"features":"[]","declared_features":"[\"alloc\", \"debug\", \"default\", \"simd\", \"std\", \"unstable-doc\", \"unstable-recover\"]","target":13376497836617006023,"profile":14674408568762635374,"path":4411598986526753068,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\winnow-1effec3731633717\\dep-lib-winnow","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\winreg-97c3f43bbd41dbce\lib-winreg.json ---
+{"rustc":8323788817864214825,"features":"[]","declared_features":"[\"chrono\", \"serde\", \"serialization-serde\", \"transactions\"]","target":1455926537639231396,"profile":2225463790103693989,"path":15442541095462821073,"deps":[[7667230146095136825,"cfg_if",false,10989069853353335378],[10281541584571964250,"windows_sys",false,17286426745225660995]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\winreg-97c3f43bbd41dbce\\dep-lib-winreg","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\writeable-6c052438b9a0092f\lib-writeable.json ---
+{"rustc":8323788817864214825,"features":"[]","declared_features":"[\"alloc\", \"default\", \"either\"]","target":6209224040855486982,"profile":15657897354478470176,"path":1798306155495393412,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\writeable-6c052438b9a0092f\\dep-lib-writeable","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\wry-1edd3f7ef98c78f5\lib-wry.json ---
+{"rustc":8323788817864214825,"features":"[\"devtools\", \"drag-drop\", \"gdkx11\", \"javascriptcore-rs\", \"linux-body\", \"os-webview\", \"protocol\", \"soup3\", \"webkit2gtk\", \"webkit2gtk-sys\", \"x11\", \"x11-dl\"]","declared_features":"[\"default\", \"devtools\", \"drag-drop\", \"fullscreen\", \"gdkx11\", \"javascriptcore-rs\", \"linux-body\", \"mac-proxy\", \"os-webview\", \"protocol\", \"serde\", \"soup3\", \"tracing\", \"transparent\", \"webkit2gtk\", \"webkit2gtk-sys\", \"x11\", \"x11-dl\"]","target":2463569863749872413,"profile":11987593577772629573,"path":1653030224962876481,"deps":[[225366818813141688,"build_script_build",false,423382511213627339],[2448563160050429386,"thiserror",false,9454373833739882408],[2620434475832828286,"http",false,4150939163178680675],[4143744114649553716,"raw_window_handle",false,5393959371130527476],[5628259161083531273,"windows_core",false,12354620742319295068],[5855319743879205494,"once_cell",false,10749213562346693162],[7606335748176206944,"dpi",false,7928973882718597941],[10781831454009427734,"webview2_com",false,17366273597467988437],[11989259058781683633,"dunce",false,4574667824406799474],[13129119782722264640,"windows_version",false,16811863475840032823],[14585479307175734061,"windows",false,5628612543145692094],[16727543399706004146,"cookie",false,7816992337866859162]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\wry-1edd3f7ef98c78f5\\dep-lib-wry","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\wry-5bf57671e0b3c57b\build-script-build-script-build.json ---
+{"rustc":8323788817864214825,"features":"[\"devtools\", \"drag-drop\", \"gdkx11\", \"javascriptcore-rs\", \"linux-body\", \"os-webview\", \"protocol\", \"soup3\", \"webkit2gtk\", \"webkit2gtk-sys\", \"x11\", \"x11-dl\"]","declared_features":"[\"default\", \"devtools\", \"drag-drop\", \"fullscreen\", \"gdkx11\", \"javascriptcore-rs\", \"linux-body\", \"mac-proxy\", \"os-webview\", \"protocol\", \"serde\", \"soup3\", \"tracing\", \"transparent\", \"webkit2gtk\", \"webkit2gtk-sys\", \"x11\", \"x11-dl\"]","target":5408242616063297496,"profile":13277125065115479800,"path":8916519374429869376,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\wry-5bf57671e0b3c57b\\dep-build-script-build-script-build","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\wry-ab62232690d937ae\run-build-script-build-script-build.json ---
+{"rustc":8323788817864214825,"features":"","declared_features":"","target":0,"profile":0,"path":0,"deps":[[225366818813141688,"build_script_build",false,4674972443050199801]],"local":[{"Precalculated":"0.54.3"}],"rustflags":[],"config":0,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\yoke-46708d6248432a0f\lib-yoke.json ---
+{"rustc":8323788817864214825,"features":"[\"derive\", \"zerofrom\"]","declared_features":"[\"alloc\", \"default\", \"derive\", \"serde\", \"zerofrom\"]","target":11250006364125496299,"profile":15657897354478470176,"path":9709629973649392822,"deps":[[4776946450414566059,"yoke_derive",false,4531238088800928478],[12669569555400633618,"stable_deref_trait",false,15030578357446661342],[17046516144589451410,"zerofrom",false,11867622019052148893]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\yoke-46708d6248432a0f\\dep-lib-yoke","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\yoke-64ca2420e631febc\lib-yoke.json ---
+{"rustc":8323788817864214825,"features":"[\"derive\", \"zerofrom\"]","declared_features":"[\"alloc\", \"default\", \"derive\", \"serde\", \"zerofrom\"]","target":11250006364125496299,"profile":15657897354478470176,"path":9709629973649392822,"deps":[[4776946450414566059,"yoke_derive",false,4531238088800928478],[12669569555400633618,"stable_deref_trait",false,9463554492380903531],[17046516144589451410,"zerofrom",false,11867622019052148893]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\yoke-64ca2420e631febc\\dep-lib-yoke","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\yoke-derive-887704857506bbdb\lib-yoke_derive.json ---
+{"rustc":8323788817864214825,"features":"[]","declared_features":"[]","target":1654536213780382264,"profile":2225463790103693989,"path":12223992114012771051,"deps":[[4289358735036141001,"proc_macro2",false,3521279066351754759],[4621990586401870511,"synstructure",false,11128058161018501539],[10420560437213941093,"syn",false,13229124349722831296],[13111758008314797071,"quote",false,5976006267281440633]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\yoke-derive-887704857506bbdb\\dep-lib-yoke_derive","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\zerocopy-331cb8fa6c0c3f64\run-build-script-build-script-build.json ---
+{"rustc":8323788817864214825,"features":"","declared_features":"","target":0,"profile":0,"path":0,"deps":[[17945577413884132710,"build_script_build",false,6297671446012488834]],"local":[{"RerunIfChanged":{"output":"debug\\build\\zerocopy-331cb8fa6c0c3f64\\output","paths":["build.rs","Cargo.toml"]}}],"rustflags":[],"config":0,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\zerocopy-66b772611309f9bf\lib-zerocopy.json ---
+{"rustc":8323788817864214825,"features":"[\"simd\"]","declared_features":"[\"__internal_use_only_features_that_work_on_stable\", \"alloc\", \"derive\", \"float-nightly\", \"simd\", \"simd-nightly\", \"std\", \"zerocopy-derive\"]","target":3084901215544504908,"profile":2225463790103693989,"path":17485604490350823904,"deps":[[17945577413884132710,"build_script_build",false,6901323574115385044]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\zerocopy-66b772611309f9bf\\dep-lib-zerocopy","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\zerocopy-c82ac49b1d4a8a15\build-script-build-script-build.json ---
+{"rustc":8323788817864214825,"features":"[\"simd\"]","declared_features":"[\"__internal_use_only_features_that_work_on_stable\", \"alloc\", \"derive\", \"float-nightly\", \"simd\", \"simd-nightly\", \"std\", \"zerocopy-derive\"]","target":5408242616063297496,"profile":2225463790103693989,"path":14493909304418904731,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\zerocopy-c82ac49b1d4a8a15\\dep-build-script-build-script-build","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\zerofrom-c16f18f2dec06756\lib-zerofrom.json ---
+{"rustc":8323788817864214825,"features":"[\"derive\"]","declared_features":"[\"alloc\", \"default\", \"derive\"]","target":723370850876025358,"profile":15657897354478470176,"path":9500692737011973592,"deps":[[4022439902832367970,"zerofrom_derive",false,13410108659734144531]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\zerofrom-c16f18f2dec06756\\dep-lib-zerofrom","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\zerofrom-derive-dc3f8f55c3011a94\lib-zerofrom_derive.json ---
+{"rustc":8323788817864214825,"features":"[]","declared_features":"[]","target":1753304412232254384,"profile":2225463790103693989,"path":3514184387168265536,"deps":[[4289358735036141001,"proc_macro2",false,3521279066351754759],[4621990586401870511,"synstructure",false,11128058161018501539],[10420560437213941093,"syn",false,13229124349722831296],[13111758008314797071,"quote",false,5976006267281440633]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\zerofrom-derive-dc3f8f55c3011a94\\dep-lib-zerofrom_derive","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\zerotrie-130b2289c25d74c2\lib-zerotrie.json ---
+{"rustc":8323788817864214825,"features":"[\"yoke\", \"zerofrom\"]","declared_features":"[\"alloc\", \"databake\", \"default\", \"litemap\", \"serde\", \"yoke\", \"zerofrom\", \"zerovec\"]","target":12445875338185814621,"profile":15657897354478470176,"path":6289332431221041194,"deps":[[697207654067905947,"yoke",false,12538522187556225078],[5298260564258778412,"displaydoc",false,13309620617543875811],[17046516144589451410,"zerofrom",false,11867622019052148893]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\zerotrie-130b2289c25d74c2\\dep-lib-zerotrie","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\zerotrie-ab31f8051a5334d2\lib-zerotrie.json ---
+{"rustc":8323788817864214825,"features":"[\"yoke\", \"zerofrom\"]","declared_features":"[\"alloc\", \"databake\", \"default\", \"litemap\", \"serde\", \"yoke\", \"zerofrom\", \"zerovec\"]","target":12445875338185814621,"profile":15657897354478470176,"path":6289332431221041194,"deps":[[697207654067905947,"yoke",false,17393578052223168713],[5298260564258778412,"displaydoc",false,13309620617543875811],[17046516144589451410,"zerofrom",false,11867622019052148893]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\zerotrie-ab31f8051a5334d2\\dep-lib-zerotrie","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\zerovec-d2f9dcc7e62a2ade\lib-zerovec.json ---
+{"rustc":8323788817864214825,"features":"[\"derive\", \"yoke\"]","declared_features":"[\"alloc\", \"databake\", \"derive\", \"hashmap\", \"serde\", \"std\", \"yoke\"]","target":1825474209729987087,"profile":15657897354478470176,"path":15062277502444616023,"deps":[[697207654067905947,"yoke",false,17393578052223168713],[6522303474648583265,"zerovec_derive",false,10775957638280855722],[17046516144589451410,"zerofrom",false,11867622019052148893]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\zerovec-d2f9dcc7e62a2ade\\dep-lib-zerovec","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\zerovec-derive-e4b331a5f7213b9f\lib-zerovec_derive.json ---
+{"rustc":8323788817864214825,"features":"[]","declared_features":"[]","target":14030368369369144574,"profile":2225463790103693989,"path":18299310165985121289,"deps":[[4289358735036141001,"proc_macro2",false,3521279066351754759],[10420560437213941093,"syn",false,13229124349722831296],[13111758008314797071,"quote",false,5976006267281440633]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\zerovec-derive-e4b331a5f7213b9f\\dep-lib-zerovec_derive","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\zerovec-f6ea4d97059bbc69\lib-zerovec.json ---
+{"rustc":8323788817864214825,"features":"[\"derive\", \"yoke\"]","declared_features":"[\"alloc\", \"databake\", \"derive\", \"hashmap\", \"serde\", \"std\", \"yoke\"]","target":1825474209729987087,"profile":15657897354478470176,"path":15062277502444616023,"deps":[[697207654067905947,"yoke",false,12538522187556225078],[6522303474648583265,"zerovec_derive",false,10775957638280855722],[17046516144589451410,"zerofrom",false,11867622019052148893]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\zerovec-f6ea4d97059bbc69\\dep-lib-zerovec","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\zmij-1eccd671b92d37aa\build-script-build-script-build.json ---
+{"rustc":8323788817864214825,"features":"[]","declared_features":"[\"no-panic\"]","target":5408242616063297496,"profile":2225463790103693989,"path":5529559523952183536,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\zmij-1eccd671b92d37aa\\dep-build-script-build-script-build","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\zmij-8c3b467cd6d7dfae\run-build-script-build-script-build.json ---
+{"rustc":8323788817864214825,"features":"","declared_features":"","target":0,"profile":0,"path":0,"deps":[[12347024475581975995,"build_script_build",false,7593607319801792665]],"local":[{"RerunIfChanged":{"output":"debug\\build\\zmij-8c3b467cd6d7dfae\\output","paths":["build.rs"]}}],"rustflags":[],"config":0,"compile_kind":0}
+
+--- File: src-tauri\target\debug\.fingerprint\zmij-f826c7a5704d4328\lib-zmij.json ---
+{"rustc":8323788817864214825,"features":"[]","declared_features":"[\"no-panic\"]","target":16603507647234574737,"profile":15657897354478470176,"path":17962781911353522996,"deps":[[12347024475581975995,"build_script_build",false,17562948482615400442]],"local":[{"CheckDepInfo":{"dep_info":"debug\\.fingerprint\\zmij-f826c7a5704d4328\\dep-lib-zmij","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+
+--- File: src-tauri\tauri.conf.json ---
+{
+    "productName": "Sonic Reader",
+    "version": "2.0.0",
+    "identifier": "com.sonicreader.v2",
+    "build": {
+        "beforeDevCommand": "npm run dev",
+        "beforeBuildCommand": "npm run build",
+        "devUrl": "http://localhost:1420",
+        "frontendDist": "../dist"
+    },
+    "app": {
+        "windows": [
+            {
+                "title": "Sonic Reader",
+                "width": 800,
+                "height": 600,
+                "resizable": true,
+                "fullscreen": false,
+                "visible": true,
+                "transparent": false,
+                "decorations": true,
+                "alwaysOnTop": false
+            }
+        ],
+        "security": {
+            "csp": null
+        }
+    },
+    "bundle": {
+        "active": true,
+        "targets": "all",
+        "icon": [
+            "icons/32x32.png",
+            "icons/128x128.png",
+            "icons/128x128@2x.png",
+            "icons/icon.icns",
+            "icons/icon.ico"
+        ]
+    }
+}
+
+--- File: src\App.tsx ---
+import { useState, useEffect, useCallback } from 'react';
+import { invoke } from '@tauri-apps/api/core';
+import { listen } from '@tauri-apps/api/event';
+import { Play, Square, Pause, Settings, Cpu, Zap, Clipboard, ClipboardCheck } from 'lucide-react';
+import GhostOverlay from './components/GhostOverlay';
+import SettingsPanel from './components/SettingsPanel';
+
+type EngineStatus = 'idle' | 'scraping' | 'reading' | 'paused' | 'error';
+
+interface Rect {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+}
+
+interface TextChunk {
+    text: string;
+    rects: Rect[];
+}
+
+const App = () => {
+    const [status, setStatus] = useState<EngineStatus>('idle');
+    const [lastError, setLastError] = useState<string>('');
+    const [chunkCount, setChunkCount] = useState(0);
+    const [settingsOpen, setSettingsOpen] = useState(false);
+    const [clipMonitor, setClipMonitor] = useState(false);
+    const [countdown, setCountdown] = useState<number | null>(null);
+
+    // Sync clipboard monitor state from backend on mount
+    useEffect(() => {
+        invoke<boolean>('get_clipboard_monitor_status').then(setClipMonitor).catch(console.error);
+
+        const unlisten1 = listen<boolean>('clipboard-monitor-status', (event) => {
+            setClipMonitor(event.payload);
+        });
+        const unlisten2 = listen<number>('clipboard-text-detected', (event) => {
+            setStatus('reading');
+            setChunkCount(1);
+        });
+
+        return () => {
+            unlisten1.then(fn => fn());
+            unlisten2.then(fn => fn());
+        };
+    }, []);
+
+    const handleToggleClipboard = useCallback(async () => {
+        try {
+            if (clipMonitor) {
+                await invoke('stop_clipboard_monitor');
+                setClipMonitor(false);
+            } else {
+                await invoke('start_clipboard_monitor');
+                setClipMonitor(true);
+            }
+        } catch (err) {
+            console.error('[SonicV2] Clipboard monitor error:', err);
+        }
+    }, [clipMonitor]);
+
+    const handleScrapeAndRead = useCallback(async () => {
+        try {
+            setLastError('');
+
+            // 3-second countdown so user can move cursor to target text
+            for (let i = 3; i > 0; i--) {
+                setCountdown(i);
+                setStatus('scraping');
+                await new Promise(res => setTimeout(res, 1000));
+            }
+            setCountdown(null);
+
+            // 1. Scrape text at cursor position
+            const chunks = await invoke<TextChunk[]>('trigger_scrape');
+
+            if (!chunks || chunks.length === 0) {
+                setStatus('idle');
+                setLastError('No text found at cursor.');
+                return;
+            }
+
+            setChunkCount(chunks.length);
+            setStatus('reading');
+
+            // 2. Start TTS pipeline with scraped chunks
+            await invoke('start_reading', { chunks });
+
+        } catch (err: any) {
+            setCountdown(null);
+            setStatus('error');
+            const raw = typeof err === 'string' ? err : err.message || 'Unknown error';
+            const msg = raw.includes('Legacy Window') || raw.includes('No readable text')
+                ? 'No readable text found. Use Clipboard Monitor — Ctrl+C any text to read it.'
+                : raw;
+            setLastError(msg);
+            console.error('[SonicV2]', err);
+        }
+    }, []);
+
+    const handleStop = useCallback(async () => {
+        try {
+            await invoke('stop_reading');
+            setStatus('idle');
+            setChunkCount(0);
+        } catch (err) {
+            console.error('[SonicV2] Stop error:', err);
+        }
+    }, []);
+
+    const handleTogglePause = useCallback(async () => {
+        try {
+            await invoke('toggle_pause');
+            setStatus(prev => prev === 'paused' ? 'reading' : 'paused');
+        } catch (err) {
+            console.error('[SonicV2] Pause error:', err);
+        }
+    }, []);
+
+    // Global keyboard shortcuts
+    useEffect(() => {
+        let lastSpaceTime = 0;
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === ' ') {
+                const now = Date.now();
+                if (now - lastSpaceTime < 400) {
+                    e.preventDefault();
+                    if (status === 'idle' || status === 'error') {
+                        handleScrapeAndRead();
+                    } else if (status === 'reading' || status === 'paused') {
+                        handleTogglePause();
+                    }
+                }
+                lastSpaceTime = now;
+            }
+
+            if (e.key === 'Escape') {
+                if (status === 'reading' || status === 'paused' || status === 'scraping') {
+                    handleStop();
+                }
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [status, handleScrapeAndRead, handleStop, handleTogglePause]);
+
+    const statusConfig: Record<EngineStatus, { label: string; color: string; dotClass: string }> = {
+        idle:     { label: 'Ready',         color: 'text-emerald-400', dotClass: 'bg-emerald-500' },
+        scraping: { label: 'Extracting...', color: 'text-cyan-400',    dotClass: 'bg-cyan-500 animate-pulse' },
+        reading:  { label: 'Reading...',    color: 'text-amber-400',   dotClass: 'bg-amber-400 animate-pulse' },
+        paused:   { label: 'Paused',        color: 'text-amber-400',   dotClass: 'bg-amber-500' },
+        error:    { label: 'Failed',        color: 'text-rose-400',    dotClass: 'bg-rose-500' },
+    };
+
+    const current = statusConfig[status];
+
+    return (
+        <div className="min-h-screen bg-neutral-950 text-neutral-100 font-sans selection:bg-indigo-500/30">
+            <GhostOverlay />
+            <SettingsPanel isOpen={settingsOpen} onClose={() => setSettingsOpen(false)} />
+
+            {/* Ambient Background */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-900/20 blur-[120px] rounded-full" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-900/10 blur-[120px] rounded-full" />
+            </div>
+
+            {/* Header */}
+            <nav className="relative z-10 flex items-center justify-between px-8 py-6 border-b border-white/5 bg-black/20 backdrop-blur-md">
+                <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                        <Cpu className="w-5 h-5 text-white" />
+                    </div>
+                    <span className="text-xl font-bold tracking-tight text-white/90">
+                        Sonic Reader <span className="text-indigo-500">V2</span>
+                    </span>
+                </div>
+                <div className="flex items-center gap-3">
+                    {chunkCount > 0 && (
+                        <span className="text-xs font-mono text-neutral-500 bg-neutral-900 px-3 py-1 rounded-full border border-white/5">
+                            <Zap className="w-3 h-3 inline mr-1 text-amber-500" />{chunkCount} chunks
+                        </span>
+                    )}
+                    <button onClick={() => setSettingsOpen(true)} className="p-2 hover:bg-white/5 rounded-full transition-colors group">
+                        <Settings className="w-5 h-5 text-neutral-400 group-hover:text-white transition-colors" />
+                    </button>
+                </div>
+            </nav>
+
+            {/* Main */}
+            <main className="relative z-10 flex flex-col items-center justify-center h-[calc(100vh-88px)] px-6">
+                <div className="w-full max-w-md p-8 rounded-3xl bg-neutral-900/40 border border-white/5 backdrop-blur-xl shadow-2xl">
+                    <div className="text-center mb-10">
+                        <h2 className="text-sm font-medium text-neutral-500 uppercase tracking-[0.2em] mb-2">
+                            Engine Isolation Active
+                        </h2>
+                        <p className="text-lg text-neutral-300 font-light">Sonic V2 — Phase 2</p>
+                    </div>
+
+                    {/* Control Buttons */}
+                    <div className="flex justify-center gap-6 mb-10">
+                        {status === 'idle' || status === 'error' ? (
+                            <button
+                                onClick={handleScrapeAndRead}
+                                className="w-20 h-20 flex items-center justify-center rounded-full bg-indigo-600 hover:bg-indigo-500 text-white shadow-xl shadow-indigo-600/20 active:scale-95 transition-all duration-300 group"
+                            >
+                                <Play className="w-8 h-8 fill-current translate-x-1 group-hover:scale-110 transition-transform" />
+                            </button>
+                        ) : (
+                            <>
+                                <button
+                                    onClick={handleTogglePause}
+                                    className="w-16 h-16 flex items-center justify-center rounded-full bg-amber-600 hover:bg-amber-500 text-white shadow-xl active:scale-95 transition-all duration-300"
+                                >
+                                    <Pause className="w-6 h-6 fill-current" />
+                                </button>
+                                <button
+                                    onClick={handleStop}
+                                    className="w-16 h-16 flex items-center justify-center rounded-full bg-neutral-100 hover:bg-white text-neutral-950 shadow-xl active:scale-95 transition-all duration-300"
+                                >
+                                    <Square className="w-6 h-6 fill-current" />
+                                </button>
+                            </>
+                        )}
+                    </div>
+
+                    {/* Status Bar */}
+                    <div className="space-y-3">
+                        <div className="px-5 py-4 rounded-2xl bg-black/30 border border-white/5 flex items-center justify-between">
+                            <span className="text-sm text-neutral-400">Status</span>
+                            <div className="flex items-center gap-2">
+                                <div className={`w-2 h-2 rounded-full ${current.dotClass}`} />
+                                <span className={`text-sm font-medium ${current.color}`}>
+                                    {countdown !== null ? `Move cursor… ${countdown}` : current.label}
+                                </span>
+                            </div>
+                        </div>
+
+                        {lastError && (
+                            <div className="px-5 py-3 rounded-2xl bg-rose-950/30 border border-rose-500/20 text-sm text-rose-400">
+                                {lastError}
+                            </div>
+                        )}
+                    </div>
+                    {/* Clipboard Monitor Toggle */}
+                    <div className="mt-6">
+                        <button
+                            onClick={handleToggleClipboard}
+                            className={`w-full px-5 py-4 rounded-2xl border flex items-center justify-between transition-all duration-300 ${
+                                clipMonitor
+                                    ? 'bg-emerald-950/40 border-emerald-500/30 hover:bg-emerald-950/60'
+                                    : 'bg-black/30 border-white/5 hover:bg-white/5'
+                            }`}
+                        >
+                            <div className="flex items-center gap-3">
+                                {clipMonitor ? (
+                                    <ClipboardCheck className="w-5 h-5 text-emerald-400" />
+                                ) : (
+                                    <Clipboard className="w-5 h-5 text-neutral-500" />
+                                )}
+                                <div className="text-left">
+                                    <span className={`text-sm font-medium block ${clipMonitor ? 'text-emerald-400' : 'text-neutral-300'}`}>
+                                        Clipboard Monitor
+                                    </span>
+                                    <span className="text-xs text-neutral-500">
+                                        {clipMonitor ? 'Listening for Ctrl+C...' : 'Auto-read copied text'}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className={`w-10 h-6 rounded-full relative transition-colors duration-300 ${
+                                clipMonitor ? 'bg-emerald-500' : 'bg-neutral-700'
+                            }`}>
+                                <div className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow transition-transform duration-300 ${
+                                    clipMonitor ? 'translate-x-5' : 'translate-x-1'
+                                }`} />
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <p className="mt-8 text-sm text-neutral-600 font-light">
+                    <kbd className="px-2 py-1 rounded bg-neutral-900 border border-white/5 text-neutral-400">Double Space</kbd> to read ·
+                    <kbd className="px-2 py-1 rounded bg-neutral-900 border border-white/5 text-neutral-400 ml-1">Esc</kbd> to stop ·
+                    <kbd className="px-2 py-1 rounded bg-neutral-900 border border-white/5 text-neutral-400 ml-1">Ctrl+C</kbd> auto-read
+                </p>
+            </main>
+        </div>
+    );
+};
+
+export default App;
+
+
+--- File: src\components\GhostOverlay.tsx ---
+/**
+ * GhostOverlay Protocol
+ * ──────────────────────
+ * This component handles the 'Visible but Invisible' strategy.
+ * 1. UI-wise: It's an invisible layer or a very subtle ghosting.
+ * 2. Scraper-wise: It uses ARIA and OS window flags to ensure 
+ *    the uiautomation engine skips this layer entirely.
+ */
+const GhostOverlay = () => {
+    return (
+        <div
+            id="sonic-ghost-overlay"
+            aria-hidden="true"
+            role="none"
+            className="fixed inset-0 pointer-events-none z-[9999]"
+            style={{
+                // Webkit / Chrome specific isolation
+                WebkitAppRegion: 'none',
+                // Guaranteeing no reader picks up text fragments
+                userSelect: 'none'
+            } as React.CSSProperties & Record<string, string>}
+        >
+            {/* Visual pulse indicator when scraping is active */}
+            <div className="absolute inset-0 border-[4px] border-indigo-500/0 animate-[pulse_4s_infinite] transition-colors duration-1000" />
+        </div>
+    );
+};
+
+export default GhostOverlay;
+
+
+--- File: src\components\SettingsPanel.tsx ---
+import { useState, useEffect, useCallback } from 'react';
+import { invoke } from '@tauri-apps/api/core';
+import { X, Volume2, Gauge, Check } from 'lucide-react';
+
+interface TtsSettings {
+    voice_model: string;
+    speed: number;
+}
+
+interface SettingsPanelProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+const SettingsPanel = ({ isOpen, onClose }: SettingsPanelProps) => {
+    const [voiceModel, setVoiceModel] = useState('en_US-lessac-high.onnx');
+    const [speed, setSpeed] = useState(1.0);
+    const [saved, setSaved] = useState(false);
+
+    // Load current settings from backend on open
+    useEffect(() => {
+        if (!isOpen) return;
+        invoke<TtsSettings>('get_settings')
+            .then((settings) => {
+                setVoiceModel(settings.voice_model);
+                setSpeed(settings.speed);
+            })
+            .catch((err) => console.error('[Settings] Load error:', err));
+    }, [isOpen]);
+
+    // Persist settings to backend whenever they change
+    const persistSettings = useCallback(async (model: string, spd: number) => {
+        try {
+            await invoke('save_settings', { voiceModel: model, speed: spd });
+            setSaved(true);
+            setTimeout(() => setSaved(false), 1500);
+        } catch (err) {
+            console.error('[Settings] Save error:', err);
+        }
+    }, []);
+
+    const handleVoiceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const val = e.target.value;
+        setVoiceModel(val);
+        persistSettings(val, speed);
+    };
+
+    const handleSpeedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const val = parseFloat(e.target.value);
+        setSpeed(val);
+    };
+
+    const handleSpeedCommit = () => {
+        persistSettings(voiceModel, speed);
+    };
+
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+            {/* Backdrop */}
+            <div
+                className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                onClick={onClose}
+            />
+
+            {/* Panel */}
+            <div className="relative w-full max-w-md mx-4 p-8 rounded-3xl bg-neutral-900/95 border border-white/5 backdrop-blur-xl shadow-2xl">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-8">
+                    <h2 className="text-lg font-semibold text-white">Settings</h2>
+                    <div className="flex items-center gap-2">
+                        {saved && (
+                            <span className="flex items-center gap-1 text-xs text-emerald-400 font-mono animate-pulse">
+                                <Check className="w-3 h-3" /> Saved
+                            </span>
+                        )}
+                        <button
+                            onClick={onClose}
+                            className="p-2 hover:bg-white/5 rounded-full transition-colors"
+                        >
+                            <X className="w-5 h-5 text-neutral-400" />
+                        </button>
+                    </div>
+                </div>
+
+                {/* Voice Model */}
+                <div className="mb-6">
+                    <label className="flex items-center gap-2 text-sm font-medium text-neutral-400 mb-3">
+                        <Volume2 className="w-4 h-4" /> Voice Model
+                    </label>
+                    <select
+                        value={voiceModel}
+                        onChange={handleVoiceChange}
+                        className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/5 text-neutral-200 text-sm font-mono focus:border-indigo-500/50 focus:outline-none transition-colors appearance-none cursor-pointer"
+                    >
+                        <option value="en_US-lessac-high.onnx">Lessac (High Quality)</option>
+                        <option value="en_US-lessac-medium.onnx">Lessac (Medium)</option>
+                        <option value="en_US-amy-medium.onnx">Amy (Medium)</option>
+                        <option value="en_US-ryan-high.onnx">Ryan (High Quality)</option>
+                    </select>
+                </div>
+
+                {/* Speed */}
+                <div className="mb-8">
+                    <label className="flex items-center gap-2 text-sm font-medium text-neutral-400 mb-3">
+                        <Gauge className="w-4 h-4" /> Reading Speed
+                    </label>
+                    <div className="flex items-center gap-4">
+                        <input
+                            type="range"
+                            min="0.5"
+                            max="2.0"
+                            step="0.1"
+                            value={speed}
+                            onChange={handleSpeedChange}
+                            onMouseUp={handleSpeedCommit}
+                            onTouchEnd={handleSpeedCommit}
+                            className="flex-1 h-1.5 rounded-full appearance-none bg-neutral-800 accent-indigo-500 cursor-pointer"
+                        />
+                        <span className="text-sm font-mono text-indigo-400 w-12 text-right">{speed.toFixed(1)}x</span>
+                    </div>
+                </div>
+
+                {/* Engine Info */}
+                <div className="px-5 py-4 rounded-2xl bg-black/30 border border-white/5">
+                    <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs text-neutral-500 uppercase tracking-wider">Engine</span>
+                        <span className="text-xs font-mono text-emerald-500">Piper TTS</span>
+                    </div>
+                    <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs text-neutral-500 uppercase tracking-wider">Scraper</span>
+                        <span className="text-xs font-mono text-cyan-500">UIAutomation V2</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                        <span className="text-xs text-neutral-500 uppercase tracking-wider">Sanitizer</span>
+                        <span className="text-xs font-mono text-amber-500">5-Stage Pipeline</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default SettingsPanel;
+
+

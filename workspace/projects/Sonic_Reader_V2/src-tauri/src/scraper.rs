@@ -31,7 +31,7 @@ fn recursive_vault_search(automation: &UIAutomation, start_node: uiautomation::U
     // Walk up to 10 levels to find the true browser frame
     for _ in 0..10 {
         if let Ok(parent) = walker.get_parent(&current) {
-            if let Ok(class) = parent.get_class_name() {
+            if let Ok(class) = parent.get_classname() {
                 if class.contains("Chrome_WidgetWin") {
                     // We found the container. Now search for the first valid TextPattern descendant.
                     return find_first_text_node(&walker, &parent);

@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GulfCast 2024 — Planning Schedule</title>
+    <meta name="description" content="GulfCast 2024 Planning Schedule — full conference timeline and milestone tracker.">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+/* ══════════════════════════════════════════
+   TOKENS
+══════════════════════════════════════════ */
+:root { --expo: cubic-bezier(0.16, 1, 0.3, 1); --t: 0.35s; }
+
+[data-theme="dark"] {
+    --bg:          #080b12;
+    --bg-dots:     rgba(255,255,255,0.03);
+    --card:        #111727;
+    --card-border: rgba(255,255,255,0.08);
+    --text-1:      #e8ecf7;
+    --text-2:      #5b6c94;
+    --text-3:      #2a3450;
+    --h-from:      #a78bfa;
+    --h-to:        #60a5fa;
+    --h-glow:      rgba(167,139,250,0.35);
+    --bar-done:    #22c55e;
+    --ring-track:  #1a2035;
+    --pill-bg:     #161e30;
+    --pill-border: #243050;
+    --connector:   rgba(255,255,255,0.08);
+}
+
+[data-theme="light"] {
+    --bg:          #f0f3fb;
+    --bg-dots:     rgba(0,0,0,0.04);
+    --card:        #ffffff;
+    --card-border: rgba(0,0,0,0.07);
+    --text-1:      #0e1525;
+    --text-2:      #64748b;
+    --text-3:      #cbd5e1;
+    --h-from:      #7c3aed;
+    --h-to:        #2563eb;
+    --h-glow:      rgba(124,58,237,0.2);
+    --bar-done:    #16a34a;
+    --ring-track:  #e2e8f4;
+    --pill-bg:     #edf0fa;
+    --pill-border: #d0d9f0;
+    --connector:   rgba(0,0,0,0.09);
+}
+
+/* ══════════════════════════════════════════
+   RESET + BASE
+══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--bg);
+    background-image: radial-gradient(var(--bg-dots) 1.5px, transparent 1.5px);
+    background-size: 30px 30px;
+    color: var(--text-1);
+    min-height: 100vh;
+    padding-bottom: 7rem;
+    overflow-x: hidden;
+    transition: background-color var(--t), color var(--t);
+}
+
+/* Ambient glow — gives glassmorphism something to blur against */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+        radial-gradient(ellipse at 15% 10%, rgba(167,139,250,0.1) 0%, transparent 45%),
+        radial-gradient(ellipse at 85% 30%, rgba(96,165,250,0.08) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 80%, rgba(34,197,94,0.05) 0%, transparent 40%);
+    transition: opacity var(--t);
+}
+[data-theme="light"] body::before {
+    background:
+        radial-gradient(ellipse at 15% 10%, rgba(124,58,237,0.07) 0%, transparent 45%),
+        radial-gradient(ellipse at 85% 30%, rgba(37,99,235,0.05) 0%, transparent 45%);
+}
+
+/* All page content must sit above the ambient layer */
+.topbar, .page-header, .dashboard, .steps-container, .page-footer, main {
+    position: relative;
+    z-index: 1;
+}
+
+/* ══════════════════════════════════════════
+   TOP BAR
+══════════════════════════════════════════ */
+.topbar {
+    position: sticky;
+    top: 0; z-index: 200;
+    background: var(--card);
+    border-bottom: 1px solid var(--card-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 0.8rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: background var(--t), border-color var(--t);
+}
+
+.brand { display: flex; align-items: center; gap: 12px; }
+
+.brand-mark {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--h-from), var(--h-to));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 1rem; color: #fff;
+    box-shadow: 0 0 18px var(--h-glow);
+    flex-shrink: 0;
+}
+
+.brand-name { font-size: 1rem; font-weight: 700; color: var(--text-1); line-height: 1.1; transition: color var(--t); }
+.brand-sub  { font-size: 0.7rem; color: var(--text-2); display: block; transition: color var(--t); }
+.topbar-actions { display: flex; align-items: center; gap: 0.5rem; }
+
+.btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 0.42rem 1rem; border-radius: 99px;
+    font-family: inherit; font-size: 0.78rem; font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--pill-border);
+    background: var(--pill-bg); color: var(--text-2);
+    transition: color 0.2s, background 0.2s, border-color 0.2s, transform 0.15s, box-shadow 0.15s;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+}
+.btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.25) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: 99px;
+}
+.btn:active::after { opacity: 1; transition: none; }
+.btn:hover { color: var(--text-1); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
+.btn svg { flex-shrink: 0; }
+
+/* ══════════════════════════════════════════
+   HEADER
+══════════════════════════════════════════ */
+.page-header { text-align: center; padding: 5rem 1.5rem 3rem; }
+
+.eyebrow {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 5px;
+    text-transform: uppercase; color: var(--text-2); margin-bottom: 1.1rem;
+    transition: color var(--t);
+}
+
+@keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+h1 {
+    font-size: clamp(2.6rem, 7vw, 4.4rem);
+    font-weight: 900; line-height: 1.04; letter-spacing: -3px;
+    background: linear-gradient(140deg, var(--h-from), var(--h-to), #f472b6, var(--h-from));
+    background-size: 300% 300%;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    filter: drop-shadow(0 10px 30px var(--h-glow));
+    animation: gradientShift 7s ease infinite;
+}
+
+.heading-rule {
+    width: 56px; height: 3px; border-radius: 99px;
+    background: linear-gradient(90deg, var(--h-from), var(--h-to));
+    margin: 1.2rem auto 0; opacity: 0.6;
+}
+
+/* ══════════════════════════════════════════
+   DASHBOARD
+══════════════════════════════════════════ */
+.dashboard { max-width: 740px; margin: 0 auto 4rem; padding: 0 1.5rem; }
+
+.dashboard-inner {
+    background: rgba(17,23,42,0.72);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px; padding: 2rem 2.4rem;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.06);
+    display: flex; align-items: center; gap: 2.4rem; flex-wrap: wrap;
+    transition: background var(--t), border-color var(--t);
+}
+[data-theme="light"] .dashboard-inner {
+    background: rgba(255,255,255,0.72);
+    border-color: rgba(0,0,0,0.1);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+.dash-left { flex: 1; min-width: 180px; }
+.dash-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--text-2); margin-bottom: 0.4rem; transition: color var(--t); }
+.dash-count { font-size: 3rem; font-weight: 900; line-height: 1; color: var(--text-1); letter-spacing: -2px; transition: color var(--t); }
+.dash-count span { color: var(--bar-done); }
+.dash-sub { font-size: 0.82rem; color: var(--text-2); margin-top: 0.3rem; transition: color var(--t); }
+
+.stat-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.1rem; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 0.28rem 0.7rem; border-radius: 99px; font-size: 0.7rem; font-weight: 700; border: 1px solid transparent; }
+.chip-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.chip-done { background: rgba(34,197,94,0.1); border-color: rgba(34,197,94,0.25); color: #4ade80; }
+.chip-prog { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.25); color: #fbbf24; }
+.chip-up   { background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.25); color: #60a5fa; }
+.chip-done .chip-dot { background: #22c55e; }
+.chip-prog .chip-dot { background: #f59e0b; }
+.chip-up   .chip-dot { background: #3b82f6; }
+[data-theme="light"] .chip-done { color: #15803d; }
+[data-theme="light"] .chip-prog { color: #b45309; }
+[data-theme="light"] .chip-up   { color: #1d4ed8; }
+
+/* Ring */
+@keyframes ringPulse {
+    0%, 100% { filter: drop-shadow(0 0 4px rgba(34,197,94,0.5)); }
+    50%       { filter: drop-shadow(0 0 14px rgba(34,197,94,0.9)); }
+}
+.ring-wrap { position: relative; width: 130px; height: 130px; flex-shrink: 0; }
+.ring-wrap svg { transform: rotate(-90deg); width: 130px; height: 130px; }
+.ring-wrap.complete svg { animation: ringPulse 2.4s ease-in-out infinite; }
+.ring-track { fill: none; stroke: var(--ring-track); stroke-width: 8; transition: stroke var(--t); }
+.ring-fill  { fill: none; stroke: url(#ringGrad); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 377; stroke-dashoffset: 377; transition: stroke-dashoffset 1.8s var(--expo); }
+.ring-label { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+.ring-pct { font-size: 1.55rem; font-weight: 900; color: var(--bar-done); letter-spacing: -1px; line-height: 1; }
+.ring-sub  { font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-2); transition: color var(--t); }
+
+/* ══════════════════════════════════════════
+   STEPPER TIMELINE  (new design)
+══════════════════════════════════════════ */
+.steps-container {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.step-item {
+    display: flex;
+    gap: 1.4rem;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s var(--expo), transform 0.6s var(--expo);
+}
+.step-item.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Left rail ── */
+.step-rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 52px;
+    padding-top: 2px;
+}
+
+.step-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    border: 2px solid transparent;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background var(--t), border-color var(--t);
+    position: relative;
+    z-index: 1;
+}
+
+.step-item:hover .step-badge {
+    transform: scale(1.08);
+}
+
+/* Connector between badges */
+.step-connector {
+    width: 2px;
+    flex: 1;
+    min-height: 28px;
+    background: var(--connector);
+    margin: 6px 0;
+    border-radius: 2px;
+    position: relative;
+}
+
+/* Animated fill on connector based on card color */
+.step-connector::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.step-item.visible + .step-item.visible .step-connector::after { opacity: 0.4; }
+
+/* Last item has no connector */
+.step-item:last-child .step-connector { display: none; }
+
+/* ── Badge colors per accent ── */
+.c-red         .step-badge { border-color: #ef4444; background: rgba(239,68,68,0.12);  color: #f87171; box-shadow: 0 0 16px rgba(239,68,68,0.2); }
+.c-bright-blue .step-badge { border-color: #3b82f6; background: rgba(59,130,246,0.12); color: #60a5fa; box-shadow: 0 0 16px rgba(59,130,246,0.18); }
+.c-yellow      .step-badge { border-color: #eab308; background: rgba(234,179,8,0.12);  color: #facc15; box-shadow: 0 0 16px rgba(234,179,8,0.18); }
+.c-dark-blue   .step-badge { border-color: #4f6fd4; background: rgba(79,111,212,0.12); color: #818cf8; box-shadow: 0 0 16px rgba(79,111,212,0.18); }
+
+[data-theme="light"] .c-red         .step-badge { color: #dc2626; box-shadow: 0 0 12px rgba(239,68,68,0.15); }
+[data-theme="light"] .c-bright-blue .step-badge { color: #2563eb; box-shadow: 0 0 12px rgba(59,130,246,0.15); }
+[data-theme="light"] .c-yellow      .step-badge { color: #ca8a04; box-shadow: 0 0 12px rgba(234,179,8,0.15); }
+[data-theme="light"] .c-dark-blue   .step-badge { color: #4338ca; box-shadow: 0 0 12px rgba(79,111,212,0.15); }
+
+/* Hover glow intensify */
+.step-item:hover.c-red         .step-badge { box-shadow: 0 0 24px rgba(239,68,68,0.4); }
+.step-item:hover.c-bright-blue .step-badge { box-shadow: 0 0 24px rgba(59,130,246,0.4); }
+.step-item:hover.c-yellow      .step-badge { box-shadow: 0 0 24px rgba(234,179,8,0.4); }
+.step-item:hover.c-dark-blue   .step-badge { box-shadow: 0 0 24px rgba(79,111,212,0.4); }
+
+/* ── Right card ── */
+.step-card {
+    flex: 1;
+    background: rgba(17,23,42,0.68);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 20px 22px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.05);
+    margin-bottom: 0;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background var(--t), border-color var(--t);
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+    transform-style: preserve-3d;
+    transform-origin: center center;
+}
+[data-theme="light"] .step-card {
+    background: rgba(255,255,255,0.75);
+    border-color: rgba(0,0,0,0.08);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.95);
+}
+
+/* Subtle accent top strip */
+.step-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 14px 14px 0 0;
+    opacity: 0.7;
+}
+
+.c-red         .step-card::before { background: #ef4444; }
+.c-bright-blue .step-card::before { background: #3b82f6; }
+.c-yellow      .step-card::before { background: #eab308; }
+.c-dark-blue   .step-card::before { background: #4f6fd4; }
+
+.step-item:hover .step-card {
+    transform: translateX(5px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.18);
+}
+
+/* Spacer between each step-item pair */
+.step-item + .step-item { margin-top: 0; }
+
+.card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.card-date {
+    font-size: 0.67rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text-2);
+    padding-top: 2px;
+    transition: color var(--t);
+}
+
+.badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 10px; border-radius: 99px;
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.3px;
+    text-transform: uppercase; white-space: nowrap;
+    border: 1px solid transparent; flex-shrink: 0;
+}
+.badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+.badge-done { background: rgba(34,197,94,0.12); color: #4ade80; border-color: rgba(34,197,94,0.25); box-shadow: 0 0 10px rgba(34,197,94,0.2); }
+.badge-prog { background: rgba(245,158,11,0.12); color: #fbbf24; border-color: rgba(245,158,11,0.25); }
+.badge-up   { background: rgba(59,130,246,0.1);  color: #60a5fa; border-color: rgba(59,130,246,0.25); }
+.badge-prog::before { animation: pulse 1.4s infinite; }
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.25} }
+
+[data-theme="light"] .badge-done { color: #15803d; }
+[data-theme="light"] .badge-prog { color: #92400e; }
+[data-theme="light"] .badge-up   { color: #1e40af; }
+
+.card-title { font-size: 1rem; font-weight: 600; line-height: 1.4; color: var(--text-1); margin-bottom: 6px; transition: color var(--t); }
+.card-desc  { font-size: 0.8rem; line-height: 1.65; color: var(--text-2); transition: color var(--t); }
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+.page-footer { text-align: center; margin-top: 5rem; color: var(--text-2); font-size: 0.82rem; padding: 0 1rem; transition: color var(--t); }
+.footer-actions { margin-top: 1.2rem; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.kbd-hint {
+    margin-top: 1.4rem;
+    font-size: 0.68rem;
+    color: var(--text-3);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    letter-spacing: 0.3px;
+    transition: color var(--t);
+}
+.kbd {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px; border-radius: 5px;
+    border: 1px solid var(--connector);
+    background: var(--pill-bg);
+    font-size: 0.65rem; font-weight: 700; color: var(--text-2);
+    font-family: monospace;
+    transition: background var(--t), border-color var(--t), color var(--t);
+}
+
+/* ══════════════════════════════════════════
+   PRINT
+══════════════════════════════════════════ */
+@media print {
+    /* Force browser to print background colors — critical for dark mode */
+    *, *::before, *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Strip UI chrome */
+    .topbar, .page-footer, #print-btn, #print-btn-footer { display: none !important; }
+
+    /* Fix animation states so cards are visible */
+    .step-item { opacity: 1 !important; transform: none !important; }
+
+    /* Remove backdrop-filter (not rendered in PDF) — fall back to solid card color */
+    .dashboard-inner, .step-card {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: var(--card) !important;
+        box-shadow: none !important;
+    }
+
+    /* Gradient text can't print — use solid primary text color instead */
+    h1 {
+        background: none !important;
+        -webkit-text-fill-color: var(--text-1) !important;
+        color: var(--text-1) !important;
+        filter: none !important;
+        animation: none !important;
+    }
+
+    /* Prevent page break inside a card */
+    .step-item { break-inside: avoid; page-break-inside: avoid; }
+
+    /* Hide confetti canvas if somehow still present */
+    canvas { display: none !important; }
+}
+
+/* ══════════════════════════════════════════
+   REDUCED MOTION
+══════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+    /* Show cards immediately — no translate/fade */
+    .step-item {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+    /* Kill magnetic 3D tilt */
+    .step-card { transform: none !important; transition: none !important; }
+    /* Kill animated headline gradient */
+    h1 { animation: none !important; }
+    /* Kill ring pulse glow */
+    .ring-wrap.complete svg { animation: none !important; }
+    /* Kill badge pulse dot */
+    .badge-prog::before { animation: none !important; }
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 600px) {
+    .topbar { padding: 0.7rem 1rem; }
+    .brand-sub { display: none; }
+    .btn .btn-label { display: none; }
+    .dashboard-inner { flex-direction: column; align-items: flex-start; gap: 1.6rem; }
+    .step-badge { width: 40px; height: 40px; border-radius: 10px; font-size: 0.7rem; }
+    .steps-container { padding: 0 1rem; }
+    h1 { letter-spacing: -1.5px; }
+}
+    </style>
+</head>
+<body>
+
+<!-- ── TOP BAR ──────────────────────────────────── -->
+<header class="topbar">
+    <div class="brand">
+        <div class="brand-mark" aria-hidden="true">GC</div>
+        <div>
+            <span class="brand-name">GulfCast</span>
+            <span class="brand-sub">Conference Planning</span>
+        </div>
+    </div>
+    <nav class="topbar-actions">
+        <button class="btn" id="print-btn" aria-label="Print or save as PDF">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            <span class="btn-label">Print / PDF</span>
+        </button>
+        <button class="btn" id="theme-toggle" aria-label="Toggle colour theme">
+            <svg id="theme-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <span class="btn-label" id="theme-label">Light Mode</span>
+        </button>
+    </nav>
+</header>
+
+<!-- ── HEADING ──────────────────────────────────── -->
+<div class="page-header">
+    <p class="eyebrow">Strategic Planning Timeline &middot; 2023&ndash;2024</p>
+    <h1>GulfCast 2024<br>Planning Schedule</h1>
+    <div class="heading-rule"></div>
+</div>
+
+<!-- ── DASHBOARD ────────────────────────────────── -->
+<section class="dashboard" aria-label="Project progress">
+    <div class="dashboard-inner">
+        <div class="dash-left">
+            <p class="dash-label">Overall Progress</p>
+            <p class="dash-count"><span id="done-count">0</span> <span id="total-count" style="font-size:1.4rem;color:var(--text-2);font-weight:500;">/ 0</span></p>
+            <p class="dash-sub">milestones completed</p>
+            <div class="stat-chips" id="stat-chips">
+                <div class="chip chip-done"><div class="chip-dot"></div><span id="chip-done-label">0 Completed</span></div>
+                <div class="chip chip-prog"><div class="chip-dot"></div><span id="chip-prog-label">0 In Progress</span></div>
+                <div class="chip chip-up"><div class="chip-dot"></div><span id="chip-up-label">0 Upcoming</span></div>
+            </div>
+        </div>
+        <div class="ring-wrap" id="ring-wrap" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="100% complete">
+            <svg viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#22c55e"/>
+                        <stop offset="100%" stop-color="#4ade80"/>
+                    </linearGradient>
+                </defs>
+                <circle class="ring-track" cx="65" cy="65" r="60"/>
+                <circle id="ring-fill" class="ring-fill" cx="65" cy="65" r="60"/>
+            </svg>
+            <div class="ring-label">
+                <span class="ring-pct">100%</span>
+                <span class="ring-sub">Done</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── STEPPER TIMELINE (rendered by JS from MILESTONES data) ── -->
+<main>
+<div class="steps-container" id="steps-container" role="list" aria-label="Conference planning milestones">
+</div>
+</main>
+
+<!-- ── FOOTER ────────────────────────────────────── -->
+<footer class="page-footer">
+    <span>Last updated: April 16, 2026</span>
+    <div class="footer-actions">
+        <button class="btn" id="print-btn-footer" aria-label="Print schedule">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Print Schedule
+        </button>
+        <button class="btn" onclick="window.print()" aria-label="Export to PDF">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export to PDF
+        </button>
+    </div>
+    <div class="kbd-hint" aria-label="Keyboard shortcut">
+        Press <kbd class="kbd">D</kbd> to toggle dark / light mode
+    </div>
+</footer>
+
+<script>
+/* ── Theme ─────────────────────────────────── */
+const html  = document.documentElement;
+const tBtn  = document.getElementById('theme-toggle');
+const tLbl  = document.getElementById('theme-label');
+const tIcon = document.getElementById('theme-icon');
+
+const MOON = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
+const SUN  = `<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`;
+
+function applyTheme(dark) {
+    html.dataset.theme = dark ? 'dark' : 'light';
+    tLbl.textContent   = dark ? 'Light Mode' : 'Dark Mode';
+    tIcon.innerHTML    = dark ? SUN : MOON;
+    localStorage.setItem('gc-grok-theme', dark ? 'dark' : 'light');
+}
+
+const saved   = localStorage.getItem('gc-grok-theme');
+const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+applyTheme(saved ? saved === 'dark' : sysDark);
+
+tBtn.addEventListener('click', () => applyTheme(html.dataset.theme !== 'dark'));
+
+// D key shortcut
+document.addEventListener('keydown', e => {
+    if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
+    if (e.key === 'd' || e.key === 'D') tBtn.click();
+});
+
+/* ── Print ──────────────────────────────────── */
+[document.getElementById('print-btn'), document.getElementById('print-btn-footer')]
+    .forEach(b => b.addEventListener('click', () => window.print()));
+
+/* ── MILESTONES data array (single source of truth) ─────────── */
+const MILESTONES = [
+    { date: 'Sept 2023',    title: 'First Meeting at ALBA',                        desc: 'Initial stakeholder alignment. Defined conference scope, goals, and preliminary budget envelope.',    status: 's-done', badge: 'badge-done', label: 'Completed',   color: 'c-red' },
+    { date: 'Oct 15, 2023', title: 'Finalizing the List of Invitees',              desc: 'Speaker roster confirmed. Keynote participants and delegate eligibility criteria locked in.',          status: 's-done', badge: 'badge-done', label: 'Completed',   color: 'c-bright-blue' },
+    { date: 'Oct 23, 2023', title: 'Finalize Program &amp; Conference Fee Decision', desc: 'Schedule locked. Registration fee structure approved after steering committee review.',              status: 's-done', badge: 'badge-done', label: 'Completed',   color: 'c-yellow' },
+    { date: 'Oct 30, 2023', title: 'Send Invitations',                             desc: 'Formal invitations dispatched with registration portal link and accommodation guidance.',             status: 's-done', badge: 'badge-done', label: 'Completed',   color: 'c-bright-blue' },
+    { date: 'Dec 15, 2023', title: 'Registration Deadline',                        desc: 'All delegate registrations closed and confirmed. Final headcount submitted to venue.',               status: 's-done', badge: 'badge-done', label: 'Completed',   color: 'c-dark-blue' },
+    { date: 'Feb 10, 2024', title: 'Deadline for Presentations',                   desc: 'All speaker decks received, reviewed, and formatted for the main stage AV system.',                 status: 's-done', badge: 'badge-done', label: 'Completed',   color: 'c-dark-blue' },
+    { date: 'March 2024',   title: 'GulfCast Conference',                          desc: 'Main event executed. Panels, keynotes, and networking sessions delivered across two days.',          status: 's-done', badge: 'badge-done', label: 'Completed',   color: 'c-red' },
+    { date: 'April 2024',   title: 'Post-Conference Work',                         desc: 'Thank-you communications dispatched. Proceedings compiled and distributed to all delegates.',        status: 's-done', badge: 'badge-done', label: 'Completed',   color: 'c-red' }
+];
+
+/* ── Render milestones from data ─────────────────────────────── */
+function renderMilestones() {
+    const container = document.getElementById('steps-container');
+    container.innerHTML = MILESTONES.map((m, i) => {
+        const stepNum = String(i + 1).padStart(2, '0');
+        const isLast  = i === MILESTONES.length - 1;
+        return `
+        <div class="step-item ${m.status} ${m.color}" role="listitem">
+            <div class="step-rail">
+                <div class="step-badge" aria-label="Step ${i + 1}">${stepNum}</div>
+                ${isLast ? '' : '<div class="step-connector"></div>'}
+            </div>
+            <div class="step-card">
+                <div class="card-head">
+                    <div class="card-date">${m.date}</div>
+                    <span class="badge ${m.badge}">${m.label}</span>
+                </div>
+                <div class="card-title">${m.title}</div>
+                <div class="card-desc">${m.desc}</div>
+            </div>
+        </div>`;
+    }).join('\n');
+}
+
+/* ── Update dashboard stats from data ───────────────────────── */
+function updateDashboard() {
+    const total   = MILESTONES.length;
+    const nDone   = MILESTONES.filter(m => m.status === 's-done').length;
+    const nProg   = MILESTONES.filter(m => m.status === 's-prog').length;
+    const nUp     = MILESTONES.filter(m => m.status === 's-up').length;
+    document.getElementById('total-count').textContent = '/ ' + total;
+    document.getElementById('chip-done-label').textContent = nDone + ' Completed';
+    document.getElementById('chip-prog-label').textContent = nProg + ' In Progress';
+    document.getElementById('chip-up-label').textContent   = nUp   + ' Upcoming';
+    const ring = document.getElementById('ring-wrap');
+    ring.setAttribute('aria-valuenow', Math.round(nDone / total * 100));
+    ring.setAttribute('aria-label', Math.round(nDone / total * 100) + '% complete');
+    document.querySelector('.ring-pct').textContent = Math.round(nDone / total * 100) + '%';
+}
+
+/* ── Bootstrap ───────────────────────────────────────────────── */
+renderMilestones();
+updateDashboard();
+
+/* ── Ring + count-up (dynamic circumference — Change #4) ─────── */
+const ringCircle = document.getElementById('ring-fill');
+const CIRC = ringCircle.r.baseVal.value * 2 * Math.PI;
+ringCircle.style.strokeDasharray  = CIRC;
+ringCircle.style.strokeDashoffset = CIRC;
+
+const allItems  = Array.from(document.querySelectorAll('.step-item'));
+const doneCount = allItems.filter(i => i.classList.contains('s-done')).length;
+const pct = Math.round((doneCount / allItems.length) * 100);
+
+setTimeout(() => {
+    ringCircle.style.strokeDashoffset = CIRC - (CIRC * pct / 100);
+    let c = 0;
+    const iv = setInterval(() => {
+        document.getElementById('done-count').textContent = Math.min(++c, doneCount);
+        if (c >= doneCount) clearInterval(iv);
+    }, 60);
+    /* Conditional trigger — only fires at 100% (Change #2) */
+    if (pct >= 100) {
+        setTimeout(() => {
+            document.getElementById('ring-wrap').classList.add('complete');
+            triggerConfetti();
+        }, 1900);
+    }
+}, 600);
+
+/* ── Scroll-in (correct DOM index stagger) ───────────────────── */
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const idx = allItems.indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), idx * 70);
+        observer.unobserve(entry.target);
+    });
+}, { threshold: 0.12, rootMargin: '0px 0px -20px 0px' });
+
+allItems.forEach(item => observer.observe(item));
+
+/* ── Magnetic hover — guarded by reduced-motion check (Change #3) */
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!prefersReducedMotion) {
+    document.querySelectorAll('.step-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width  - 0.5;
+            const y = (e.clientY - rect.top)  / rect.height - 0.5;
+            card.style.transform = `perspective(900px) rotateX(${y * -7}deg) rotateY(${x * 10}deg) translateX(4px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    });
+}
+
+/* ── Confetti — named function, called conditionally (Change #2) */
+function triggerConfetti() {
+    if (prefersReducedMotion) return; /* also respect reduced motion */
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:9999;';
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+    document.body.appendChild(canvas);
+    const ctx    = canvas.getContext('2d');
+    const COLORS = ['#a78bfa','#60a5fa','#4ade80','#fbbf24','#f87171','#818cf8','#34d399'];
+    const particles = Array.from({ length: 70 }, () => ({
+        x: Math.random() * canvas.width,
+        y: -Math.random() * canvas.height * 0.3,
+        r: Math.random() * 5 + 3,
+        d: Math.random() * 2 + 1.2,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        tilt: Math.random() * 10 - 5,
+        tiltDir: Math.random() > 0.5 ? 1 : -1,
+        opacity: 1
+    }));
+    let start = null;
+    const DURATION = 3200;
+    function draw(ts) {
+        if (!start) start = ts;
+        const elapsed = ts - start;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.y      += p.d;
+            p.tilt   += 0.08 * p.tiltDir;
+            p.opacity = elapsed > 2200 ? Math.max(0, 1 - (elapsed - 2200) / 1000) : 1;
+            ctx.save();
+            ctx.globalAlpha = p.opacity;
+            ctx.fillStyle   = p.color;
+            ctx.beginPath();
+            ctx.ellipse(p.x + Math.sin(p.tilt) * 10, p.y, p.r, p.r * 0.5, p.tilt, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+            if (p.y > canvas.height) { p.y = -10; p.x = Math.random() * canvas.width; }
+        });
+        if (elapsed < DURATION) requestAnimationFrame(draw);
+        else canvas.remove();
+    }
+    requestAnimationFrame(draw);
+}
+</script>
+</body>
+</html>

@@ -26,7 +26,7 @@ pub struct Rect {
     pub height: f64,
 }
 
-#[derive(Clone, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct TextChunk {
     pub text: String,
     pub rects: Vec<Rect>,

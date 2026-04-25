@@ -1,0 +1,30 @@
+// Version: 1.0.0
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type MilestoneColor__1058774699 = Text;
+type MilestoneStatus__580555619 = Text;
+type Milestone__652957039 =
+  {
+    color : MilestoneColor__1058774699;
+    date : Text;
+    description : Text;
+    id : Nat;
+    status : MilestoneStatus__580555619;
+    step : Text;
+    title : Text
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+actor {
+  stable nextIdCell : [var Nat];
+  stable store :
+    {
+      var root : Node__46230540<Nat, Milestone__652957039>;
+      var size : Nat__490723111
+    }
+};

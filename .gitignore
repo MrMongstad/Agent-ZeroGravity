@@ -21,3 +21,6 @@ __pycache__/
 # IDE
 .vscode/
 .idea/
+
+# Ignore node modules
+node_modules/

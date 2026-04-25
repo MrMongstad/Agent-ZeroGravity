@@ -1,0 +1,5 @@
+=== SONIC READER V2 : CODE CHUNK 5 ===
+
+--- File: src-tauri\gen\schemas\capabilities.json ---
+{}
+

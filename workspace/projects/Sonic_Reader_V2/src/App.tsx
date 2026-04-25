@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { invoke } from '@tauri-apps/api/core';
-import { Play, Square, Pause, Settings, Cpu, Zap } from 'lucide-react';
+import { Play, Square, Pause, Settings, Zap } from 'lucide-react';
 import GhostOverlay from './components/GhostOverlay';
 import SettingsPanel from './components/SettingsPanel';
 
@@ -123,8 +123,8 @@ const App = () => {
             {/* Header */}
             <nav className="relative z-10 flex items-center justify-between px-8 py-6 border-b border-white/5 bg-black/20 backdrop-blur-md">
                 <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/20">
-                        <Cpu className="w-5 h-5 text-white" />
+                    <div className="w-8 h-8 rounded-lg overflow-hidden shadow-lg shadow-indigo-500/20 border border-white/10">
+                        <img src="/app-icon.png" alt="Sonic Reader" className="w-full h-full object-cover" />
                     </div>
                     <span className="text-xl font-bold tracking-tight text-white/90">
                         Sonic Reader <span className="text-indigo-500">V2</span>

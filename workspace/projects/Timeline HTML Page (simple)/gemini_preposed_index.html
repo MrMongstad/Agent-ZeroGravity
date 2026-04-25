@@ -1,0 +1,277 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GulfCast 2024 - 3D Interactive Timeline</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --card-bg: #1e293b;
+            --line-color: #334155;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 60px 20px;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            color: #e2e8f0;
+            margin-bottom: 60px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            perspective: 1500px;
+            /* Establishes 3D space */
+        }
+
+        /* Central Axis */
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--line-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+            z-index: 1;
+        }
+
+        .container {
+            padding: 15px 50px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            z-index: 2;
+            animation: floatUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        /* Sequential loading */
+        .container:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .container:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .container:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .container:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .container:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .container:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        .container:nth-child(7) {
+            animation-delay: 0.7s;
+        }
+
+        .container:nth-child(8) {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes floatUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        /* Timeline Nodes */
+        .container::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--card-bg);
+            border: 4px solid var(--card-color);
+            top: 24px;
+            border-radius: 50%;
+            z-index: 3;
+            box-shadow: 0 0 12px var(--card-color);
+        }
+
+        .right::after {
+            left: -14px;
+        }
+
+        /* Card Content with 3D Depth and Shadows */
+        .content {
+            padding: 25px 30px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            position: relative;
+            box-shadow:
+                0 10px 20px rgba(0, 0, 0, 0.4),
+                0 2px 5px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            /* Soft inner highlight */
+            border-left: 5px solid var(--card-color);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .right .content {
+            border-left: none;
+            border-right: 5px solid var(--card-color);
+        }
+
+        /* Interactive 3D Hover State */
+        .container:hover .content {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow:
+                0 25px 40px rgba(0, 0, 0, 0.6),
+                0 10px 15px rgba(0, 0, 0, 0.4),
+                0 0 25px rgba(var(--card-color-rgb), 0.25);
+        }
+
+        .date {
+            color: var(--card-color);
+            font-weight: 700;
+            font-size: 1.15em;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .desc {
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            font-size: 1.05em;
+        }
+
+        /* Mobile Adjustments */
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 35px;
+            }
+
+            .container {
+                width: 100%;
+                padding-left: 80px;
+                padding-right: 20px;
+            }
+
+            .right {
+                left: 0;
+            }
+
+            .container::after {
+                left: 25px;
+            }
+
+            .right .content {
+                border-right: none;
+                border-left: 5px solid var(--card-color);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>GulfCast 2024 Interactive Timeline</h1>
+
+    <div class="timeline">
+
+        <div class="container left" style="--card-color: #ef4444; --card-color-rgb: 239, 68, 68;">
+            <div class="content">
+                <div class="date">Sept. 2023</div>
+                <p class="desc">First Meeting at ALBA</p>
+            </div>
+        </div>
+
+        <div class="container right" style="--card-color: #3b82f6; --card-color-rgb: 59, 130, 246;">
+            <div class="content">
+                <div class="date">October 15, 2023</div>
+                <p class="desc">Finalizing the list of invitees</p>
+            </div>
+        </div>
+
+        <div class="container left" style="--card-color: #eab308; --card-color-rgb: 234, 179, 8;">
+            <div class="content">
+                <div class="date">Oct. 23, 2023</div>
+                <p class="desc">Finalize the program and decision concerning Conference Fee</p>
+            </div>
+        </div>
+
+        <div class="container right" style="--card-color: #3b82f6; --card-color-rgb: 59, 130, 246;">
+            <div class="content">
+                <div class="date">October 30, 2023</div>
+                <p class="desc">Send invitations</p>
+            </div>
+        </div>
+
+        <div class="container left" style="--card-color: #1d4ed8; --card-color-rgb: 29, 78, 216;">
+            <div class="content">
+                <div class="date">December 15, 2023</div>
+                <p class="desc">Registration deadline</p>
+            </div>
+        </div>
+
+        <div class="container right" style="--card-color: #1d4ed8; --card-color-rgb: 29, 78, 216;">
+            <div class="content">
+                <div class="date">February 10, 2024</div>
+                <p class="desc">Deadline for presentations</p>
+            </div>
+        </div>
+
+        <div class="container left" style="--card-color: #ef4444; --card-color-rgb: 239, 68, 68;">
+            <div class="content">
+                <div class="date">March 2024</div>
+                <p class="desc">GulfCast Conference (date to be decided)</p>
+            </div>
+        </div>
+
+        <div class="container right" style="--card-color: #ef4444; --card-color-rgb: 239, 68, 68;">
+            <div class="content">
+                <div class="date">April 2024</div>
+                <p class="desc">Post Conference Work - Prepare post conf. greeting</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+```

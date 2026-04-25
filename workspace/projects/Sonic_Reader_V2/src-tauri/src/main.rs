@@ -79,6 +79,8 @@ fn sanitize_text(raw: String) -> String {
 
 fn main() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_global_shortcut::Builder::new().build())
         .setup(|app| {
             // Initialize audio backend early
             tts::init_audio_backend();

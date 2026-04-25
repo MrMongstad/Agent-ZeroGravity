@@ -39,6 +39,8 @@ const SettingsPanel = ({ isOpen, onClose }: SettingsPanelProps) => {
                         <Volume2 className="w-4 h-4" /> Voice Model
                     </label>
                     <select
+                        id="voice-model-select"
+                        name="voice-model"
                         value={voiceModel}
                         onChange={(e) => setVoiceModel(e.target.value)}
                         className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/5 text-neutral-200 text-sm font-mono focus:border-indigo-500/50 focus:outline-none transition-colors appearance-none cursor-pointer"
@@ -57,6 +59,8 @@ const SettingsPanel = ({ isOpen, onClose }: SettingsPanelProps) => {
                     </label>
                     <div className="flex items-center gap-4">
                         <input
+                            id="speed-range-input"
+                            name="reading-speed"
                             type="range"
                             min="0.5"
                             max="2.0"
