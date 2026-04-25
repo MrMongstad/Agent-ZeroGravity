@@ -55,7 +55,7 @@ if __name__ == "__main__":
     
     logging.basicConfig(level=logging.INFO)
     
-    model = args.model or os.environ.get("PLANNING_MODEL") or os.environ.get("CODING_MODEL") or "unknown"
+    model = args.model or os.environ.get("A0_SET_CHAT_MODEL_NAME") or os.environ.get("PLANNING_MODEL") or os.environ.get("CODING_MODEL") or "unknown"
     
     if args.check:
         token_terminator_audit(args.mission, model, args.override)
