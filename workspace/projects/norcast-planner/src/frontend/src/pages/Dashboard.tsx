@@ -230,44 +230,48 @@ function MilestoneCard({
     <div className="flex items-start gap-4">
       {/* Step badge */}
       <div className="flex flex-col items-center flex-shrink-0 mt-1 relative z-10 w-12">
-        <motion.div
-          whileHover={{ scale: 1.04 }}
-          transition={{ type: "spring", stiffness: 400, damping: 20 }}
-          className={cn(
-            "w-12 h-12 rounded-xl flex items-center justify-center font-display font-black text-sm border-2 select-none cursor-default bg-card/40 backdrop-blur-md",
-            colors.border,
-            colors.bg,
-          )}
-          style={{
-            boxShadow: `0 0 18px rgba(${colors.glow}, 0.4), 0 0 6px rgba(${colors.glow}, 0.2)`,
-          }}
-          data-ocid={`milestone.step_badge.${index + 1}`}
-        >
-          <span style={{ color: colors.hex }}>{milestone.step}</span>
-        </motion.div>
+        <div className="bg-background dark:bg-transparent rounded-xl">
+          <motion.div
+            whileHover={{ scale: 1.04 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            className={cn(
+              "w-12 h-12 rounded-xl flex items-center justify-center font-display font-black text-sm border-2 select-none cursor-default bg-card/40 backdrop-blur-md",
+              colors.border,
+              colors.bg,
+            )}
+            style={{
+              boxShadow: `0 0 18px rgba(${colors.glow}, 0.4), 0 0 6px rgba(${colors.glow}, 0.2)`,
+            }}
+            data-ocid={`milestone.step_badge.${index + 1}`}
+          >
+            <span style={{ color: colors.hex }}>{milestone.step}</span>
+          </motion.div>
+        </div>
 
-        <div 
-          className="mt-3 flex flex-col items-center justify-center glass-card px-2 py-1.5 rounded-lg border-2 shadow-lg text-center backdrop-blur-md"
-          style={{ borderColor: `${colors.hex}40` }}
-        >
-          <span
-            className="text-[9px] font-bold tracking-widest uppercase mb-0.5 opacity-80"
-            style={{ color: colors.hex }}
+        <div className="mt-3 bg-background dark:bg-transparent rounded-lg">
+          <div 
+            className="flex flex-col items-center justify-center glass-card px-2 py-1.5 rounded-lg border-2 shadow-lg text-center backdrop-blur-md"
+            style={{ borderColor: `${colors.hex}40` }}
           >
-            {new Date(`${milestone.date}T00:00:00`).toLocaleDateString(
-              "en-US",
-              { month: "short" },
-            )}
-          </span>
-          <span
-            className="text-sm font-black leading-none"
-            style={{ color: colors.hex }}
-          >
-            {new Date(`${milestone.date}T00:00:00`).toLocaleDateString(
-              "en-US",
-              { day: "2-digit" },
-            )}
-          </span>
+            <span
+              className="text-[9px] font-bold tracking-widest uppercase mb-0.5 opacity-80"
+              style={{ color: colors.hex }}
+            >
+              {new Date(`${milestone.date}T00:00:00`).toLocaleDateString(
+                "en-US",
+                { month: "short" },
+              )}
+            </span>
+            <span
+              className="text-sm font-black leading-none"
+              style={{ color: colors.hex }}
+            >
+              {new Date(`${milestone.date}T00:00:00`).toLocaleDateString(
+                "en-US",
+                { day: "2-digit" },
+              )}
+            </span>
+          </div>
         </div>
       </div>
 

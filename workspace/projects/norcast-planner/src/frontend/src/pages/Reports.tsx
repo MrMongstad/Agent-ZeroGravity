@@ -161,25 +161,27 @@ function TimelineItem({
     >
       {/* Step badge + connector column */}
       <div className="flex flex-col items-center flex-shrink-0">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.65 }}
-          animate={inView ? { opacity: 1, scale: 1 } : {}}
-          transition={{
-            delay: index * 0.07,
-            duration: 0.35,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="w-12 h-12 rounded-xl flex items-center justify-center text-sm font-display font-black border-2 flex-shrink-0 relative z-10"
-          style={{
-            borderColor: colors.hex,
-            backgroundColor: `${colors.hex}18`,
-            boxShadow: `0 0 16px ${colors.hex}40`,
-            color: colors.hex,
-          }}
-          aria-hidden="true"
-        >
-          {milestone.step}
-        </motion.div>
+        <div className="bg-background dark:bg-transparent rounded-xl">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.65 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{
+              delay: index * 0.07,
+              duration: 0.35,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="w-12 h-12 rounded-xl flex items-center justify-center text-sm font-display font-black border-2 flex-shrink-0 relative z-10"
+            style={{
+              borderColor: colors.hex,
+              backgroundColor: `${colors.hex}18`,
+              boxShadow: `0 0 16px ${colors.hex}40`,
+              color: colors.hex,
+            }}
+            aria-hidden="true"
+          >
+            {milestone.step}
+          </motion.div>
+        </div>
         {!isLast && (
           <div
             aria-hidden="true"

@@ -115,16 +115,18 @@ function MilestoneCard({
     >
       <div className="p-4 sm:p-5 flex items-start gap-4">
         {/* Step badge */}
-        <div
-          className={cn(
-            "w-11 h-11 rounded-xl flex items-center justify-center font-display font-black text-sm border-2 flex-shrink-0 transition-smooth group-hover:scale-[1.04] bg-card/40 backdrop-blur-md",
-            colors.border,
-            colors.bg,
-          )}
-          style={{ boxShadow: `0 0 14px rgba(${colors.glow}, 0.35)` }}
-          aria-label={`Step ${milestone.step}`}
-        >
-          <span style={{ color: colors.hex }}>{milestone.step}</span>
+        <div className="bg-background dark:bg-transparent rounded-xl shadow-sm">
+          <div
+            className={cn(
+              "w-11 h-11 rounded-xl flex items-center justify-center font-display font-black text-sm border-2 flex-shrink-0 transition-smooth group-hover:scale-[1.04] bg-card/40 backdrop-blur-md",
+              colors.border,
+              colors.bg,
+            )}
+            style={{ boxShadow: `0 0 14px rgba(${colors.glow}, 0.35)` }}
+            aria-label={`Step ${milestone.step}`}
+          >
+            <span style={{ color: colors.hex }}>{milestone.step}</span>
+          </div>
         </div>
 
         {/* Content */}
