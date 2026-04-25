@@ -5,6 +5,15 @@ import subprocess
 from datetime import datetime, timezone
 import re
 import hashlib
+import sys
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
+# Add workspace to path for relative imports
+sys.path.append(os.getcwd())
+from workspace.utils.supabase_client import SupabaseClient
 
 # Configuration
 VORTEX_STATE_PATH = "workspace/comms/vortex_state.json"
@@ -72,32 +81,56 @@ def log_sentinel(event_type, details):
             ef.write(f"[{datetime.now(timezone.utc).isoformat()}] Failed to write to sentinel log: {str(e)}\n")
 
 def check_vortex_directives():
-    """Checks vortex_state.json for unhandled DIRECTIVE or DELEGATE acts."""
-    if not os.path.exists(VORTEX_STATE_PATH):
-        return []
-
-    try:
-        with open(VORTEX_STATE_PATH, "r", encoding="utf-8-sig") as f:
-            state = json.load(f)
+    """Checks Supabase for unhandled DIRECTIVE or DELEGATE acts."""
+    client = SupabaseClient()
+    conversations = client.get_conversations()
+    
+    new_tasks = []
+    for conv in conversations:
+        conv_id = conv['id']
+        history = client.get_history(conv_id)
+        for msg in history:
+            if msg.get("type") in ["DIRECTIVE", "DELEGATE"]:
+                # Use a stable hash of the content as an ID for now
+                task_id = hashlib.md5(f"{conv_id}:{msg.get('content')}".encode()).hexdigest()
+                new_tasks.append({
+                    "id": task_id,
+                    "source": f"vortex:{conv_id}",
+                    "content": msg.get("content"),
+                    "type": msg.get("type")
+                })
+    
+    # Fallback/Migration: If Supabase returns nothing, check local json
+    if not new_tasks and os.path.exists(VORTEX_STATE_PATH):
+        try:
+            with open(VORTEX_STATE_PATH, "r", encoding="utf-8-sig") as f:
+                local_state = json.load(f)
             
-        new_tasks = []
-        conversations = state.get("active_conversations", {})
-        for conv_id, conv_data in conversations.items():
-            history = conv_data.get("history", [])
-            for msg in history:
-                if msg.get("type") in ["DIRECTIVE", "DELEGATE"]:
-                    # Use a stable hash of the content as an ID for now
-                    task_id = hashlib.md5(f"{conv_id}:{msg.get('content')}".encode()).hexdigest()
-                    new_tasks.append({
-                        "id": task_id,
-                        "source": f"vortex:{conv_id}",
-                        "content": msg.get("content"),
-                        "type": msg.get("type")
-                    })
-        return new_tasks
-    except Exception as e:
-        log_sentinel("ERROR", f"Failed to parse vortex state: {str(e)}")
-        return []
+            local_conversations = local_state.get("active_conversations", {})
+            for conv_id, conv_data in local_conversations.items():
+                if conv_data.get("status") == "OPEN":
+                    # Migrate to Supabase
+                    client.upsert_conversation(conv_id, conv_data.get("participants", []))
+                    for msg in conv_data.get("history", []):
+                        client.push_message(conv_id, msg.get("sender"), msg.get("type"), msg.get("content"))
+                    
+                    # Add to current tasks
+                    for msg in conv_data.get("history", []):
+                        if msg.get("type") in ["DIRECTIVE", "DELEGATE"]:
+                            task_id = hashlib.md5(f"{conv_id}:{msg.get('content')}".encode()).hexdigest()
+                            new_tasks.append({
+                                "id": task_id,
+                                "source": f"vortex:{conv_id}",
+                                "content": msg.get("content"),
+                                "type": msg.get("type")
+                            })
+            
+            # After migration, we could rename the file or mark it migrated
+            # For now, we'll just keep it as fallback
+        except Exception as e:
+            log_sentinel("ERROR", f"Failed to parse or migrate local vortex state: {str(e)}")
+
+    return new_tasks
 
 def check_night_watch_backlog():
     """Checks night_watch.md for QUEUED items."""
