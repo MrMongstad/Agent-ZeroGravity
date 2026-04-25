@@ -1,0 +1,14 @@
+# Exclude heavy local artifacts — Cloud Build installs fresh
+node_modules/
+src/frontend/dist/
+src/frontend/node_modules/
+src/frontend/electron/
+.git/
+*.pdf
+*.mp4
+*.log
+.env*
+kimi_code_submission.txt
+kimi_doc_temp.txt
+google_ai_studio_sonic_export/
+kimi_sonic_export/
