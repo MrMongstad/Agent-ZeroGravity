@@ -25,6 +25,7 @@ The **Prompt Magic** extension is now functionally complete for its MVP release.
 
 ## 5. Findings
 *   **Tiered AI Strategy:** By prioritizing `window.ai.languageModel`, we provide a zero-cost path for basic optimization, while maintaining cloud quality via BYOK.
+*   **Cloud Reliability:** Implemented `try/catch` and status checks for the BYOK fetch call to prevent silent failures and ensure fallback to heuristic mode if the API is down or keys are invalid.
 *   **Async UX:** Using `⌛` and `✨` button states provides enough friction to signal processing without breaking flow.
 
 ## 6. LogicFlow
