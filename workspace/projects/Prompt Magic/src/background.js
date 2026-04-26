@@ -76,25 +76,32 @@ async function handleAIRequest(payload, sendResponse) {
     // Attempt 2: BYOK (OpenAI/Anthropic) - USER KEY
     if (pm_api_key && pm_model) {
       console.log(`Prompt Magic: Using Cloud Provider (${pm_model})...`);
-      
-      // OpenAI-compatible endpoint example
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${pm_api_key}`
-        },
-        body: JSON.stringify({
-          model: pm_model,
-          messages: [{ role: "user", content: systemPrompt }],
-          temperature: 0.7
-        })
-      });
 
-      const data = await response.json();
-      if (data.choices && data.choices[0]) {
-        sendResponse({ success: true, optimized: data.choices[0].message.content.trim() });
-        return;
+      try {
+        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${pm_api_key}`
+          },
+          body: JSON.stringify({
+            model: pm_model,
+            messages: [{ role: "user", content: systemPrompt }],
+            temperature: 0.2
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`API Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        if (data.choices && data.choices[0]) {
+          sendResponse({ success: true, optimized: data.choices[0].message.content.trim() });
+          return;
+        }
+      } catch (cloudError) {
+        console.warn(`Prompt Magic: Cloud Provider fallback failed (${pm_model}):`, cloudError.message);
       }
     }
 
@@ -105,7 +112,7 @@ async function handleAIRequest(payload, sendResponse) {
 **Task:** ${userText}
 **Constraints:** Be concise, use professional tone, and format in Markdown.
 **Context:** Generated via Prompt Magic Offline Mode.`;
-    
+
     sendResponse({ success: true, optimized: fallbackText });
 
   } catch (error) {
