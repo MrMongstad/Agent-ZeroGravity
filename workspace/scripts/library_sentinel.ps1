@@ -30,8 +30,11 @@ $sources = @(
     "C:\Users\steph\.gemini\antigravity\knowledge"
 )
 
+Write-Log "======================================================"
+Write-Log "SESSION INITIATED: $(Get-Date -Format 'dddd, MMMM dd, yyyy HH:mm:ss')"
 Write-Log "--- Jarvis Library Sentinel ---"
 Write-Log "Snapshot initiated at $timestamp"
+Write-Log "======================================================"
 
 # Create temporary staging area to avoid open file locks
 $staging = Join-Path $env:TEMP "Jarvis_Staging_$timestamp"
@@ -79,3 +82,9 @@ if (Test-Path .git) {
 }
 
 Write-Log "--- Sentinel Mission Complete ---"
+
+# Log File Cleanup: Keep only the most recent 1000 lines to prevent infinite growth
+if (Test-Path $logFile) {
+    $trimmedLog = @(Get-Content -Path $logFile -Tail 1000)
+    $trimmedLog | Out-File -FilePath $logFile -Force
+}
