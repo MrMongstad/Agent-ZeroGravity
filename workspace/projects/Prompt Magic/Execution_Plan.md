@@ -13,10 +13,10 @@ This isn't just a clone; it's a structural evolution.
 
 ### Phase 1: Foundation & Scaffolding (Days 1-2)
 **Goal:** Set up the basic Chrome Extension (Manifest V3) and establish the communication pipeline.
-- [ ] Initialize the project repository (`manifest.json`, `background.js`, `content.js`).
+- [x] Initialize the project repository (`manifest.json`, `background.js`, `content.js`).
 - [ ] Set up the build pipeline (Webpack/Vite) to handle bundling and hot-reloading for extension development.
 - [ ] Implement basic message passing between `content.js` (the web page) and `background.js` (the service worker).
-- [ ] Create the `selectors.json` mapping file to decouple target DOM elements from the core logic.
+- [x] Create the `selectors.json` mapping file to decouple target DOM elements from the core logic.
 
 ### Phase 2: The "Ghost" UI & DOM Injection (Days 3-5)
 **Goal:** Read text from the chat inputs and provide a minimalist way to trigger the optimization.

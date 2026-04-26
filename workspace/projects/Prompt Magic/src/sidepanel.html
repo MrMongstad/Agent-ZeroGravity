@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Prompt Magic Library</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 16px;
+      background: #0f172a;
+      color: #f8fafc;
+    }
+    h1 {
+      font-size: 1.25rem;
+      margin-bottom: 16px;
+      color: #38bdf8;
+    }
+    .prompt-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .prompt-card {
+      background: #1e293b;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .prompt-card:hover {
+      border-color: #38bdf8;
+    }
+    .empty-state {
+      text-align: center;
+      color: #94a3b8;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h1>✨ Prompt Magic</h1>
+  <div id="library" class="prompt-list">
+    <div class="empty-state">
+      No saved prompts yet.<br>
+      Right-click a prompt to optimize and save!
+    </div>
+  </div>
+  <script src="sidepanel.js"></script>
+</body>
+</html>

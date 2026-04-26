@@ -1,0 +1,18 @@
+{
+  "chatgpt": {
+    "input": "#prompt-textarea",
+    "submit": "button[data-testid='send-button']"
+  },
+  "gemini": {
+    "input": "div.U04fid",
+    "submit": "button.send-button"
+  },
+  "claude": {
+    "input": "div[contenteditable='true']",
+    "submit": "button[aria-label='Send Message']"
+  },
+  "perplexity": {
+    "input": "textarea[placeholder*='Ask anything']",
+    "submit": "button[aria-label='Submit']"
+  }
+}
