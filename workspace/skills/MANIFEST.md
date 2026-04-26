@@ -14,6 +14,7 @@
 | Scratchpad | `mcp-server-scratchpad` | ✅ Active | ✅ uvx-powered reasoning log |
 | Cline-Nexus Bridge | `bridge_executor.py` | ⚠️ Stub | ✅ Local-only, Python |
 | Prompt Engineer | `prompt_engineer.md` | ✅ Active | ✅ Local-only, zero external calls |
+| Summarize & Reset | `summarize_and_reset.md` | ✅ Active | ✅ Context extraction protocol |
 
 ## Active Agent Profiles
 
