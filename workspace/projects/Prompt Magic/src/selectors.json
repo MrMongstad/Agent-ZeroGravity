@@ -1,18 +1,14 @@
 {
-  "chatgpt": {
-    "input": "#prompt-textarea",
-    "submit": "button[data-testid='send-button']"
+  "chatgpt.com": {
+    "input": "#prompt-textarea"
   },
-  "gemini": {
-    "input": "div.U04fid",
-    "submit": "button.send-button"
+  "claude.ai": {
+    "input": "div[contenteditable='true'].ProseMirror"
   },
-  "claude": {
-    "input": "div[contenteditable='true']",
-    "submit": "button[aria-label='Send Message']"
+  "gemini.google.com": {
+    "input": "rich-textarea div[contenteditable='true']"
   },
-  "perplexity": {
-    "input": "textarea[placeholder*='Ask anything']",
-    "submit": "button[aria-label='Submit']"
+  "perplexity.ai": {
+    "input": "textarea"
   }
 }

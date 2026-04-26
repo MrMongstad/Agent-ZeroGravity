@@ -3,19 +3,21 @@
  * Manages DOM interaction and UI injection for AI platforms.
  */
 
-let platformSelectors = null;
+let platformConfig = null;
+let lastActiveElement = null;
 
 console.log("Prompt Magic: Content script loaded.");
 
 // Listen for messages from background script (e.g., Context Menu trigger)
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "OPTIMIZE_TEXT") {
-    console.log("Optimization triggered.");
+    console.log("Prompt Magic: Optimization triggered via Context Menu.");
 
     // If the user highlighted text, use that. Otherwise, try to extract from the active input.
     let textToOptimize = request.selection;
     if (!textToOptimize) {
-      textToOptimize = extractTextFromActiveInput();
+      lastActiveElement = document.activeElement;
+      textToOptimize = lastActiveElement.value || lastActiveElement.innerText;
     }
 
     if (textToOptimize) {
@@ -30,40 +32,118 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
  * Main logic for processing and re-inserting optimized text
  */
 async function handleOptimization(originalText) {
-  // 1. Show a minimalist "Processing" ghost UI near the cursor or input box
+  const btn = document.getElementById('prompt-magic-btn');
+  if (btn) btn.innerText = '⏳';
+
   // 2. Request optimization from background (Phase 3 logic)
   const response = await chrome.runtime.sendMessage({
     action: "CALL_AI_MODEL",
     payload: { text: originalText }
   });
 
-  if (response.success) {
-    console.log("Success! Optimized text:", response.optimized);
-    injectTextIntoActiveInput(response.optimized);
+  if (response && response.success) {
+    console.log("Prompt Magic: Success! Optimized text:", response.optimized);
+    injectText(response.optimized);
+  }
+
+  if (btn) btn.innerText = '✨';
+}
+
+function injectText(newText) {
+  // Use the element we saved from the click/context menu, or fallback to the active element
+  const el = lastActiveElement || document.activeElement;
+  if (!el) {
+    console.error("Prompt Magic: No target element found for injection.");
+    return;
+  }
+
+  const isTextarea = el.tagName.toLowerCase() === 'textarea';
+
+  // STEP 3: The "React Bypass" Injection
+  if (isTextarea) {
+    // Bypass React's synthetic events for <textarea> (e.g., ChatGPT)
+    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, "value").set;
+    nativeInputValueSetter.call(el, newText);
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  } else {
+    // Bypass for contenteditable divs (e.g., Claude, Gemini)
+    // execCommand is the safest way to inject into ProseMirror/Draft.js without breaking their internal state tree
+    el.focus();
+    document.execCommand('selectAll', false, null);
+    document.execCommand('insertText', false, newText);
   }
 }
 
-function extractTextFromActiveInput() {
-  // TODO: Phase 2 - Read from the active DOM element based on platformSelectors
-  const activeEl = document.activeElement;
-  return activeEl ? (activeEl.value || activeEl.innerText) : null;
+// STEP 4: The "Ghost" UI Trigger
+function initGhostUI() {
+  if (!platformConfig || !platformConfig.input) return;
+
+  // Watch the DOM for the chat box to appear (fixes SPA navigation issues)
+  const observer = new MutationObserver(() => {
+    const inputEl = document.querySelector(platformConfig.input);
+    if (inputEl && !document.getElementById('prompt-magic-btn')) {
+      injectGhostButton(inputEl);
+    }
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
 }
 
-function injectTextIntoActiveInput(newText) {
-  // TODO: Phase 2 - Inject text and trigger React/Next.js synthetic events
-  const activeEl = document.activeElement;
-  if (activeEl) {
-    if (activeEl.value !== undefined) activeEl.value = newText;
-    else activeEl.innerText = newText;
+function injectGhostButton(inputEl) {
+  const btn = document.createElement('button');
+  btn.id = 'prompt-magic-btn';
+  btn.innerText = '✨';
+  btn.title = 'Optimize Prompt (Prompt Magic)';
+  btn.style.cssText = `
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    z-index: 9999;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+  `;
+
+  btn.onmouseover = () => btn.style.transform = 'scale(1.2)';
+  btn.onmouseout = () => btn.style.transform = 'scale(1)';
+
+  // Ensure parent can anchor the absolute positioned button
+  const parent = inputEl.parentElement;
+  if (window.getComputedStyle(parent).position === 'static') {
+    parent.style.position = 'relative';
   }
+  parent.appendChild(btn);
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    lastActiveElement = inputEl; // Save target for injection
+    const text = inputEl.value || inputEl.innerText;
+    if (text) {
+      handleOptimization(text);
+    }
+  });
 }
 
+// STEP 1 & 2: Load Selectors and identify platform
 async function loadSelectors() {
   try {
     const url = chrome.runtime.getURL('selectors.json');
     const response = await fetch(url);
-    platformSelectors = await response.json();
-    console.log("Prompt Magic: Selectors loaded.", platformSelectors);
+    const allSelectors = await response.json();
+
+    // Match current hostname (handles both 'chatgpt.com' and 'www.chatgpt.com')
+    const hostname = window.location.hostname.replace('www.', '');
+    platformConfig = allSelectors[hostname];
+
+    console.log("Prompt Magic: Platform config loaded:", platformConfig);
+
+    if (platformConfig) {
+      initGhostUI();
+    }
   } catch (error) {
     console.error("Prompt Magic: Failed to load selectors.json", error);
   }
