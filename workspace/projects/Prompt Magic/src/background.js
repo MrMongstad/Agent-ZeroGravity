@@ -17,8 +17,12 @@ chrome.runtime.onInstalled.addListener(() => {
 // Handle Context Menu Clicks
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "optimize-prompt") {
-    // Send message to content script to grab the text and show optimization UI
-    chrome.tabs.sendMessage(tab.id, { action: "OPTIMIZE_TEXT", text: info.selectionText });
+    // Send message to content script to handle the optimization.
+    // We pass selectionText if they highlighted something, otherwise the content script will find the active input.
+    chrome.tabs.sendMessage(tab.id, {
+      action: "OPTIMIZE_TEXT",
+      selection: info.selectionText || null
+    });
   }
 });
 
@@ -38,7 +42,7 @@ async function handleAIRequest(payload, sendResponse) {
     // Placeholder for Phase 3: AI Integration
     // Logic will switch between Chrome Prompt API (Gemini Nano) and External APIs
     console.log("AI request received:", payload);
-    
+
     // Simulate processing delay
     setTimeout(() => {
       sendResponse({ success: true, optimized: `[Optimized] ${payload.text}` });

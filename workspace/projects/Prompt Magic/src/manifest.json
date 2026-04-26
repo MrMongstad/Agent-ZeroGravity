@@ -28,7 +28,9 @@
         "https://claude.ai/*",
         "https://www.perplexity.ai/*"
       ],
-      "js": ["content.js"]
+      "js": [
+        "content.js"
+      ]
     }
   ],
   "side_panel": {
@@ -36,5 +38,15 @@
   },
   "action": {
     "default_title": "Open Prompt Magic"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "selectors.json"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
 }
