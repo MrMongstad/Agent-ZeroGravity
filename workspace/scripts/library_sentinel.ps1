@@ -29,24 +29,26 @@ foreach ($source in $sources) {
         $dest = Join-Path $staging (Split-Path $source -Leaf)
         Copy-Item -Path $source -Destination $dest -Recurse -Force -ErrorAction SilentlyContinue
         Write-Host "[OK] Staged: $(Split-Path $source -Leaf)"
-    } else {
+    }
+    else {
         Write-Warning "[MISSING] Source not found: $source"
     }
 }
 
 # Create Zip Image
-if (Get-ChildItem $staging) {
+if (@(Get-ChildItem $staging).Count -gt 0) {
     if (-not (Test-Path $backupDir)) { New-Item -ItemType Directory -Path $backupDir -Force | Out-Null }
     Compress-Archive -Path "$staging\*" -DestinationPath $snapshotPath -Force
     Write-Host "[SUCCESS] Image created: $snapshotName"
     
     # Retention: Keep last 14 days
-    Get-ChildItem $backupDir -Filter "*.zip" | 
-        Sort-Object LastWriteTime -Descending | 
-        Select-Object -Skip 14 | 
-        Remove-Item -Force
+    $oldBackups = Get-ChildItem $backupDir -Filter "*.zip" | Sort-Object LastWriteTime -Descending | Select-Object -Skip 14
+    if ($oldBackups) {
+        $oldBackups | Remove-Item -Force
+    }
     Write-Host "[CLEANUP] Retention policy enforced (14 days)."
-} else {
+}
+else {
     Write-Error "No data found to back up."
 }
 
