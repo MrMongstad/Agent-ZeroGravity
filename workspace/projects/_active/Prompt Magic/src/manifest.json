@@ -19,7 +19,9 @@
     "https://chatgpt.com/*",
     "https://gemini.google.com/*",
     "https://claude.ai/*",
-    "https://www.perplexity.ai/*"
+    "https://www.perplexity.ai/*",
+    "https://api.anthropic.com/*",
+    "https://api.openai.com/*"
   ],
   "background": {
     "service_worker": "background.js",
