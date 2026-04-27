@@ -44,6 +44,7 @@
   "action": {
     "default_title": "Open Prompt Magic"
   },
+  "options_page": "options.html",
   "web_accessible_resources": [
     {
       "matches": [
