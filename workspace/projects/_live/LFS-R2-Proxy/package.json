@@ -2,6 +2,8 @@
   "name": "lfs-r2-proxy",
   "version": "2.0.0",
   "description": "Elite Stateless Git LFS Proxy for Cloudflare R2",
+  "private": true,
+  "type": "module",
   "main": "src/index.ts",
   "scripts": {
     "dev": "wrangler dev",

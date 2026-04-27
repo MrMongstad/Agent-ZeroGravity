@@ -6,6 +6,9 @@
     "strict": true,
     "skipLibCheck": true,
     "lib": ["ESNext", "WebWorker"],
-    "types": ["@cloudflare/workers-types"]
+    "types": ["@cloudflare/workers-types"],
+    "isolatedModules": true,
+    "noEmit": true,
+    "resolveJsonModule": true
   }
 }
