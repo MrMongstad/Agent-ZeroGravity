@@ -1,0 +1,9 @@
+# Exclude local build artifacts and dependencies — Cloud Build installs fresh
+node_modules/
+dist/
+.git/
+electron/
+*.pdf
+*.mp4
+*.log
+.env*
