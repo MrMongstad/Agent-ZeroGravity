@@ -32,11 +32,20 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
  * Main logic for processing and re-inserting optimized text
  */
 function handleOptimization(originalText) {
+  console.log("[Prompt Magic] Starting optimization. Payload:", originalText);
   const btn = document.getElementById('prompt-magic-btn');
   if (btn) btn.innerText = '⏳';
 
   // 2. Open a persistent port for streaming response from the background
   const port = chrome.runtime.connect({ name: "ai-optimizer-port" });
+
+  port.onDisconnect.addListener(() => {
+    if (chrome.runtime.lastError) {
+      console.error("[Prompt Magic] Port disconnected with error:", chrome.runtime.lastError.message);
+      if (btn) btn.innerText = '⚠️';
+    }
+  });
+
   port.postMessage({
     action: "optimize_prompt",
     payload: originalText
@@ -163,9 +172,17 @@ function injectGhostButton(inputEl) {
     e.preventDefault();
     e.stopPropagation();
     lastActiveElement = inputEl; // Save target for injection
-    const text = inputEl.value || inputEl.innerText;
-    if (text) {
+
+    // Robust extraction: Handle deep DOMs / contenteditables (Gemini)
+    const text = (inputEl.value || inputEl.innerText || inputEl.textContent || "").trim();
+    console.log("[Prompt Magic] ✨ Button clicked. Extracted text:", `"${text}"`);
+
+    if (text && text.length > 0) {
       handleOptimization(text);
+    } else {
+      console.warn("[Prompt Magic] Cannot optimize: Input element is empty.", inputEl);
+      btn.innerText = '❓';
+      setTimeout(() => { if (btn.innerText === '❓') btn.innerText = '✨'; }, 2000);
     }
   });
 }

@@ -21,7 +21,8 @@
     "https://claude.ai/*",
     "https://www.perplexity.ai/*",
     "https://api.anthropic.com/*",
-    "https://api.openai.com/*"
+    "https://api.openai.com/*",
+    "https://generativelanguage.googleapis.com/*"
   ],
   "background": {
     "service_worker": "service-worker-loader.js",
@@ -30,7 +31,7 @@
   "content_scripts": [
     {
       "js": [
-        "assets/content.js-Dto515Et.js"
+        "assets/content.js-DJUjjgpH.js"
       ],
       "matches": [
         "https://chatgpt.com/*",
@@ -65,7 +66,7 @@
         "https://www.perplexity.ai/*"
       ],
       "resources": [
-        "assets/content.js-Dto515Et.js"
+        "assets/content.js-DJUjjgpH.js"
       ],
       "use_dynamic_url": false
     }

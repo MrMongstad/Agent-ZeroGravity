@@ -60,15 +60,27 @@ async function initializeModel() {
  * Step 2: The Router - Decide between Cloud BYOK and Local Nano
  */
 async function optimizePromptStream(rawInput, port) {
+  console.log("[SYS] optimizePromptStream initiated. Payload length:", rawInput.length);
   const storage = await chrome.storage.local.get("settings");
   const settings = storage.settings || {};
   const apiKey = settings.apiKey;
+  
+  console.log("[SYS] Extracted settings:", JSON.stringify(settings));
 
   if (apiKey) {
-    // BYOK Route (OpenAI-compatible streaming)
-    await routeToCloud(rawInput, apiKey, settings.provider, port);
+    // Auto-detect Google key by prefix (AIzaSy...) or provider name
+    const isGoogle = apiKey.startsWith('AIzaSy') ||
+                     (settings.provider && settings.provider.toLowerCase().includes('gemini'));
+    if (isGoogle) {
+      console.log("[SYS] Routing to Gemini Cloud API. Provider:", settings.provider);
+      await routeToGemini(rawInput, apiKey, settings.provider, port);
+    } else {
+      console.log("[SYS] Routing to Cloud API (OpenAI/Anthropic). Provider:", settings.provider);
+      await routeToCloud(rawInput, apiKey, settings.provider, port);
+    }
   } else {
     // Free Local Tier Route
+    console.log("[SYS] Routing to Local Model (Gemini Nano).");
     await routeToLocal(rawInput, port);
   }
 }
@@ -91,6 +103,53 @@ async function routeToLocal(rawInput, port) {
   } catch (err) {
     console.error("[SYS] Execution drifted or failed:", err);
     port.postMessage({ error: "Local AI Error: " + err.message });
+  }
+}
+
+async function routeToGemini(rawInput, apiKey, provider, port) {
+  // Use non-streaming generateContent — verified working
+  const model = (provider && provider.toLowerCase().includes('gemini'))
+    ? provider
+    : 'gemini-2.5-flash';
+
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+  console.log('[SYS] Gemini endpoint:', endpoint);
+
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        system_instruction: {
+          parts: [{ text: NANO_SYSTEM_PROMPT }]
+        },
+        contents: [{
+          role: 'user',
+          parts: [{ text: rawInput }]
+        }],
+        generationConfig: { temperature: 0.2 }
+      })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Gemini API Error (${response.status}): ${errorText}`);
+    }
+
+    const data = await response.json();
+    console.log('[SYS] Gemini raw response:', JSON.stringify(data).slice(0, 200));
+
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (text) {
+      port.postMessage({ type: 'chunk', data: text });
+    } else {
+      throw new Error('No text in Gemini response: ' + JSON.stringify(data).slice(0, 300));
+    }
+
+    port.postMessage({ type: 'done' });
+  } catch (err) {
+    console.error('[SYS] Gemini Route Failed:', err);
+    port.postMessage({ error: 'Gemini API Error: ' + err.message });
   }
 }
 
