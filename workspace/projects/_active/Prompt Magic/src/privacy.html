@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Magic — Privacy Policy</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #0f172a;
+            color: #cbd5e1;
+            line-height: 1.7;
+            padding: 40px 24px;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 1.75rem;
+            color: #f8fafc;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            color: #64748b;
+            font-size: 0.85rem;
+            margin-bottom: 32px;
+        }
+        h2 {
+            font-size: 1.1rem;
+            color: #38bdf8;
+            margin-top: 28px;
+            margin-bottom: 10px;
+        }
+        p, ul { margin-bottom: 14px; }
+        ul {
+            padding-left: 20px;
+        }
+        li { margin-bottom: 6px; }
+        strong { color: #f8fafc; }
+        a { color: #38bdf8; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .highlight {
+            background: #1e293b;
+            border-left: 3px solid #38bdf8;
+            padding: 14px 16px;
+            border-radius: 0 8px 8px 0;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #1e293b;
+            font-size: 0.8rem;
+            color: #475569;
+        }
+    </style>
+</head>
+<body>
+    <h1>✨ Prompt Magic — Privacy Policy</h1>
+    <p class="subtitle">Last updated: April 28, 2026</p>
+
+    <div class="highlight">
+        <strong>TL;DR:</strong> Your data never touches our servers. Prompt Magic operates entirely between your browser and the AI provider you choose. We collect nothing.
+    </div>
+
+    <h2>1. What Prompt Magic Does</h2>
+    <p>Prompt Magic is a Chrome extension that improves the quality of prompts you type into AI chat interfaces (such as Gemini, ChatGPT, and Claude). When you click the ✨ button, your text is sent directly from your browser to the AI provider's API — and the improved prompt is injected back into the chat box.</p>
+
+    <h2>2. Data We Collect</h2>
+    <p><strong>None.</strong> Prompt Magic does not collect, transmit, store, or sell any personal data, browsing history, analytics, telemetry, or usage metrics. There is no backend server. There is no database. There are no cookies.</p>
+
+    <h2>3. API Keys (BYOK)</h2>
+    <p>Prompt Magic uses a Bring-Your-Own-Key (BYOK) model. You provide your own API key from a supported provider (Google, OpenAI, or Anthropic). Your key is:</p>
+    <ul>
+        <li>Stored <strong>locally</strong> in your browser's <code>chrome.storage.local</code></li>
+        <li><strong>Never transmitted</strong> to any server other than the AI provider you selected</li>
+        <li><strong>Never logged</strong> or cached outside your browser</li>
+        <li>Deletable at any time by clearing the extension's storage or uninstalling</li>
+    </ul>
+
+    <h2>4. Prompt Content</h2>
+    <p>When you click ✨, your prompt text is sent <strong>directly</strong> from your browser to the selected AI provider's API endpoint (e.g., <code>generativelanguage.googleapis.com</code>). Prompt Magic acts as a pass-through — it does not intercept, log, copy, or store your prompts. The AI provider's own privacy policy governs how they process your input.</p>
+
+    <h2>5. Permissions</h2>
+    <p>The extension requests the following permissions:</p>
+    <ul>
+        <li><strong>activeTab</strong> — to detect the input field on the current page</li>
+        <li><strong>storage</strong> — to persist your API key and model selection locally</li>
+        <li><strong>host_permissions</strong> — to make API calls to Google, OpenAI, and Anthropic endpoints</li>
+        <li><strong>sidePanel</strong> — to render the extension's settings panel</li>
+    </ul>
+
+    <h2>6. Third-Party Services</h2>
+    <p>Prompt Magic communicates only with the AI provider you explicitly configure:</p>
+    <ul>
+        <li><a href="https://ai.google.dev/terms" target="_blank">Google Gemini API — Terms of Service</a></li>
+        <li><a href="https://openai.com/policies/terms-of-use" target="_blank">OpenAI API — Terms of Use</a></li>
+        <li><a href="https://www.anthropic.com/policies/terms-of-service" target="_blank">Anthropic API — Terms of Service</a></li>
+    </ul>
+
+    <h2>7. Children's Privacy</h2>
+    <p>Prompt Magic is not intended for use by individuals under the age of 13. We do not knowingly collect any information from children.</p>
+
+    <h2>8. Changes to This Policy</h2>
+    <p>If this policy is updated, the "Last updated" date at the top will reflect the change. Continued use of the extension after changes constitutes acceptance of the revised policy.</p>
+
+    <h2>9. Contact</h2>
+    <p>For questions or concerns about this privacy policy, contact: <a href="mailto:privacy@promptmagic.app">privacy@promptmagic.app</a></p>
+
+    <div class="footer">
+        <p>Prompt Magic v1.0 · Built by StephanM · © 2026 All rights reserved.</p>
+    </div>
+</body>
+</html>

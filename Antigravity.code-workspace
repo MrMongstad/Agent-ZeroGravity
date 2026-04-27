@@ -1,0 +1,67 @@
+{
+  "folders": [
+    {
+      "name": "🔴 Active — In Dev",
+      "path": "workspace/projects/_active"
+    },
+    {
+      "name": "🟢 Live — Deployed",
+      "path": "workspace/projects/_live"
+    },
+    {
+      "name": "⚙️ Workspace Root",
+      "path": "."
+    }
+  ],
+  "settings": {
+    // --- File Watcher: stops VS Code from watching these on disk ---
+    "files.watcherExclude": {
+      "**/node_modules/**": true,
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/.pnpm/**": true,
+      "**/dist/**": true,
+      "**/build/**": true,
+      "workspace/projects/_archive/**": true,
+      "workspace/projects/_staging/**": true,
+      "workspace/projects/_archive": true,
+      "workspace/projects/_staging": true
+    },
+
+    // --- File Explorer: hides these from the sidebar ---
+    "files.exclude": {
+      "**/node_modules": true,
+      "workspace/projects/_archive": true,
+      "workspace/projects/_staging": true
+    },
+
+    // --- Search: excludes these from Ctrl+Shift+F results ---
+    "search.exclude": {
+      "**/node_modules/**": true,
+      "**/dist/**": true,
+      "**/build/**": true,
+      "workspace/projects/_archive/**": true,
+      "workspace/projects/_staging/**": true
+    },
+
+    // --- IntelliSense: skip large binary/artifact files ---
+    "files.associations": {},
+    "typescript.disableAutomaticTypeAcquisition": false,
+
+    // --- Editor perf: reduce overhead on i7-8550U ---
+    "editor.semanticHighlighting.enabled": true,
+    "editor.minimap.enabled": false,
+    "files.autoSave": "onFocusChange",
+
+    // --- Extensions: scope git operations to workspace root ---
+    "git.openRepositoryInParentFolders": "never"
+  },
+  "extensions": {
+    "recommendations": [
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "bradlc.vscode-tailwindcss",
+      "ms-vscode.vscode-typescript-next"
+    ]
+  }
+}
