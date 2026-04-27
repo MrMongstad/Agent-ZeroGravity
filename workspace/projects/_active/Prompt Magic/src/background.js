@@ -60,27 +60,19 @@ async function initializeModel() {
  * Step 2: The Router - Decide between Cloud BYOK and Local Nano
  */
 async function optimizePromptStream(rawInput, port) {
-  console.log("[SYS] optimizePromptStream initiated. Payload length:", rawInput.length);
   const storage = await chrome.storage.local.get("settings");
   const settings = storage.settings || {};
   const apiKey = settings.apiKey;
-  
-  console.log("[SYS] Extracted settings:", JSON.stringify(settings));
 
   if (apiKey) {
-    // Auto-detect Google key by prefix (AIzaSy...) or provider name
     const isGoogle = apiKey.startsWith('AIzaSy') ||
                      (settings.provider && settings.provider.toLowerCase().includes('gemini'));
     if (isGoogle) {
-      console.log("[SYS] Routing to Gemini Cloud API. Provider:", settings.provider);
       await routeToGemini(rawInput, apiKey, settings.provider, port);
     } else {
-      console.log("[SYS] Routing to Cloud API (OpenAI/Anthropic). Provider:", settings.provider);
       await routeToCloud(rawInput, apiKey, settings.provider, port);
     }
   } else {
-    // Free Local Tier Route
-    console.log("[SYS] Routing to Local Model (Gemini Nano).");
     await routeToLocal(rawInput, port);
   }
 }
@@ -113,7 +105,6 @@ async function routeToGemini(rawInput, apiKey, provider, port) {
     : 'gemini-2.5-flash';
 
   const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-  console.log('[SYS] Gemini endpoint:', endpoint);
 
   try {
     const response = await fetch(endpoint, {
@@ -137,7 +128,6 @@ async function routeToGemini(rawInput, apiKey, provider, port) {
     }
 
     const data = await response.json();
-    console.log('[SYS] Gemini raw response:', JSON.stringify(data).slice(0, 200));
 
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
     if (text) {
