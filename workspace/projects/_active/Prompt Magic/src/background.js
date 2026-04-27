@@ -27,7 +27,7 @@ async function initializeModel() {
   const ai = self.ai || self.navigator?.ai;
 
   if (!ai?.languageModel) {
-    console.warn("[SYS] Prompt API unavailable. Check Chrome flags or Origin Trial token.");
+    console.info("[SYS] Local Nano unavailable — using cloud API route.");
     return false;
   }
 
