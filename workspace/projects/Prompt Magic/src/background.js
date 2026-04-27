@@ -1,122 +1,219 @@
+// V8 Service Worker Environment for Manifest V3
+
+let aiSession = null;
+
 /**
- * Prompt Magic - Background Service Worker
- * Handles context menus, API calls, and Side Panel management.
+ * Ultra-Dense Meta-Prompt for Gemini Nano (3B Parameters).
+ * Compressed from the "Master Prompt Structure" to prevent context drift
+ * while enforcing the strict architectural pillars (Role, Task, Context, Constraints, Format).
  */
+const NANO_SYSTEM_PROMPT = `You are a world-class Prompt Architect. 
+Transform the user's raw, vague input into a highly structured, definitive execution blueprint.
+Output MUST strictly follow this structure:
+**[ROLE & IDENTITY]** (Define the expert persona)
+**[TASK & OBJECTIVE]** (Clear, actionable objective)
+**[CONTEXT]** (Background info and assumed variables)
+**[CONSTRAINTS & RULES]** (3-5 strict negative boundaries)
+**[OUTPUT FORMAT]** (Exact structural requirement)
 
-// Initialize Context Menus
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.contextMenus.create({
-    id: "optimize-prompt",
-    title: "Optimize Prompt ✨",
-    contexts: ["selection", "editable"]
-  });
+Zero conversational filler. Output ONLY the optimized prompt.`;
 
-  console.log("Prompt Magic: Background service worker initialized.");
-});
+/**
+ * Step 1: Boot and Verify the Local AI Model
+ * Called eagerly on extension load to hide cold-start latency.
+ */
+async function initializeModel() {
+  // MV3 Background workers lack a DOM, so we use self/navigator
+  const ai = self.ai || self.navigator?.ai;
 
-// Handle Context Menu Clicks
-chrome.contextMenus.onClicked.addListener((info, tab) => {
-  if (info.menuItemId === "optimize-prompt") {
-    // Send message to content script to handle the optimization.
-    // We pass selectionText if they highlighted something, otherwise the content script will find the active input.
-    chrome.tabs.sendMessage(tab.id, {
-      action: "OPTIMIZE_TEXT",
-      selection: info.selectionText || null
+  if (!ai?.languageModel) {
+    console.warn("[SYS] Prompt API unavailable. Check Chrome flags or Origin Trial token.");
+    return false;
+  }
+
+  const { available } = await ai.languageModel.capabilities();
+  if (available === 'no') {
+    console.warn("[SYS] Hardware rejected. Device cannot run local Gemini Nano.");
+    return false;
+  }
+
+  try {
+    // Memory management: destroy lingering unused sessions before creating a new one
+    if (aiSession) {
+      aiSession.destroy();
+    }
+
+    aiSession = await ai.languageModel.create({
+      systemPrompt: NANO_SYSTEM_PROMPT,
+      temperature: 0.2, // Low variance for clean, deterministic structural outputs
+      topK: 40
+    });
+    console.log("[SYS] Local Gemini Nano session warm and ready.");
+    return true;
+  } catch (err) {
+    console.error("[SYS] Session initialization failed:", err);
+    return false;
+  }
+}
+
+/**
+ * Step 2: The Router - Decide between Cloud BYOK and Local Nano
+ */
+async function optimizePromptStream(rawInput, port) {
+  const storage = await chrome.storage.local.get("settings");
+  const settings = storage.settings || {};
+  const apiKey = settings.apiKey;
+
+  if (apiKey) {
+    // BYOK Route (OpenAI-compatible streaming)
+    await routeToCloud(rawInput, apiKey, settings.provider, port);
+  } else {
+    // Free Local Tier Route
+    await routeToLocal(rawInput, port);
+  }
+}
+
+async function routeToLocal(rawInput, port) {
+  if (!aiSession) {
+    const isReady = await initializeModel();
+    if (!isReady) {
+      port.postMessage({ error: "AI Engine failed to boot. Check storage space or add an API key in settings." });
+      return;
+    }
+  }
+
+  try {
+    const stream = aiSession.promptStreaming(rawInput);
+    for await (const chunk of stream) {
+      port.postMessage({ type: "chunk", data: chunk });
+    }
+    port.postMessage({ type: "done" });
+  } catch (err) {
+    console.error("[SYS] Execution drifted or failed:", err);
+    port.postMessage({ error: "Local AI Error: " + err.message });
+  }
+}
+
+async function routeToCloud(rawInput, apiKey, provider, port) {
+  const isClaude = provider && provider.toLowerCase().includes("claude");
+
+  try {
+    let endpoint, headers, body;
+
+    if (isClaude) {
+      endpoint = "https://api.anthropic.com/v1/messages";
+      headers = {
+        "Content-Type": "application/json",
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
+        "anthropic-dangerously-allow-browser": "true"
+      };
+      body = JSON.stringify({
+        model: provider,
+        system: NANO_SYSTEM_PROMPT,
+        messages: [{ role: "user", content: rawInput }],
+        stream: true,
+        temperature: 0.2,
+        max_tokens: 2048
+      });
+    } else {
+      endpoint = "https://api.openai.com/v1/chat/completions";
+      headers = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`
+      };
+      body = JSON.stringify({
+        model: provider || "gpt-4o",
+        messages: [
+          { role: "system", content: NANO_SYSTEM_PROMPT },
+          { role: "user", content: rawInput }
+        ],
+        stream: true,
+        temperature: 0.2 // Low variance for structural output
+      });
+    }
+
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers,
+      body
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Cloud API Error (${response.status}): ${errorText}`);
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+    let buffer = "";
+
+    // Parse Server-Sent Events (SSE)
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split("\n");
+
+      // Keep the last incomplete line in the buffer in case a chunk was split
+      buffer = lines.pop() || "";
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed.startsWith("data: ")) continue;
+
+        const data = trimmed.replace("data: ", "");
+        if (data === "[DONE]") {
+          port.postMessage({ type: "done" });
+          return;
+        }
+
+        try {
+          const parsed = JSON.parse(data);
+
+          let content = "";
+          if (isClaude) {
+            if (parsed.type === "content_block_delta") {
+              content = parsed.delta?.text;
+            } else if (parsed.type === "message_stop") {
+              port.postMessage({ type: "done" });
+              return;
+            }
+          } else {
+            content = parsed.choices[0]?.delta?.content;
+          }
+
+          if (content) {
+            port.postMessage({ type: "chunk", data: content });
+          }
+        } catch (e) {
+          console.warn("[SYS] Failed to parse stream chunk:", data);
+        }
+      }
+    }
+
+    port.postMessage({ type: "done" });
+  } catch (err) {
+    console.error("[SYS] Cloud Execution Failed:", err);
+    port.postMessage({ error: "Cloud AI Error: " + err.message });
+  }
+}
+
+/**
+ * Step 3: Lifecycle Hooks
+ * Listen for persistent connections from the Ghost UI content script.
+ */
+chrome.runtime.onConnect.addListener((port) => {
+  if (port.name === "ai-optimizer-port") {
+    port.onMessage.addListener(async (msg) => {
+      if (msg.action === "optimize_prompt") {
+        await optimizePromptStream(msg.payload, port);
+      }
     });
   }
 });
 
-// Message Listener for API handling
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === "CALL_AI_MODEL") {
-    handleAIRequest(request.payload, sendResponse);
-    return true; // Keep message channel open for async response
-  }
-});
-
-/**
- * Handle optimization requests using local Gemini Nano or BYOK API
- */
-async function handleAIRequest(payload, sendResponse) {
-  try {
-    const { pm_api_key, pm_model } = await chrome.storage.local.get(['pm_api_key', 'pm_model']);
-    const userText = payload.text || "";
-
-    // Optimization Meta-Prompt (The Decalogue)
-    const systemPrompt = `You are a world-class prompt engineer. Your challenge is to transform the following raw user intent into a high-fidelity, machine-executable instruction.
-    
-    1. EXPERT IDENTITY: Assign a high-prestige role.
-    2. OBJECTIVE CLARITY: Distill the goal into an actionable sentence.
-    3. CONTEXTUAL GROUNDING: Add necessary Who/What/Why.
-    4. CONSTRAINTS: Define boundaries and style.
-    5. FORMAT: Explicitly define the target structure (e.g., Markdown).
-    
-    RAW USER INPUT: "${userText}"
-    
-    OUTPUT ONLY THE OPTIMIZED PROMPT. DO NOT ADD PREAMBLE.`;
-
-    // Attempt 1: Chrome Prompt API (Gemini Nano) - ZERO COST
-    if (typeof ai !== 'undefined' && ai.languageModel) {
-      console.log("Prompt Magic: Using Local Gemini Nano...");
-      try {
-        const capabilities = await ai.languageModel.capabilities();
-        if (capabilities.available !== 'no') {
-          const session = await ai.languageModel.create({
-            systemPrompt: "You are a prompt engineer."
-          });
-          const result = await session.prompt(systemPrompt);
-          sendResponse({ success: true, optimized: result.trim() });
-          return;
-        }
-      } catch (e) {
-        console.warn("Local Gemini Nano failed, falling back to Cloud/Placeholder...", e);
-      }
-    }
-
-    // Attempt 2: BYOK (OpenAI/Anthropic) - USER KEY
-    if (pm_api_key && pm_model) {
-      console.log(`Prompt Magic: Using Cloud Provider (${pm_model})...`);
-
-      try {
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${pm_api_key}`
-          },
-          body: JSON.stringify({
-            model: pm_model,
-            messages: [{ role: "user", content: systemPrompt }],
-            temperature: 0.2
-          })
-        });
-
-        if (!response.ok) {
-          throw new Error(`API Error: ${response.status} - ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        if (data.choices && data.choices[0]) {
-          sendResponse({ success: true, optimized: data.choices[0].message.content.trim() });
-          return;
-        }
-      } catch (cloudError) {
-        console.warn(`Prompt Magic: Cloud Provider fallback failed (${pm_model}):`, cloudError.message);
-      }
-    }
-
-    // Attempt 3: Placeholder / Heuristic Fallback
-    console.log("Prompt Magic: Using Heuristic Fallback...");
-    const fallbackText = `### [Optimized Task]
-**Role:** Expert Analyst
-**Task:** ${userText}
-**Constraints:** Be concise, use professional tone, and format in Markdown.
-**Context:** Generated via Prompt Magic Offline Mode.`;
-
-    sendResponse({ success: true, optimized: fallbackText });
-
-  } catch (error) {
-    console.error("AI processing failed:", error);
-    sendResponse({ success: false, error: error.message });
-  }
-}
+// Eager initialization
+chrome.runtime.onStartup.addListener(initializeModel);
+chrome.runtime.onInstalled.addListener(initializeModel);

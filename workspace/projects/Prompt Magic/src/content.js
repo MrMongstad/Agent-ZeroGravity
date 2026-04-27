@@ -31,25 +31,41 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 /**
  * Main logic for processing and re-inserting optimized text
  */
-async function handleOptimization(originalText) {
+function handleOptimization(originalText) {
   const btn = document.getElementById('prompt-magic-btn');
   if (btn) btn.innerText = '⏳';
 
-  // 2. Request optimization from background (Phase 3 logic)
-  const response = await chrome.runtime.sendMessage({
-    action: "CALL_AI_MODEL",
-    payload: { text: originalText }
+  // 2. Open a persistent port for streaming response from the background
+  const port = chrome.runtime.connect({ name: "ai-optimizer-port" });
+  port.postMessage({
+    action: "optimize_prompt",
+    payload: originalText
   });
 
-  if (response && response.success) {
-    console.log("Prompt Magic: Success! Optimized text:", response.optimized);
-    injectText(response.optimized);
-  }
+  let accumulatedText = "";
+  let isFirstChunk = true;
 
-  if (btn) btn.innerText = '✨';
+  port.onMessage.addListener((msg) => {
+    if (msg.error) {
+      console.error("Prompt Magic Error:", msg.error);
+      if (btn) btn.innerText = '⚠️';
+      port.disconnect();
+      return;
+    }
+
+    if (msg.type === "chunk") {
+      accumulatedText += msg.data;
+      streamText(accumulatedText, msg.data, isFirstChunk);
+      isFirstChunk = false;
+    } else if (msg.type === "done") {
+      console.log("Prompt Magic: Stream complete.");
+      if (btn) btn.innerText = '✨';
+      port.disconnect();
+    }
+  });
 }
 
-function injectText(newText) {
+function streamText(fullText, chunk, isFirst) {
   // Use the element we saved from the click/context menu, or fallback to the active element
   const el = lastActiveElement || document.activeElement;
   if (!el) {
@@ -63,15 +79,16 @@ function injectText(newText) {
   if (isTextarea) {
     // Bypass React's synthetic events for <textarea> (e.g., ChatGPT)
     const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, "value").set;
-    nativeInputValueSetter.call(el, newText);
+    nativeInputValueSetter.call(el, fullText);
     el.dispatchEvent(new Event('input', { bubbles: true }));
-    el.dispatchEvent(new Event('change', { bubbles: true }));
   } else {
     // Bypass for contenteditable divs (e.g., Claude, Gemini)
     // execCommand is the safest way to inject into ProseMirror/Draft.js without breaking their internal state tree
     el.focus();
-    document.execCommand('selectAll', false, null);
-    document.execCommand('insertText', false, newText);
+    if (isFirst) {
+      document.execCommand('selectAll', false, null);
+    }
+    document.execCommand('insertText', false, chunk);
   }
 }
 

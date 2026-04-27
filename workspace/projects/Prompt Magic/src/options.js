@@ -5,16 +5,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusDiv = document.getElementById('status');
 
     // Hydrate UI from Chrome Local Storage
-    chrome.storage.local.get(['pm_api_key', 'pm_model'], (result) => {
-        if (result.pm_api_key) apiKeyInput.value = result.pm_api_key;
-        if (result.pm_model) providerInput.value = result.pm_model;
+    chrome.storage.local.get("settings", (result) => {
+        const settings = result.settings || {};
+        if (settings.apiKey) apiKeyInput.value = settings.apiKey;
+        if (settings.provider) providerInput.value = settings.provider;
     });
 
     // Save Configuration securely
     saveBtn.addEventListener('click', () => {
         chrome.storage.local.set({
-            pm_api_key: apiKeyInput.value.trim(),
-            pm_model: providerInput.value.trim() || 'gpt-4o'
+            settings: {
+                apiKey: apiKeyInput.value.trim(),
+                provider: providerInput.value.trim() || 'gpt-4o'
+            }
         }, () => {
             statusDiv.textContent = 'Configuration secured.';
             saveBtn.textContent = 'Saved!';
