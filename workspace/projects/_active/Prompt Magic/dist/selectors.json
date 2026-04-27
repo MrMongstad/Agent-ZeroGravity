@@ -1,0 +1,14 @@
+{
+  "chatgpt.com": {
+    "input": "#prompt-textarea"
+  },
+  "claude.ai": {
+    "input": "div[contenteditable='true'].ProseMirror"
+  },
+  "gemini.google.com": {
+    "input": "rich-textarea div[contenteditable='true']"
+  },
+  "perplexity.ai": {
+    "input": "textarea"
+  }
+}

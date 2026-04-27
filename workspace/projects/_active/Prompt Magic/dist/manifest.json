@@ -1,0 +1,70 @@
+{
+  "manifest_version": 3,
+  "name": "Prompt Magic",
+  "version": "0.1.0",
+  "description": "Minimalist, space-efficient prompt engineering extension.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "sidePanel",
+    "storage",
+    "contextMenus",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://gemini.google.com/*",
+    "https://claude.ai/*",
+    "https://www.perplexity.ai/*"
+  ],
+  "background": {
+    "service_worker": "service-worker-loader.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "assets/content.js-Dto515Et.js"
+      ],
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://gemini.google.com/*",
+        "https://claude.ai/*",
+        "https://www.perplexity.ai/*"
+      ]
+    }
+  ],
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "action": {
+    "default_title": "Open Prompt Magic"
+  },
+  "web_accessible_resources": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "resources": [
+        "selectors.json"
+      ],
+      "use_dynamic_url": false
+    },
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://claude.ai/*",
+        "https://gemini.google.com/*",
+        "https://www.perplexity.ai/*"
+      ],
+      "resources": [
+        "assets/content.js-Dto515Et.js"
+      ],
+      "use_dynamic_url": false
+    }
+  ]
+}
