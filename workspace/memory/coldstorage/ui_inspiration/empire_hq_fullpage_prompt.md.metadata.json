@@ -1,0 +1,6 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_OTHER",
+  "summary":  "A single, comprehensive image generation prompt for the Empire HQ v3.0 dashboard. Synthesizes the layout analysis decisions: 7-tile metric strip, critical alert banner, compact horizontal API credits strip, 3-column main layout (Processes | Projects+Network | System Health), and footer. Formatted as a copy-paste-ready prompt block targeting tall portrait aspect ratio for full-page visibility.",
+  "updatedAt":  "2026-04-28T15:07:31.094311500Z",
+  "requestFeedback":  true
+}

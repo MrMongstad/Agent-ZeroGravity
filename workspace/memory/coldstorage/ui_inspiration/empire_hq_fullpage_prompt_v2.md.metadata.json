@@ -1,0 +1,6 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_OTHER",
+  "summary":  "Updated Empire HQ dashboard image generation prompt (v2). All purple/magenta/pink accents replaced with copper-gold (#e8a855) to create a cyan ↔ copper temperature polarity. Includes the full copy-paste prompt block, updated style tokens table, and rationale for the color swap.",
+  "updatedAt":  "2026-04-28T15:15:25.870671100Z",
+  "requestFeedback":  true
+}
