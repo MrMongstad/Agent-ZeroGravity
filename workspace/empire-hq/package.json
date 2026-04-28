@@ -1,0 +1,13 @@
+{
+  "name": "empire-hq",
+  "version": "3.0.0",
+  "description": "Empire HQ — Zero-dependency local command center",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

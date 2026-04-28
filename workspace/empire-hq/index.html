@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Empire HQ</title>
+  <meta name="description" content="Empire HQ — Autonomous Command Center for workspace documentation, system health, and project synchronization." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="hq-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <span class="logo-icon">🏛</span>
+          <span class="logo-text">Empire HQ</span>
+        </div>
+        <div class="version-badge">v3.0</div>
+      </div>
+
+      <nav class="nav-tabs" id="navTabs">
+        <button class="nav-tab active" data-panel="library" id="tab-library">
+          <span class="tab-icon">📖</span>
+          <span>Library</span>
+        </button>
+        <button class="nav-tab" data-panel="status" id="tab-status">
+          <span class="tab-icon">📡</span>
+          <span>Sync</span>
+          <span class="status-dot" id="globalStatusDot"></span>
+        </button>
+      </nav>
+
+      <div class="file-tree-section" id="fileTreeSection">
+        <div class="section-label">Documents</div>
+        <div class="search-bar">
+          <input type="text" id="fileSearch" placeholder="Search files…" autocomplete="off" />
+        </div>
+        <div class="file-tree" id="fileTree">
+          <div class="loading-state">Loading files…</div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="live-indicator" id="liveIndicator">
+          <span class="pulse-dot"></span>
+          <span>Live</span>
+        </div>
+        <div class="footer-time" id="footerTime"></div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+      <!-- Library Panel -->
+      <section class="panel" id="panelLibrary">
+        <div class="panel-toolbar">
+          <div class="breadcrumb" id="breadcrumb">Select a document</div>
+          <div class="toolbar-actions">
+            <button class="toolbar-btn" id="btnCopy" style="display:none">Copy MD</button>
+          </div>
+        </div>
+        <div class="reading-canvas" id="readingCanvas">
+          <div class="welcome-screen">
+            <div class="welcome-icon">🏛</div>
+            <h1>Empire HQ</h1>
+            <p class="welcome-sub">Your autonomous command center.<br/>Select a document from the sidebar to begin.</p>
+            <div class="welcome-stats" id="welcomeStats"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Status Panel -->
+      <section class="panel hidden" id="panelStatus">
+        <div class="panel-toolbar">
+          <div class="breadcrumb">Sync Status — All Repositories</div>
+          <div class="toolbar-actions">
+            <button class="toolbar-btn" id="btnRefreshStatus">↻ Refresh</button>
+          </div>
+        </div>
+        <div class="status-grid" id="statusGrid">
+          <div class="loading-state">Fetching Git status…</div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
