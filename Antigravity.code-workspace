@@ -1,12 +1,20 @@
 {
   "folders": [
     {
-      "name": "🔴 Active — In Dev",
-      "path": "workspace/projects/_active"
+      "name": "🔮 Prompt Magic",
+      "path": "workspace/projects/_active/Prompt Magic"
     },
     {
-      "name": "🟢 Live — Deployed",
-      "path": "workspace/projects/_live"
+      "name": "🔊 Sonic Reader V3",
+      "path": "workspace/projects/_active/Sonic_Reader_V3"
+    },
+    {
+      "name": "📅 NorCast Planner",
+      "path": "workspace/projects/_live/norcast-planner"
+    },
+    {
+      "name": "☁️ LFS-R2-Proxy",
+      "path": "workspace/projects/_live/LFS-R2-Proxy"
     },
     {
       "name": "⚙️ Workspace Root",
