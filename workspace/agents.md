@@ -13,6 +13,23 @@
 - **Pre-PR Validation:** Before staging a PR or finalizing a task, independently verify your work. Run tests, syntax checks, or linters. Never pass unverified code for review.
 - **Output Discipline:** Never narrate tool calls as free text. Call tools directly. Do not use repeated structural wrapper tags (e.g. `<step>`, `<thought_process>`) in output—one reasoning block, one tool call, verify result. If the response exceeds ~500 words before a tool call is made, halt reasoning and execute immediately. Violation of this rule causes recursive generation loops and token overflow.
 
+## Continuous Improvement Protocol
+- **Trigger:** During or after any task execution, if the agent identifies untapped optimization potential in the Architect's workflow, tooling, or system configuration.
+- **Scope:** Improvements include but are not limited to:
+  - Workflow process changes (gold-standard setup, file structures, naming conventions)
+  - New skills that should be created to codify repeating patterns
+  - VS Code extensions, CLI tools, or MCP servers worth installing/enabling
+  - Standalone apps, dashboards, or utilities worth building
+  - Automation opportunities (scripts, scheduled tasks, CI/CD hooks)
+  - Configuration drift from established best practices
+- **Delivery:** Surface suggestions as a concise `> [IMPROVEMENT]` block at the end of the relevant task response. Each suggestion must include:
+  1. **What** — the specific improvement
+  2. **Why** — the friction or inefficiency it eliminates
+  3. **How** — concrete next step (command, file, or PR)
+- **Constraint:** Do not interrupt active task flow. Append suggestions after task completion. If the improvement is critical (blocks future work or introduces risk), escalate inline with `⚠️ IMPROVEMENT_CRITICAL`.
+- **Automation Bias:** If an improvement *can* be automated, default to proposing automation. Manual-only improvements are a last resort.
+- **Tracking:** Log accepted improvements to `workspace/memory/improvements.md` with date, category, and status (`PROPOSED` → `ACCEPTED` → `IMPLEMENTED`).
+
 ## Compaction Flush Protocol
 - **Trigger:** When context window reaches ~90% capacity OR a compaction event is initiated.
 - **Procedure:**
