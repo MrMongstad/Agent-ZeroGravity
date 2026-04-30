@@ -1,14 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
+import 'dotenv/config';
 // ES Module compatibility for __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Resolve paths based on your workspace structure
-const MEMORY_DIR = path.resolve(__dirname, '../../../memory/prompt_library');
-const OUTPUT_FILE = path.resolve(__dirname, '../src/data/library.json');
+const WORKSPACE_ROOT = path.resolve(__dirname, '..');
+const MEMORY_DIR = path.resolve(WORKSPACE_ROOT, 'memory/prompt_library');
+const OUTPUT_FILE = path.resolve(WORKSPACE_ROOT, 'projects/_active/Prompt Magic/src/data/library.json');
 
 const FILES_TO_PARSE = [
   { filename: 'DEV_PROMPTS.md', category: 'Developer' },

@@ -1,612 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Empire HQ - Brutalist Command Center</title>
-  <meta name="description" content="Empire HQ — Autonomous Command Center for workspace documentation, system health, and project synchronization." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Empire HQ — Command Center</title>
+  <meta name="description" content="Empire HQ: Brutalist developer command center for monitoring projects, pipelines, and system health.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="hq-shell">
 
-    <div class="structural-label" style="padding: 10px 28px 0;">[ TOP NAVIGATION ]</div>
-    <!-- TOP NAVIGATION BAR -->
-    <nav class="top-nav" id="topNav">
-      <div class="nav-left">
-        <div class="logo">
-          <span class="logo-icon">>></span>
-          <span class="logo-text">Empire HQ</span>
+  <!-- ═══════════════════════ TOP NAV ═══════════════════════ -->
+  <nav id="top-nav">
+    <div class="nav-brand">
+      <span class="brand-icon">◆</span>
+      <span class="brand-text">EMPIRE HQ</span>
+      <span class="brand-version">v4.0</span>
+    </div>
+    <div class="nav-tabs">
+      <button class="nav-tab active" id="tab-dashboard">DASHBOARD</button>
+      <button class="nav-tab" id="tab-library">LIBRARY</button>
+      <button class="nav-tab" id="tab-projects">PROJECTS</button>
+      <button class="nav-tab" id="tab-processes">PROCESSES</button>
+      <button class="nav-tab" id="tab-settings">SETTINGS</button>
+    </div>
+    <div class="nav-user">
+      <div id="nano-indicator" style="display:flex; align-items:center; gap:6px; margin-right:12px; padding:4px 8px; background:var(--bg-light); border:1px solid var(--border-light); font-size:10px; cursor:default;" title="Nano AI Status: Checking...">
+        <span class="nano-icon" style="color:var(--text-muted)">◈</span>
+        <span class="nano-text" style="color:var(--text-muted)">NANO</span>
+      </div>
+      <span class="status-dot live"></span>
+      <span class="nav-clock" id="nav-clock">--:--:--</span>
+      <div class="avatar" id="user-avatar">SM</div>
+    </div>
+  </nav>
+
+  <main id="dashboard-main">
+
+    <!-- ═══════════════════ ROW 1: METRICS STRIP ═══════════════════ -->
+    <section id="metrics-strip" class="row">
+      <div class="metric-tile" id="metric-cpu">
+        <span class="metric-label">CPU</span>
+        <span class="metric-value">38<small>%</small></span>
+        <canvas class="sparkline" id="spark-cpu" width="80" height="24"></canvas>
+      </div>
+      <div class="metric-tile" id="metric-ram">
+        <span class="metric-label">RAM</span>
+        <span class="metric-value">62<small>%</small></span>
+        <canvas class="sparkline" id="spark-ram" width="80" height="24"></canvas>
+      </div>
+      <div class="metric-tile" id="metric-disk">
+        <span class="metric-label">DISK I/O</span>
+        <span class="metric-value">R:1.2 <small>W:9.4</small></span>
+        <canvas class="sparkline" id="spark-disk" width="80" height="24"></canvas>
+      </div>
+      <div class="metric-tile" id="metric-gpu">
+        <span class="metric-label">GPU TEMP</span>
+        <span class="metric-value">68<small>°C</small></span>
+        <canvas class="sparkline" id="spark-gpu" width="80" height="24"></canvas>
+      </div>
+      <div class="metric-tile" id="metric-projects">
+        <span class="metric-label">ACTIVE PROJECTS</span>
+        <span class="metric-value">4</span>
+        <div class="metric-bar"><div class="metric-bar-fill" style="width: 57%"></div></div>
+      </div>
+      <div class="metric-tile" id="metric-commits">
+        <span class="metric-label">GIT COMMITS</span>
+        <span class="metric-value">12</span>
+        <div class="metric-bar accent-green"><div class="metric-bar-fill" style="width: 40%"></div></div>
+      </div>
+      <div class="metric-tile" id="metric-network">
+        <span class="metric-label">NETWORK</span>
+        <span class="metric-value">↑1.2 <small>↓9.4</small></span>
+        <canvas class="sparkline" id="spark-net" width="80" height="24"></canvas>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ ROW 2: ALERT BANNER ═══════════════════ -->
+    <section id="alert-banner" class="row alert-critical">
+      <div class="alert-content">
+        <span class="alert-icon">▲</span>
+        <span class="alert-text">
+          <strong>CRITICAL:</strong> Build failed for <code>'data-pipeline'</code> in <code>'feat/authentication'</code>
+        </span>
+      </div>
+      <div class="alert-actions">
+        <button class="btn-ghost" id="alert-restart">RESTART BUILD</button>
+        <button class="btn-ghost" id="alert-logs">VIEW LOGS</button>
+        <button class="btn-ghost dismiss" id="alert-dismiss">DISMISS</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ ROW 3: API CREDITS ═══════════════════ -->
+    <section id="api-credits" class="row">
+      <div class="credit-cell" id="credit-openai">
+        <span class="credit-provider">OPENAI</span>
+        <div class="credit-bar"><div class="credit-bar-fill" style="width: 67%"></div></div>
+        <span class="credit-usage">$34 / $50</span>
+        <span class="credit-pct">67%</span>
+      </div>
+      <div class="credit-cell" id="credit-anthropic">
+        <span class="credit-provider">ANTHROPIC</span>
+        <div class="credit-bar"><div class="credit-bar-fill" style="width: 82%"></div></div>
+        <span class="credit-usage">$82 / $100</span>
+        <span class="credit-pct">82%</span>
+      </div>
+      <div class="credit-cell" id="credit-google">
+        <span class="credit-provider">GOOGLE AI</span>
+        <div class="credit-bar accent-amber"><div class="credit-bar-fill" style="width: 45%"></div></div>
+        <span class="credit-usage">$23 / $50</span>
+        <span class="credit-pct">45%</span>
+      </div>
+      <div class="credit-cell" id="credit-replicate">
+        <span class="credit-provider">REPLICATE</span>
+        <div class="credit-bar accent-red"><div class="credit-bar-fill" style="width: 91%"></div></div>
+        <span class="credit-usage">$4.50 / $5.00</span>
+        <span class="credit-pct warning">91%</span>
+      </div>
+      <div class="credit-burn" id="credit-daily-burn">
+        <span class="burn-label">DAILY BURN</span>
+        <span class="burn-value">$12.40<small>/day</small></span>
+        <canvas class="sparkline" id="spark-burn" width="60" height="20"></canvas>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ ROW 4: MAIN 3-COL AREA ═══════════════════ -->
+    <section id="main-content" class="row three-col">
+
+      <!-- LEFT COLUMN -->
+      <div class="col col-left" id="col-left">
+        <!-- Nav & Status -->
+        <div class="panel" id="panel-nav-status">
+          <div class="panel-header">
+            <span class="panel-title">NAV & STATUS</span>
+            <span class="panel-badge">6 NODES</span>
+          </div>
+          <div class="panel-body">
+            <ul class="status-tree" id="status-tree">
+              <li class="tree-item"><span class="dot green"></span><span class="tree-label">SITE-A</span><span class="tree-status">OK</span></li>
+              <li class="tree-item"><span class="dot green"></span><span class="tree-label">SITE-B</span><span class="tree-status">OK</span></li>
+              <li class="tree-item"><span class="dot amber"></span><span class="tree-label">PIPELINE-C</span><span class="tree-status">WARN</span></li>
+              <li class="tree-item"><span class="dot green"></span><span class="tree-label">PIPELINE-D</span><span class="tree-status">OK</span></li>
+              <li class="tree-item"><span class="dot green"></span><span class="tree-label">WORKER-E</span><span class="tree-status">OK</span></li>
+              <li class="tree-item"><span class="dot red"></span><span class="tree-label">CACHE-F</span><span class="tree-status">DOWN</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Data Ingestion Monitor -->
+        <div class="panel" id="panel-ingestion">
+          <div class="panel-header">
+            <span class="panel-title">DATA INGESTION</span>
+            <span class="panel-badge teal">LIVE</span>
+          </div>
+          <div class="panel-body">
+            <div class="ingestion-metric">
+              <span class="ingestion-label">THROUGHPUT</span>
+              <span class="ingestion-value">680 <small>Mbps</small></span>
+            </div>
+            <canvas class="chart-area" id="chart-throughput" width="280" height="80"></canvas>
+            <div class="ingestion-metric">
+              <span class="ingestion-label">ERROR RATE</span>
+              <span class="ingestion-value green">0.08<small>%</small></span>
+            </div>
+            <canvas class="chart-area" id="chart-errors" width="280" height="50"></canvas>
+          </div>
         </div>
       </div>
-      <div class="nav-center" id="navTabs">
-        <button class="nav-tab active" data-panel="dashboard" id="tab-dashboard">Dashboard</button>
-        <button class="nav-tab" data-panel="library" id="tab-library">Library</button>
-        <button class="nav-tab" data-panel="status" id="tab-status">Projects <span class="status-dot" id="globalStatusDot"></span></button>
-        <button class="nav-tab" data-panel="processes" id="tab-processes">Processes</button>
-        <button class="nav-tab" data-panel="settings" id="tab-settings">Settings</button>
+
+      <!-- CENTER COLUMN -->
+      <div class="col col-center" id="col-center">
+        <!-- Project Overview Table -->
+        <div class="panel" id="panel-projects">
+          <div class="panel-header">
+            <span class="panel-title">PROJECT OVERVIEW</span>
+            <span class="panel-badge">3 ACTIVE</span>
+          </div>
+          <div class="panel-body">
+            <table class="data-table" id="table-projects">
+              <thead>
+                <tr>
+                  <th>NAME</th>
+                  <th>PROGRESS</th>
+                  <th>TASKS</th>
+                  <th>DEADLINE</th>
+                  <th>STATUS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="cell-name">Project Alpha</td>
+                  <td><div class="progress-bar"><div class="progress-fill" style="width:78%"></div></div><span class="progress-pct">78%</span></td>
+                  <td>24/31</td>
+                  <td>2026-05-14</td>
+                  <td><span class="status-badge active">ACTIVE</span></td>
+                </tr>
+                <tr>
+                  <td class="cell-name">Project Beta</td>
+                  <td><div class="progress-bar"><div class="progress-fill amber" style="width:52%"></div></div><span class="progress-pct">52%</span></td>
+                  <td>13/25</td>
+                  <td>2026-05-28</td>
+                  <td><span class="status-badge warning">WARNING</span></td>
+                </tr>
+                <tr>
+                  <td class="cell-name">Gamma Pipeline</td>
+                  <td><div class="progress-bar"><div class="progress-fill" style="width:95%"></div></div><span class="progress-pct">95%</span></td>
+                  <td>19/20</td>
+                  <td>2026-05-02</td>
+                  <td><span class="status-badge active">ACTIVE</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pipeline Status -->
+        <div class="panel" id="panel-pipeline">
+          <div class="panel-header">
+            <span class="panel-title">PIPELINE STATUS</span>
+            <span class="panel-badge green">ALL CLEAR</span>
+          </div>
+          <div class="panel-body">
+            <div class="pipeline-flow" id="pipeline-flow">
+              <div class="pipeline-stage complete"><span class="stage-icon">✓</span><span class="stage-label">COLLECT</span></div>
+              <div class="pipeline-arrow">→</div>
+              <div class="pipeline-stage complete"><span class="stage-icon">✓</span><span class="stage-label">PROCESS</span></div>
+              <div class="pipeline-arrow">→</div>
+              <div class="pipeline-stage complete"><span class="stage-icon">✓</span><span class="stage-label">LOAD</span></div>
+              <div class="pipeline-arrow">→</div>
+              <div class="pipeline-stage active-stage"><span class="stage-icon pulse">●</span><span class="stage-label">ANALYZE</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Performance Metrics -->
+        <div class="panel" id="panel-kpi">
+          <div class="panel-header">
+            <span class="panel-title">KEY PERFORMANCE</span>
+          </div>
+          <div class="panel-body kpi-row">
+            <div class="kpi-cell" id="kpi-jobs">
+              <span class="kpi-label">JOBS</span>
+              <span class="kpi-value">1,452</span>
+              <canvas class="sparkline" id="spark-jobs" width="60" height="18"></canvas>
+            </div>
+            <div class="kpi-cell" id="kpi-errors">
+              <span class="kpi-label">ERRORS</span>
+              <span class="kpi-value red">28</span>
+              <canvas class="sparkline" id="spark-errors" width="60" height="18"></canvas>
+            </div>
+            <div class="kpi-cell" id="kpi-uptime">
+              <span class="kpi-label">UPTIME</span>
+              <span class="kpi-value green">99.8%</span>
+              <canvas class="sparkline" id="spark-uptime" width="60" height="18"></canvas>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="nav-right">
-        <!-- Actions or user profile placeholder -->
-        <div class="avatar-placeholder"></div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="col col-right" id="col-right">
+        <!-- Active Alerts -->
+        <div class="panel" id="panel-alerts">
+          <div class="panel-header">
+            <span class="panel-title">ACTIVE ALERTS</span>
+            <span class="panel-badge amber">4</span>
+          </div>
+          <div class="panel-body">
+            <ul class="alert-list" id="alert-list">
+              <li class="alert-item warn"><span class="alert-tri">▲</span><span>Disk Usage <strong>89%</strong></span><span class="alert-time">2m ago</span></li>
+              <li class="alert-item warn"><span class="alert-tri">▲</span><span>Queue Delay <strong>4min</strong></span><span class="alert-time">5m ago</span></li>
+              <li class="alert-item crit"><span class="alert-tri">▲</span><span>Memory Leak <strong>node.exe</strong></span><span class="alert-time">8m ago</span></li>
+              <li class="alert-item warn"><span class="alert-tri">▲</span><span>SSL Cert Expiry <strong>12d</strong></span><span class="alert-time">12m ago</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Team Activity -->
+        <div class="panel" id="panel-team">
+          <div class="panel-header">
+            <span class="panel-title">TEAM ACTIVITY</span>
+          </div>
+          <div class="panel-body">
+            <ul class="activity-feed" id="activity-feed">
+              <li class="feed-item"><span class="feed-action">PUSH</span><span class="feed-desc">fix: auth token refresh</span><span class="feed-time">3m</span></li>
+              <li class="feed-item"><span class="feed-action merge">MERGE</span><span class="feed-desc">feat/dashboard-v4</span><span class="feed-time">18m</span></li>
+              <li class="feed-item"><span class="feed-action">PUSH</span><span class="feed-desc">chore: bump deps</span><span class="feed-time">42m</span></li>
+              <li class="feed-item"><span class="feed-action deploy">DEPLOY</span><span class="feed-desc">prod release v3.9.1</span><span class="feed-time">1h</span></li>
+              <li class="feed-item"><span class="feed-action">PUSH</span><span class="feed-desc">docs: update API guide</span><span class="feed-time">2h</span></li>
+            </ul>
+            <div class="team-members">
+              <div class="member"><span class="member-avatar">SM</span><span class="member-name">StephanM</span><span class="status-badge active">ACTIVE</span></div>
+              <div class="member"><span class="member-avatar">J0</span><span class="member-name">Jarvis</span><span class="status-badge active">ACTIVE</span></div>
+              <div class="member"><span class="member-avatar">NX</span><span class="member-name">Nexus</span><span class="status-badge warning">STANDBY</span></div>
+            </div>
+          </div>
+        </div>
       </div>
-    </nav>
+    </section>
 
-    <!-- MAIN -->
-    <main class="main-content">
-
-      <!-- Dashboard Panel -->
-      <section class="panel" id="panelDashboard">
-        <div class="dashboard-scroll-area">
-          
-          <div class="structural-label">[ SYSTEM METRICS STRIP ]</div>
-          <!-- ROW 1 — SYSTEM METRICS STRIP -->
-          <div class="dash-row metrics-strip">
-            <div class="metric-tile">
-              <div class="metric-label">CPU</div>
-              <div class="metric-value">38%</div>
-              <div class="sparkline-container" style="height: 40px;">
-                <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 100 40">
-                  <path d="M0,25 L20,15 L40,30 L60,10 L80,20 L100,5" fill="none" stroke="var(--accent-cyan)" stroke-width="2" vector-effect="non-scaling-stroke"/>
-                </svg>
-              </div>
-            </div>
-            <div class="metric-tile">
-              <div class="metric-label">RAM</div>
-              <div class="metric-value">62%</div>
-              <div class="sparkline-container" style="height: 40px;">
-                <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 100 40">
-                  <path d="M0,30 L20,28 L40,15 L60,18 L80,8 L100,12" fill="none" stroke="var(--accent-green)" stroke-width="2" vector-effect="non-scaling-stroke"/>
-                </svg>
-              </div>
-            </div>
-            <div class="metric-tile">
-              <div class="metric-label">DISK I/O</div>
-              <div class="metric-value text-sm">R:1.2 W:9.4 MB/s</div>
-              <div class="sparkline-container" style="height: 40px;">
-                <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 100 40">
-                  <path d="M0,35 L20,10 L40,30 L60,25 L80,15 L100,5" fill="none" stroke="var(--accent-amber)" stroke-width="2" vector-effect="non-scaling-stroke"/>
-                </svg>
-              </div>
-            </div>
-            <div class="metric-tile">
-              <div class="metric-label">GPU</div>
-              <div class="metric-value">68°C</div>
-              <div class="sparkline-container" style="height: 40px;">
-                <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 100 40">
-                  <path d="M0,20 L30,22 L50,15 L70,18 L100,10" fill="none" stroke="var(--accent-amber)" stroke-width="2" vector-effect="non-scaling-stroke"/>
-                </svg>
-              </div>
-            </div>
-            <div class="metric-tile">
-              <div class="metric-label">ACTIVE PROJECTS</div>
-              <div class="metric-value">4</div>
-              <div class="sparkline-container" style="height: 40px;">
-                <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 100 40">
-                  <path d="M0,20 L100,20" fill="none" stroke="var(--accent-cyan)" stroke-width="2" stroke-dasharray="4,4" vector-effect="non-scaling-stroke"/>
-                </svg>
-              </div>
-            </div>
-            <div class="metric-tile">
-              <div class="metric-label">GIT COMMITS</div>
-              <div class="metric-value">12</div>
-              <div class="sparkline-container" style="height: 40px;">
-                <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 100 40">
-                  <path d="M0,35 L20,35 L20,25 L40,25 L40,15 L60,15 L60,20 L80,20 L80,5 L100,5" fill="none" stroke="var(--accent-green)" stroke-width="2" vector-effect="non-scaling-stroke"/>
-                </svg>
-              </div>
-            </div>
-            <div class="metric-tile">
-              <div class="metric-label">NETWORK</div>
-              <div class="metric-value text-sm">↑1.2 ↓9.4 MB/s</div>
-              <div class="sparkline-container" style="height: 40px;">
-                <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 100 40">
-                  <path d="M0,30 L30,15 L60,25 L100,5" fill="none" stroke="var(--accent-teal)" stroke-width="2" vector-effect="non-scaling-stroke"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          <div class="structural-label" style="margin-top: 16px;">[ CRITICAL ALERT BANNER ]</div>
-          <!-- ROW 2 — CRITICAL ALERT BANNER -->
-          <div class="dash-row alert-banner">
-            <div class="alert-content">CRITICAL: Build failed for 'data-pipeline' in 'feat/authentication'</div>
-            <div class="alert-actions">
-              <button class="ghost-btn" style="border-color: var(--accent-amber); color: var(--accent-amber);">Restart Build</button>
-              <button class="ghost-btn">View Logs</button>
-              <button class="ghost-btn">Dismiss</button>
-            </div>
-          </div>
-
-          <div class="structural-label" style="margin-top: 16px;">[ API CREDITS ]</div>
-          <!-- ROW 3 — API CREDITS HORIZONTAL STRIP -->
-          <div class="dash-row api-credits-strip">
-            <div class="api-cards">
-              <div class="api-card">
-                <div class="api-header"><strong>OpenAI</strong> <span class="text-cyan">$34/$50</span></div>
-                <div class="progress-track"><div class="progress-fill bg-cyan" style="width: 67%;"></div></div>
-              </div>
-              <div class="api-card">
-                <div class="api-header"><strong>Anthropic</strong> <span class="text-teal">$82/$100</span></div>
-                <div class="progress-track"><div class="progress-fill bg-teal" style="width: 82%;"></div></div>
-              </div>
-              <div class="api-card">
-                <div class="api-header"><strong>Google AI</strong> <span class="text-amber">$23/$50</span></div>
-                <div class="progress-track"><div class="progress-fill bg-amber" style="width: 45%;"></div></div>
-              </div>
-              <div class="api-card">
-                <div class="api-header"><strong>Replicate</strong> <span class="text-red">$4.50/$5.00</span></div>
-                <div class="progress-track"><div class="progress-fill bg-red" style="width: 91%;"></div></div>
-              </div>
-            </div>
-            <div class="api-burn">
-              <div class="api-burn-label">Daily Burn</div>
-              <div class="api-burn-value text-cyan">$12.40/day</div>
-            </div>
-          </div>
-
-          <div class="structural-label" style="margin-top: 16px;">[ MAIN GRID ]</div>
-          <!-- ROW 4 — MAIN THREE-COLUMN LAYOUT -->
-          <div class="dash-row dash-columns">
-            
-            <!-- LEFT COLUMN: Top Processes & Documents -->
-            <div class="dash-col col-left">
-              <div class="structural-label">COL 1: SYSTEM & FILES</div>
-              
-              <!-- Nav & Status -->
-              <div class="widget-box">
-                <h3 class="widget-title">Nav & Status</h3>
-                <table class="mono-table" style="width: 100%;">
-                  <tbody>
-                    <tr><td>Workspace</td><td class="text-right text-green">ONLINE</td></tr>
-                    <tr><td>Data DB</td><td class="text-right text-green">SYNCED</td></tr>
-                    <tr><td>Agents</td><td class="text-right text-amber">4 BUSY</td></tr>
-                    <tr><td>Relay</td><td class="text-right text-cyan">ACTIVE</td></tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <!-- Top Processes -->
-              <div class="widget-box top-processes-widget">
-                <h3 class="widget-title">Top Processes</h3>
-                <div class="processes-list">
-                  <div class="process-card">
-                    <div class="process-header">
-                      <span class="process-name">python.exe <span class="process-pid">PID 1024</span></span>
-                      <span class="pill pill-critical">CRITICAL</span>
-                    </div>
-                    <div class="process-stats">
-                      <div class="stat-row"><span>CPU</span> <div class="stat-bar-track"><div class="stat-bar-fill bg-red" style="width:95%;"></div></div></div>
-                      <div class="stat-row"><span>RAM</span> <span>2.4 GB</span></div>
-                    </div>
-                    <div class="process-actions">
-                        <button class="ghost-btn">Audit</button>
-                        <button class="ghost-btn">Restart</button>
-                        <button class="ghost-btn danger">Kill</button>
-                    </div>
-                  </div>
-                  
-                  <div class="process-card">
-                    <div class="process-header">
-                      <span class="process-name">chrome.exe <span class="process-pid">PID 4512</span></span>
-                      <span class="pill pill-warning">WARNING</span>
-                    </div>
-                    <div class="process-stats">
-                      <div class="stat-row"><span>CPU</span> <div class="stat-bar-track"><div class="stat-bar-fill bg-amber" style="width:75%;"></div></div></div>
-                      <div class="stat-row"><span>RAM</span> <span>850 MB</span></div>
-                    </div>
-                  </div>
-                  
-                  <div class="process-card">
-                    <div class="process-header">
-                      <span class="process-name">node.exe <span class="process-pid">PID 8920</span></span>
-                      <span class="pill pill-running">RUNNING</span>
-                    </div>
-                    <div class="process-stats">
-                      <div class="stat-row"><span>CPU</span> <div class="stat-bar-track"><div class="stat-bar-fill bg-green" style="width:30%;"></div></div></div>
-                      <div class="stat-row"><span>RAM</span> <span>120 MB</span></div>
-                    </div>
-                  </div>
-                  
-                  <div class="process-card">
-                    <div class="process-header">
-                      <span class="process-name">code.exe <span class="process-pid">PID 1104</span></span>
-                      <span class="pill pill-running">RUNNING</span>
-                    </div>
-                    <div class="process-stats">
-                      <div class="stat-row"><span>CPU</span> <div class="stat-bar-track"><div class="stat-bar-fill bg-green" style="width:15%;"></div></div></div>
-                      <div class="stat-row"><span>RAM</span> <span>640 MB</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Documents File Tree -->
-              <div class="widget-box dash-documents-widget">
-                <h3 class="widget-title">Documents</h3>
-                <div class="search-bar dash-search" style="padding: 0;">
-                  <input type="text" id="dashFileSearch" placeholder="SEARCH_FILES..." autocomplete="off" />
-                </div>
-                <div class="file-tree" id="dashFileTree" style="padding: 0;">
-                  <div class="loading-state">Loading files...</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- DEFAULT DASHBOARD VIEW (Center & Right Columns) -->
-            <div id="dashDefaultView" class="dash-default-view">
-              
-              <!-- CENTER COLUMN: Projects, Network Monitor, Console -->
-              <div class="dash-col col-center">
-                <div class="structural-label">COL 2: WORKSPACE & TERMINAL</div>
-                <!-- Project Overview -->
-                <div class="widget-box">
-                  <h3 class="widget-title">Project Overview</h3>
-                  <table class="projects-table mono-table" style="width: 100%;">
-                    <thead>
-                      <tr>
-                        <th>Project</th>
-                        <th>Tasks</th>
-                        <th>Progress</th>
-                        <th>Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="proj-name text-cyan">Empire_HQ</td>
-                        <td>24/30</td>
-                        <td><div class="progress-track" style="height:4px;"><div class="progress-fill bg-green" style="width: 80%;"></div></div></td>
-                        <td><span class="status-indicator bg-green"></span></td>
-                      </tr>
-                      <tr>
-                        <td class="proj-name text-cyan">data-pipeline</td>
-                        <td>12/45</td>
-                        <td><div class="progress-track" style="height:4px;"><div class="progress-fill bg-amber" style="width: 26%;"></div></div></td>
-                        <td><span class="status-indicator bg-amber"></span></td>
-                      </tr>
-                      <tr>
-                        <td class="proj-name text-cyan">Sonic_Reader</td>
-                        <td>10/10</td>
-                        <td><div class="progress-track" style="height:4px;"><div class="progress-fill bg-green" style="width: 100%;"></div></div></td>
-                        <td><span class="status-indicator bg-green"></span></td>
-                      </tr>
-                      <tr>
-                        <td class="proj-name text-cyan">core-api</td>
-                        <td>5/20</td>
-                        <td><div class="progress-track" style="height:4px;"><div class="progress-fill bg-red" style="width: 25%;"></div></div></td>
-                        <td><span class="status-indicator bg-red"></span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <!-- Network Traffic Chart -->
-                <div class="widget-box">
-                  <h3 class="widget-title">Network Traffic — 12h</h3>
-                  <div class="area-chart-placeholder">
-                      <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 1000 100">
-                          <path d="M0,70 Q100,50 200,80 T400,30 T600,60 T800,20 L1000,40" fill="none" stroke="var(--accent-teal)" stroke-width="2" vector-effect="non-scaling-stroke"/>
-                          <path d="M0,85 Q100,75 200,90 T400,50 T600,70 T800,40 L1000,55" fill="none" stroke="var(--accent-green)" stroke-width="2" vector-effect="non-scaling-stroke"/>
-                      </svg>
-                  </div>
-                  <div class="chart-sub">Top Consumer: chrome.exe — <span class="text-cyan">4.2 MB/s</span></div>
-                </div>
-
-                <!-- Data Ingestion Monitor -->
-                <div class="widget-box">
-                  <h3 class="widget-title">Data Ingestion Monitor</h3>
-                  <div class="flex justify-between align-center mb-2" style="font-size: 11px; text-transform: uppercase;">
-                    <span>Throughput: <span class="text-cyan">4,201 EPS</span></span>
-                    <span>Error Rate: <span class="text-red">0.02%</span></span>
-                  </div>
-                  <div class="sparkline-container" style="height: 60px;">
-                    <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 100 40">
-                      <path d="M0,30 L20,25 L40,35 L60,15 L80,20 L100,5" fill="none" stroke="var(--accent-cyan)" stroke-width="2" vector-effect="non-scaling-stroke"/>
-                    </svg>
-                  </div>
-                </div>
-
-                <!-- Pipeline Status -->
-                <div class="widget-box">
-                  <h3 class="widget-title">Pipeline Status</h3>
-                  <div class="pipeline-flow">
-                    <div class="pipeline-node success"><span>Collect</span> <span>100%</span></div>
-                    <div class="pipeline-arrow">↓</div>
-                    <div class="pipeline-node success"><span>Process</span> <span>100%</span></div>
-                    <div class="pipeline-arrow">↓</div>
-                    <div class="pipeline-node warning"><span>Load</span> <span class="text-amber">85%</span></div>
-                    <div class="pipeline-arrow">↓</div>
-                    <div class="pipeline-node idle"><span>Analyze</span> <span>0%</span></div>
-                  </div>
-                </div>
-
-                <!-- Live Terminal / Console (New) -->
-                <div class="widget-box flex-1 flex-col">
-                  <h3 class="widget-title">Live Terminal</h3>
-                  <div class="terminal-container">
-                    <div class="log-line"><span class="log-time">[08:33:01]</span> <span class="log-info">INFO:</span> Initializing Empire HQ v4.0...</div>
-                    <div class="log-line"><span class="log-time">[08:33:02]</span> <span class="log-success">SUCCESS:</span> Connected to local node via WS.</div>
-                    <div class="log-line"><span class="log-time">[08:33:04]</span> <span class="log-warn">WARN:</span> High CPU usage detected on PID 1024.</div>
-                    <div class="log-line"><span class="log-time">[08:33:05]</span> <span class="log-info">INFO:</span> Agent A-001 started task 'UI Refactor'.</div>
-                    <div class="log-line"><span class="log-time">[08:33:08]</span> <span class="log-error">ERROR:</span> Build failed for 'data-pipeline' in 'feat/authentication'.</div>
-                    <div class="log-line"><span class="log-time">[08:33:09]</span> <span class="log-info">INFO:</span> Awaiting command... <span class="cursor-blink">_</span></div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- RIGHT COLUMN: System Health, Agents, Task Queue -->
-              <div class="dash-col col-right">
-                <div class="structural-label">COL 3: SYSTEM & AGENTS</div>
-                
-                <!-- System Health -->
-                <div class="widget-box">
-                  <h3 class="widget-title">System Health</h3>
-                  <div class="gauges-container">
-                    <div class="gauge">
-                      <div class="gauge-label">CPU Load</div>
-                      <div class="gauge-val-text">38%</div>
-                      <div class="gauge-bar-track"><div class="gauge-bar-fill bg-cyan" style="width: 38%;"></div></div>
-                    </div>
-                    <div class="gauge">
-                      <div class="gauge-label">RAM Usage</div>
-                      <div class="gauge-val-text">62%</div>
-                      <div class="gauge-bar-track"><div class="gauge-bar-fill bg-green" style="width: 62%;"></div></div>
-                    </div>
-                    <div class="gauge">
-                      <div class="gauge-label">System Temp</div>
-                      <div class="gauge-val-text">68°C</div>
-                      <div class="gauge-bar-track"><div class="gauge-bar-fill bg-amber" style="width: 68%;"></div></div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Network I/O -->
-                <div class="widget-box">
-                  <h3 class="widget-title">Network I/O</h3>
-                  <div class="area-chart-placeholder" style="min-height: 80px;">
-                      <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 200 100">
-                          <path d="M0,80 L20,70 L40,85 L60,50 L80,60 L100,40 L120,65 L140,30 L160,55 L180,20 L200,40" fill="none" stroke="var(--accent-teal)" stroke-width="2" vector-effect="non-scaling-stroke"/>
-                          <path d="M0,90 L20,85 L40,95 L60,70 L80,75 L100,60 L120,80 L140,50 L160,70 L180,45 L200,55" fill="none" stroke="var(--accent-green)" stroke-width="2" vector-effect="non-scaling-stroke"/>
-                      </svg>
-                  </div>
-                  <div class="chart-sub">Max peak: <span class="text-teal">19.4 MB/s</span></div>
-                </div>
-
-                <!-- Active Agents / Swarm Tracker (New) -->
-                <div class="widget-box">
-                  <h3 class="widget-title">Active Agents</h3>
-                  <table class="projects-table mono-table">
-                    <thead>
-                      <tr>
-                        <th>Agent ID</th>
-                        <th>Task</th>
-                        <th>Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="text-cyan">A-001</td>
-                        <td>UI Refactor</td>
-                        <td><span class="pill pill-running">ACTIVE</span></td>
-                      </tr>
-                      <tr>
-                        <td class="text-teal">A-002</td>
-                        <td>Network Audit</td>
-                        <td><span class="pill pill-warning">IDLE</span></td>
-                      </tr>
-                      <tr>
-                        <td class="text-amber">A-003</td>
-                        <td>DB Migration</td>
-                        <td><span class="pill pill-running">ACTIVE</span></td>
-                      </tr>
-                      <tr>
-                        <td class="text-red">A-004</td>
-                        <td>Log Parser</td>
-                        <td><span class="pill pill-critical">ERROR</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <!-- Task Queue (New) -->
-                <div class="widget-box flex-1 flex-col">
-                  <h3 class="widget-title">Task Queue</h3>
-                  <div class="task-queue">
-                    <div class="task-item">
-                      <div class="task-header"><span class="task-id">#8041</span> <span class="task-status text-amber">In Progress</span></div>
-                      <div class="text-muted text-sm mt-2">Update index.html</div>
-                      <div class="progress-track mt-2"><div class="progress-fill bg-amber" style="width: 45%;"></div></div>
-                    </div>
-                    <div class="task-item mt-3">
-                      <div class="task-header"><span class="task-id">#8042</span> <span class="task-status text-muted">Pending</span></div>
-                      <div class="text-muted text-sm mt-2">Brutalist CSS pass</div>
-                      <div class="progress-track mt-2"><div class="progress-fill" style="width: 0%; background: var(--glass-border);"></div></div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Active Alerts -->
-                <div class="widget-box">
-                  <h3 class="widget-title">Active Alerts</h3>
-                  <div class="alert-item red">
-                    <div class="font-bold" style="color: var(--accent-red);">CRITICAL: DB Latency</div>
-                    <div class="text-muted text-sm" style="margin-top: 4px;">Cluster 4 responding > 500ms</div>
-                  </div>
-                  <div class="alert-item amber">
-                    <div class="font-bold" style="color: var(--accent-amber);">WARNING: API Limit</div>
-                    <div class="text-muted text-sm" style="margin-top: 4px;">Anthropic API usage at 82%</div>
-                  </div>
-                </div>
-
-                <!-- Key Performance Metrics -->
-                <div class="widget-box">
-                  <h3 class="widget-title">Key Performance</h3>
-                  <div class="flex justify-between align-center activity-item">
-                    <span>Total Jobs</span>
-                    <span class="text-cyan font-bold">14,302</span>
-                  </div>
-                  <div class="flex justify-between align-center activity-item">
-                    <span>Error Rate</span>
-                    <span class="text-red font-bold">1.2%</span>
-                  </div>
-                  <div class="flex justify-between align-center activity-item">
-                    <span>Uptime</span>
-                    <span class="text-green font-bold">99.98%</span>
-                  </div>
-                </div>
-
-                <!-- Team Activity -->
-                <div class="widget-box">
-                  <h3 class="widget-title">Team Activity</h3>
-                  <div class="activity-item">
-                    <div class="font-bold text-cyan">Agent-Zero</div>
-                    <div class="text-muted text-sm" style="margin-top: 4px;">Committed to feature/dashboard</div>
-                  </div>
-                  <div class="activity-item">
-                    <div class="font-bold text-teal">StephanM</div>
-                    <div class="text-muted text-sm" style="margin-top: 4px;">Reviewed PR #8041</div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            <!-- READER VIEW (Hidden by Default, takes up Center & Right) -->
-            <div id="dashReader" class="hidden widget-box dash-reader-view">
-              <div class="panel-toolbar reader-toolbar">
-                <div class="breadcrumb" id="dashBreadcrumb">Document</div>
-                <div class="toolbar-actions">
-                  <button class="toolbar-btn" id="btnDashCopy">COPY_MD</button>
-                  <button class="toolbar-btn" id="btnDashClose">CLOSE [X]</button>
-                </div>
-              </div>
-              <div class="reading-canvas">
-                <div class="md-body" id="dashMdBody"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="structural-label" style="margin-top: 16px;">[ ACTIVITY LOG ]</div>
-          <!-- ROW 5 — LATEST ACTIVITY LOG -->
-          <div class="dash-row">
-            <div class="widget-box" style="width: 100%;">
-              <h3 class="widget-title">Latest Activity Log</h3>
-              <table class="mono-table" style="width: 100%;">
-                <thead>
-                  <tr>
-                    <th>Timestamp</th>
-                    <th>Source</th>
-                    <th>Event / Action</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="text-muted">10:42:05</td>
-                    <td>Agent-001</td>
-                    <td>Initiated build sequence for 'Empire HQ'</td>
-                    <td><span class="pill pill-running">SUCCESS</span></td>
-                  </tr>
-                  <tr>
-                    <td class="text-muted">10:38:12</td>
-                    <td>System</td>
-                    <td>Detected memory spike in 'node.exe' PID 8920</td>
-                    <td><span class="pill pill-warning">WARNING</span></td>
-                  </tr>
-                  <tr>
-                    <td class="text-muted">10:35:00</td>
-                    <td>Auth Service</td>
-                    <td>Token refresh failed for user ID 804</td>
-                    <td><span class="pill pill-critical">FAILED</span></td>
-                  </tr>
-                  <tr>
-                    <td class="text-muted">10:15:22</td>
-                    <td>Agent-003</td>
-                    <td>Completed database migration job #402</td>
-                    <td><span class="pill pill-running">SUCCESS</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+    <!-- ═══════════════════ ROW 5: ACTIVITY LOG ═══════════════════ -->
+    <section id="activity-log" class="row">
+      <div class="panel full-width" id="panel-activity-log">
+        <div class="panel-header">
+          <span class="panel-title">LATEST ACTIVITY LOG</span>
+          <span class="panel-badge">12 EVENTS</span>
         </div>
-      </section>
-
-      <!-- Library Panel -->
-      <section class="panel hidden layout-split" id="panelLibrary">
-        <aside class="library-sidebar">
-          <div class="file-tree-section" id="fileTreeSection">
-            <div class="section-label">Documents</div>
-            <div class="search-bar">
-              <input type="text" id="fileSearch" placeholder="SEARCH_FILES..." autocomplete="off" />
-            </div>
-            <div class="file-tree" id="fileTree">
-              <div class="loading-state">Loading files...</div>
-            </div>
-          </div>
-        </aside>
-        <div class="library-content">
-          <div class="panel-toolbar reader-toolbar">
-            <div class="breadcrumb" id="breadcrumb">SELECT_A_DOCUMENT</div>
-            <div class="toolbar-actions">
-              <button class="toolbar-btn" id="btnCopy" style="display:none">COPY_MD</button>
-            </div>
-          </div>
-          <div class="reading-canvas" id="readingCanvas">
-            <div class="welcome-screen">
-              <div class="welcome-icon">>></div>
-              <h1>Empire HQ</h1>
-              <p class="welcome-sub">Autonomous Command Center.<br/>Select a document from the sidebar to begin.</p>
-              <div class="welcome-stats" id="welcomeStats"></div>
-            </div>
-          </div>
+        <div class="panel-body">
+          <table class="data-table log-table" id="table-log">
+            <thead>
+              <tr>
+                <th>TIMESTAMP</th>
+                <th>EVENT</th>
+                <th>SOURCE</th>
+                <th>STATUS</th>
+                <th>USER</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>11:34:02</td><td>Build completed</td><td>CI/CD</td><td><span class="status-badge active">SUCCESS</span></td><td>jarvis</td></tr>
+              <tr class="alt"><td>11:33:48</td><td>Tests passed (42/42)</td><td>Jest</td><td><span class="status-badge active">SUCCESS</span></td><td>jarvis</td></tr>
+              <tr><td>11:32:15</td><td>Dependency scan</td><td>Snyk</td><td><span class="status-badge active">SUCCESS</span></td><td>system</td></tr>
+              <tr class="alt"><td>11:31:09</td><td>Disk usage warning</td><td>Monitor</td><td><span class="status-badge warning">WARNING</span></td><td>system</td></tr>
+              <tr><td>11:28:44</td><td>PR #47 merged</td><td>GitHub</td><td><span class="status-badge active">SUCCESS</span></td><td>stephanm</td></tr>
+              <tr class="alt"><td>11:25:33</td><td>Queue delay spike</td><td>Redis</td><td><span class="status-badge warning">WARNING</span></td><td>system</td></tr>
+              <tr><td>11:22:10</td><td>API key rotated</td><td>Vault</td><td><span class="status-badge active">SUCCESS</span></td><td>stephanm</td></tr>
+              <tr class="alt"><td>11:18:55</td><td>Model inference 2.3s</td><td>Nano</td><td><span class="status-badge active">SUCCESS</span></td><td>jarvis</td></tr>
+              <tr><td>11:15:02</td><td>SSL cert check</td><td>Certbot</td><td><span class="status-badge warning">WARNING</span></td><td>system</td></tr>
+              <tr class="alt"><td>11:12:41</td><td>Backup completed</td><td>R2</td><td><span class="status-badge active">SUCCESS</span></td><td>system</td></tr>
+              <tr><td>11:08:33</td><td>Memory leak detected</td><td>Node</td><td><span class="status-badge critical">CRITICAL</span></td><td>system</td></tr>
+              <tr class="alt"><td>11:05:19</td><td>Deploy v3.9.1 → prod</td><td>Vercel</td><td><span class="status-badge active">SUCCESS</span></td><td>stephanm</td></tr>
+            </tbody>
+          </table>
         </div>
-      </section>
-
-      <!-- Status Panel (Projects) -->
-      <section class="panel hidden" id="panelStatus">
-        <div class="panel-toolbar reader-toolbar">
-          <div class="breadcrumb">SYNC_STATUS</div>
-          <div class="toolbar-actions">
-            <button class="toolbar-btn" id="btnRefreshStatus">REFRESH</button>
-          </div>
-        </div>
-        <div class="status-grid" id="statusGrid">
-          <div class="loading-state">Fetching Git status...</div>
-        </div>
-      </section>
-
-      <!-- Processes Panel (Placeholder) -->
-      <section class="panel hidden" id="panelProcesses">
-        <div class="loading-state">Processes view placeholder</div>
-      </section>
-
-      <!-- Settings Panel (Placeholder) -->
-      <section class="panel hidden" id="panelSettings">
-        <div class="loading-state">Settings view placeholder</div>
-      </section>
-
-    </main>
-    
-    <div class="structural-label" style="padding: 0 28px 4px;">[ FOOTER ]</div>
-    <!-- ROW 5 — FOOTER -->
-    <footer class="app-footer">
-      <div class="footer-left">Empire HQ v4.0 | Last refresh: 2s ago | Auto-refresh: 5s</div>
-      <div class="footer-right">
-        <div class="live-indicator" id="liveIndicator">
-          <span class="pulse-dot"></span>
-          <span>LIVE</span>
-        </div>
-        <div class="footer-time" id="footerTime"></div>
       </div>
-    </footer>
-  </div>
+    </section>
 
-  <div class="toast-container" id="toastContainer"></div>
-  <script src="app.js?v=4" type="module"></script>
+  </main>
+
+  <!-- ═══════════════════ ROW 6: FOOTER ═══════════════════ -->
+  <footer id="hq-footer">
+    <span class="footer-left">EMPIRE HQ v4.0 • LAST REFRESH: <span id="footer-refresh">2s</span> AGO • AUTO-REFRESH: 5s</span>
+    <span class="footer-right"><span class="status-dot live"></span> LIVE <span id="footer-clock">--:--:--</span></span>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>

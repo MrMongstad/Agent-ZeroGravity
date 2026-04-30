@@ -1,7 +1,7 @@
 {
   "name": "empire-hq",
-  "version": "3.0.0",
-  "description": "Empire HQ — Zero-dependency local command center",
+  "version": "4.0.0",
+  "description": "Empire HQ v4.0 — Zero-dependency brutalist command center",
   "type": "module",
   "scripts": {
     "start": "node server.js",
@@ -9,8 +9,5 @@
   },
   "engines": {
     "node": ">=18.0.0"
-  },
-  "devDependencies": {
-    "tailwindcss": "^4.2.4"
   }
 }
