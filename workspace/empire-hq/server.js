@@ -11,7 +11,7 @@ import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PORT = 3737;
+const PORT = 3739;
 
 // ─── Configurable Paths ───────────────────────────────────────────────────────
 const WORKSPACE_ROOT = path.resolve(__dirname, '..');
