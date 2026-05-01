@@ -307,11 +307,17 @@ const server = http.createServer((req, res) => {
 
   // Settings API
   if (pathname === '/api/settings') {
+    // Maps the short client keys → actual .env variable names
+    const KEY_MAP = {
+      openai:    'OPENAI_API_KEY',
+      anthropic: 'ANTHROPIC_API_KEY',
+      google:    'GEMINI_API_KEY',
+    };
     if (req.method === 'GET') {
       const keys = {
-        openai: (process.env.OPENAI_API_KEY || '').slice(0, 8) + '...',
-        anthropic: (process.env.ANTHROPIC_KEY || '').slice(0, 8) + '...',
-        google: (process.env.GEMINI_API_KEY || '').slice(0, 8) + '...',
+        openai:    (process.env.OPENAI_API_KEY    || '').slice(0, 8) + '...',
+        anthropic: (process.env.ANTHROPIC_API_KEY || '').slice(0, 8) + '...',
+        google:    (process.env.GEMINI_API_KEY    || '').slice(0, 8) + '...',
       };
       return json(res, keys);
     } else if (req.method === 'POST') {
@@ -320,24 +326,28 @@ const server = http.createServer((req, res) => {
       req.on('end', () => {
         try {
           const updates = JSON.parse(body);
-          if (fs.existsSync(envPath)) {
-            let envContent = fs.readFileSync(envPath, 'utf8');
-            // Basic replacement for demo purposes (assumes keys exist)
-            for (const [k, v] of Object.entries(updates)) {
-              if (v && !v.includes('...')) {
-                const regex = new RegExp(`^${k}=.*`, 'm');
-                if (envContent.match(regex)) {
-                  envContent = envContent.replace(regex, `${k}=${v}`);
-                } else {
-                  envContent += `\n${k}=${v}`;
-                }
-                process.env[k] = v;
-              }
-            }
-            fs.writeFileSync(envPath, envContent);
+          if (!fs.existsSync(envPath)) {
+            return json(res, { success: false, error: '.env file not found at ' + envPath }, 500);
           }
-          json(res, { success: true });
+          let envContent = fs.readFileSync(envPath, 'utf8');
+          let changed = 0;
+          for (const [k, v] of Object.entries(updates)) {
+            if (!v || v.includes('...')) continue;
+            // Support both short keys (openai) and full keys (OPENAI_API_KEY)
+            const envKey = KEY_MAP[k] || k;
+            const regex = new RegExp(`^${envKey}=.*`, 'm');
+            if (envContent.match(regex)) {
+              envContent = envContent.replace(regex, `${envKey}=${v}`);
+            } else {
+              envContent += `\n${envKey}=${v}`;
+            }
+            process.env[envKey] = v;
+            changed++;
+          }
+          fs.writeFileSync(envPath, envContent, 'utf8');
+          json(res, { success: true, updated: changed });
         } catch(e) {
+          console.error('[HQ] Settings save error:', e.message);
           json(res, { success: false, error: e.message }, 500);
         }
       });

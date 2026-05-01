@@ -230,6 +230,7 @@ async function fetchGitStatus() {
     renderGitStatusTree(repos);
     renderGitToProjectTable(repos);
     renderGitToActivityFeed(repos);
+    renderCommitLog(repos);        // ← real activity log
     renderProjectsTab(repos);
   } catch (e) {
     console.warn('[HQ] Git status fetch failed:', e.message);
@@ -382,6 +383,58 @@ function renderGitToActivityFeed(repos) {
 
   // Take latest 8
   feed.innerHTML = items.slice(0, 8).map(i => i.html).join('');
+}
+
+// ══════════════════════════════════════════════
+//  REAL DATA: COMMIT LOG → #table-log
+// ══════════════════════════════════════════════
+
+function renderCommitLog(repos) {
+  const tbody = $('table-log')?.querySelector('tbody');
+  const badge = $('panel-activity-log')?.querySelector('.panel-badge');
+  if (!tbody) return;
+
+  // Update thead columns to match real data
+  const thead = $('table-log')?.querySelector('thead tr');
+  if (thead && !thead.dataset.live) {
+    thead.innerHTML = '<th>HASH</th><th>COMMIT MESSAGE</th><th>REPO</th><th>STATUS</th><th>BRANCH</th>';
+    thead.dataset.live = 'true';
+  }
+
+  const rows = [];
+  repos.forEach(repo => {
+    if (!repo.exists || !repo.commits?.length) return;
+    repo.commits.forEach(c => {
+      const [hash, ...rest] = c.split(' ');
+      const msg = rest.join(' ') || '(no message)';
+      const actionType = msg.startsWith('Merge') ? 'MERGE'
+        : msg.toLowerCase().includes('deploy') ? 'DEPLOY'
+        : msg.toLowerCase().includes('fix') ? 'FIX'
+        : msg.toLowerCase().includes('feat') ? 'FEAT'
+        : 'PUSH';
+      const badgeClass = actionType === 'MERGE' ? 'merge'
+        : actionType === 'DEPLOY' ? 'deploy' : '';
+      rows.push({ hash: hash.slice(0, 7), msg, repo: repo.name, branch: repo.branch || 'main', actionType, badgeClass });
+    });
+  });
+
+  if (badge) badge.textContent = `${rows.length} COMMITS`;
+
+  if (!rows.length) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-muted)">No commits found — ensure repos have git history</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = rows.map((r, i) => `
+    <tr class="${i % 2 === 1 ? 'alt' : ''}">
+      <td style="font-family:var(--font-mono);color:var(--text-muted);letter-spacing:1px">${r.hash}</td>
+      <td title="${r.msg}" style="max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+        <span class="feed-action ${r.badgeClass}" style="margin-right:6px;font-size:10px;padding:2px 6px">${r.actionType}</span>${r.msg}
+      </td>
+      <td class="cell-name">${r.repo}</td>
+      <td><span class="status-badge active">PUSHED</span></td>
+      <td style="color:var(--text-muted)">${r.branch}</td>
+    </tr>`).join('');
 }
 
 // ══════════════════════════════════════════════
@@ -692,15 +745,17 @@ function createTabViews() {
         try {
           const res = await fetch('/api/settings', {
             method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
           });
-          if (res.ok) {
-            saveBtn.textContent = 'SAVED';
+          const data = await res.json();
+          if (data.success) {
+            saveBtn.textContent = 'SAVED ✓';
             saveBtn.style.color = 'var(--accent-green)';
-            showToast('Settings saved successfully', 'success');
-            setTimeout(() => { saveBtn.textContent = 'SAVE SETTINGS'; saveBtn.style.color = 'var(--accent-teal)'; }, 2000);
+            showToast(`Settings saved (${data.updated} key${data.updated !== 1 ? 's' : ''} updated)`, 'success');
+            setTimeout(() => { saveBtn.textContent = 'SAVE SETTINGS'; saveBtn.style.color = 'var(--accent-teal)'; }, 2500);
           } else {
-            showToast('Failed to save settings', 'error');
+            showToast(`Save failed: ${data.error || 'Unknown error'}`, 'error');
             saveBtn.textContent = 'SAVE SETTINGS';
           }
         } catch(e) {
@@ -920,6 +975,8 @@ async function fetchCreditConfig() {
 }
 
 function updateCreditBars(credits) {
+  // HONEST MODE: No billing API available → show configured budget caps, $0 tracked usage.
+  // Future: POST usage to /api/credits when AI calls are made from within HQ.
   const map = {
     openai:    'credit-openai',
     anthropic: 'credit-anthropic',
@@ -932,41 +989,24 @@ function updateCreditBars(credits) {
     const credit = credits[key];
     if (!cell || !credit) return;
 
-    // Update the provider name
     const providerEl = cell.querySelector('.credit-provider');
     if (providerEl) providerEl.textContent = credit.provider;
 
-    // Update the limit display (keep existing usage as placeholder)
+    // Show real cap from .env, honest $0 used
     const usageEl = cell.querySelector('.credit-usage');
-    if (usageEl) {
-      const currentText = usageEl.textContent;
-      const match = currentText.match(/\$?([\d.]+)/);
-      const used = match ? parseFloat(match[1]) : 0;
-      usageEl.textContent = `$${used} / $${credit.limit}`;
-    }
+    if (usageEl) usageEl.textContent = `$0 / $${credit.limit} cap`;
 
-    // Update percentage
-    const pctEl = cell.querySelector('.credit-pct');
+    // Bar at 0% — no false data
+    const pctEl  = cell.querySelector('.credit-pct');
     const barFill = cell.querySelector('.credit-bar-fill');
-    if (pctEl && barFill) {
-      const currentText = cell.querySelector('.credit-usage')?.textContent || '';
-      const usedMatch = currentText.match(/\$([\d.]+)\s*\//);
-      const used = usedMatch ? parseFloat(usedMatch[1]) : 0;
-      const pct = credit.limit > 0 ? Math.round((used / credit.limit) * 100) : 0;
-      pctEl.textContent = `${pct}%`;
-      barFill.style.width = `${pct}%`;
-
-      // Color code based on usage
-      pctEl.classList.remove('warning');
-      cell.querySelector('.credit-bar')?.classList.remove('accent-red', 'accent-amber');
-      if (pct >= 90) {
-        pctEl.classList.add('warning');
-        cell.querySelector('.credit-bar')?.classList.add('accent-red');
-      } else if (pct >= 75) {
-        cell.querySelector('.credit-bar')?.classList.add('accent-amber');
-      }
-    }
+    if (pctEl)  { pctEl.textContent = '0%'; pctEl.classList.remove('warning'); }
+    if (barFill) barFill.style.width = '0%';
+    cell.querySelector('.credit-bar')?.classList.remove('accent-red', 'accent-amber');
   });
+
+  // Daily burn: not tracked yet
+  const burnVal = document.querySelector('#credit-daily-burn .burn-value');
+  if (burnVal) burnVal.innerHTML = `N/A<small> /day</small>`;
 }
 
 // ══════════════════════════════════════════════
@@ -1017,18 +1057,8 @@ function animateProgressBars() {
 //  ACTIVITY LOG TIMESTAMPS
 // ══════════════════════════════════════════════
 
-function updateLogTimestamps() {
-  const rows = document.querySelectorAll('#table-log tbody tr');
-  if (!rows.length) return;
-  const now = new Date();
-  rows.forEach((row, i) => {
-    const td = row.querySelector('td');
-    if (td) {
-      const fakeTime = new Date(now.getTime() - (i * 150000 + rand(0, 60000)));
-      td.textContent = fakeTime.toLocaleTimeString('en-GB', { hour12: false });
-    }
-  });
-}
+// updateLogTimestamps retired — #table-log now shows real git commits via renderCommitLog()
+function updateLogTimestamps() { /* no-op: real data from renderCommitLog */ }
 
 // ══════════════════════════════════════════════
 //  PIPELINE STAGE CYCLING
@@ -1139,7 +1169,6 @@ async function boot() {
   // Start metric simulation
   setInterval(updateMetrics, 2000);
   setInterval(cyclePipeline, 8000);
-  setInterval(updateLogTimestamps, 30000);
   setTimeout(updateMetrics, 500);
 
   if (isServed) {
