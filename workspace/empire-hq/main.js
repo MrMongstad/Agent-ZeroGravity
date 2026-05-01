@@ -929,9 +929,63 @@ function renderLibraryList(filter = '') {
   });
 }
 
+let speechUtterances = [];
+let isSpeaking = false;
+
+function toggleReadAloud(text, btn) {
+  if (isSpeaking) {
+    window.speechSynthesis.cancel();
+    isSpeaking = false;
+    btn.textContent = 'READ ALOUD';
+    btn.style.color = '';
+    return;
+  }
+  
+  // Clean up basic markdown characters for better reading
+  const cleanText = text.replace(/[#*_\[\]`]/g, '').replace(/https?:\/\/[^\s]+/g, 'link');
+  
+  // Split into chunks (paragraphs/lines) to prevent long-text silent failures
+  const chunks = cleanText.split(/\n+/).filter(c => c.trim().length > 0);
+  if (chunks.length === 0) return;
+  
+  // Ensure cancel is called before starting new sequence
+  window.speechSynthesis.cancel();
+  
+  // Keep references globally to prevent garbage collection bugs in Chrome
+  speechUtterances = chunks.map((chunk, index) => {
+    const utterance = new SpeechSynthesisUtterance(chunk.trim());
+    utterance.rate = 1.0;
+    
+    // Only reset button on the very last chunk
+    if (index === chunks.length - 1) {
+      utterance.onend = () => {
+        isSpeaking = false;
+        if (document.body.contains(btn)) {
+          btn.textContent = 'READ ALOUD';
+          btn.style.color = '';
+        }
+      };
+    }
+    return utterance;
+  });
+  
+  // Queue all chunks
+  speechUtterances.forEach(u => window.speechSynthesis.speak(u));
+  
+  isSpeaking = true;
+  btn.textContent = 'STOP READING';
+  btn.style.color = 'var(--accent-amber)';
+}
+
 async function loadLibraryFile(relPath) {
   const readerEl = $('library-reader');
   if (!readerEl) return;
+
+  // Stop any active speech when loading a new file
+  if (window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+    isSpeaking = false;
+  }
 
   readerEl.innerHTML = '<div class="library-loading">Loading...</div>';
 
@@ -941,12 +995,20 @@ async function loadLibraryFile(relPath) {
     const md = await res.text();
     const filename = relPath.split('/').pop();
     readerEl.innerHTML = `
-      <div class="reader-toolbar">
-        <span class="reader-filename">${filename}</span>
-        <span class="reader-path">${relPath}</span>
+      <div class="reader-toolbar" style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <span class="reader-filename">${filename}</span>
+          <span class="reader-path">${relPath}</span>
+        </div>
+        <button id="btn-read-aloud" class="btn-ghost" style="padding:4px 8px; font-size:11px;">READ ALOUD</button>
       </div>
       <div class="reader-content">${mdToHtml(md)}</div>
     `;
+    
+    const readBtn = $('btn-read-aloud');
+    if (readBtn) {
+      readBtn.addEventListener('click', () => toggleReadAloud(md, readBtn));
+    }
   } catch (e) {
     readerEl.innerHTML = `<div class="library-loading" style="color:var(--red);">Error: ${e.message}</div>`;
   }
