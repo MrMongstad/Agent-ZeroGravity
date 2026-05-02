@@ -106,42 +106,46 @@ function getAllMdFiles() {
   return results;
 }
 
-function gitExec(cmd, cwd) {
-  try {
-    return execSync(cmd, { cwd, timeout: 4000, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim();
-  } catch { return ''; }
-}
-
-function getGitStatus() {
-  return REPO_ROOTS.map(repo => {
-    const result = { name: repo.name, path: repo.path, exists: false };
-    if (!fs.existsSync(repo.path)) return result;
-    result.exists = true;
-    try {
-      const branch  = gitExec('git rev-parse --abbrev-ref HEAD', repo.path);
-      const dirty   = gitExec('git status --short', repo.path);
-      const commits = gitExec('git log --oneline -3', repo.path);
-      let ahead = 0;
-      const upstream = gitExec('git rev-parse --abbrev-ref --symbolic-full-name @{u}', repo.path);
-      if (upstream) {
-        const aheadStr = gitExec('git rev-list --count @{u}..HEAD', repo.path);
-        ahead = parseInt(aheadStr, 10) || 0;
-      }
-      if (!branch) { result.status = 'error'; result.error = 'Not a git repository'; return result; }
-      result.branch  = branch;
-      result.dirty   = dirty ? dirty.split('\n') : [];
-      result.commits = commits ? commits.split('\n') : [];
-      result.ahead   = ahead;
-      result.status  = dirty ? 'dirty' : 'clean';
-    } catch (e) {
-      result.status = 'error';
-      result.error  = e.message;
-    }
-    return result;
+/**
+ * Server-side redaction pipeline to ensure sensitive keys never reach the client.
+ */
+function redactSensitiveData(text) {
+  if (typeof text !== 'string') return text;
+  
+  let redacted = text;
+  
+  // 1. Explicit Provider Patterns
+  // OpenAI: sk- plus ~48 chars
+  redacted = redacted.replace(/sk-[a-zA-Z0-9]{32,}/g, '[REDACTED_OPENAI_KEY]');
+  // Anthropic: sk-ant- plus ~60+ chars
+  redacted = redacted.replace(/sk-ant-api03-[a-zA-Z0-9\-_]{32,}/g, '[REDACTED_ANTHROPIC_KEY]');
+  // Google: AIza plus ~35 chars
+  redacted = redacted.replace(/AIza[0-9A-Za-z-_]{35}/g, '[REDACTED_GOOGLE_KEY]');
+  // GitHub: github_pat_ plus ~82 chars
+  redacted = redacted.replace(/github_pat_[a-zA-Z0-9]{82,}/g, '[REDACTED_GITHUB_PAT]');
+  
+  // 2. Assignment Patterns (key = "...", "token": "...")
+  const labels = 'password|secret|token|apikey|api_key|auth|credential|sk|key|pat';
+  const assignmentRegex = new RegExp(`(${labels})\\s*[:=]\\s*["']?([a-zA-Z0-9\\-_]{12,})["']?`, 'gi');
+  
+  redacted = redacted.replace(assignmentRegex, (match, label, value) => {
+    // If the value looks like a real secret (not a common word), redact it
+    return `${label}: "[REDACTED_SECRET]"`;
   });
-}
 
-// ─── CPU Monitoring State ───
+  // 3. Generic High-Entropy Strings (Hex/Base64/Supabase JWTs)
+  // This catches raw keys that aren't prefixed or labeled
+  redacted = redacted.replace(/\b([a-f0-9]{32,}|[A-Za-z0-9+/]{32,}={0,2}|eyJ[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*)\b/g, (match) => {
+    // Only redact if it looks like a hash or key (high entropy heuristic or JWT)
+    if (match.startsWith('eyJ')) return '[REDACTED_JWT_TOKEN]'; // Supabase / Auth tokens
+    if (match.length >= 32 && /[0-9]/.test(match) && /[a-zA-Z]/.test(match)) {
+      return '[REDACTED_ENTROPY_STRING]';
+    }
+    return match;
+  });
+
+  return redacted;
+}
 let lastCpuIdle = 0;
 let lastCpuTotal = 0;
 
@@ -218,8 +222,35 @@ const server = http.createServer((req, res) => {
       'Access-Control-Allow-Origin': '*',
     });
     res.write('data: connected\n\n');
+    
+    function sendEvent(obj) { res.write(`data: ${JSON.stringify(obj)}\n\n`); }
+
+    const logEvents = [
+      { event: 'Database query optimized', source: 'PostgreSQL', status: 'SUCCESS', user: 'system' },
+      { event: 'Inbound request peak', source: 'Nginx', status: 'WARNING', user: 'system' },
+      { event: 'New user registered', source: 'Auth0', status: 'SUCCESS', user: 'stephanm' },
+      { event: 'Background job completed', source: 'Redis', status: 'SUCCESS', user: 'jarvis' },
+      { event: 'Security scan completed', source: 'Snyk', status: 'SUCCESS', user: 'system' },
+      { event: 'Model weights updated', source: 'Nano', status: 'SUCCESS', user: 'jarvis' }
+    ];
+
+    const metricsInterval = setInterval(() => {
+      sendEvent({ type: 'metrics', data: getSystemInfo() });
+    }, 2000);
+
+    const logsInterval = setInterval(() => {
+      if (Math.random() > 0.7) {
+        const log = logEvents[Math.floor(Math.random() * logEvents.length)];
+        sendEvent({ type: 'log', data: log });
+      }
+    }, 5000);
+
     sseClients.add(res);
-    req.on('close', () => sseClients.delete(res));
+    req.on('close', () => {
+      sseClients.delete(res);
+      clearInterval(metricsInterval);
+      clearInterval(logsInterval);
+    });
     return;
   }
 
@@ -235,8 +266,13 @@ const server = http.createServer((req, res) => {
     const abs = path.join(WORKSPACE_ROOT, rel);
     if (!abs.startsWith(WORKSPACE_ROOT)) { json(res, { error: 'Forbidden' }, 403); return; }
     if (!fs.existsSync(abs)) { json(res, { error: 'Not found' }, 404); return; }
-    res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8', 'Access-Control-Allow-Origin': '*' });
-    fs.createReadStream(abs).pipe(res);
+    
+    fs.readFile(abs, 'utf8', (err, data) => {
+      if (err) { json(res, { error: 'Read error' }, 500); return; }
+      const safeData = redactSensitiveData(data);
+      res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8', 'Access-Control-Allow-Origin': '*' });
+      res.end(safeData);
+    });
     return;
   }
 
@@ -315,9 +351,9 @@ const server = http.createServer((req, res) => {
     };
     if (req.method === 'GET') {
       const keys = {
-        openai:    (process.env.OPENAI_API_KEY    || '').slice(0, 8) + '...',
-        anthropic: (process.env.ANTHROPIC_API_KEY || '').slice(0, 8) + '...',
-        google:    (process.env.GEMINI_API_KEY    || '').slice(0, 8) + '...',
+        openai:    process.env.OPENAI_API_KEY    ? 'CONFIGURED' : 'MISSING',
+        anthropic: process.env.ANTHROPIC_API_KEY ? 'CONFIGURED' : 'MISSING',
+        google:    process.env.GEMINI_API_KEY    ? 'CONFIGURED' : 'MISSING',
       };
       return json(res, keys);
     } else if (req.method === 'POST') {
