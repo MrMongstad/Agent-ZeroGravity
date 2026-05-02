@@ -27,10 +27,10 @@ function redactSensitiveData(text) {
   
   // 2. Assignment Patterns
   const labels = 'password|secret|token|apikey|api_key|auth|credential|sk|key|pat';
-  const assignmentRegex = new RegExp(`(${labels})\\s*[:=]\\s*["']?([a-zA-Z0-9\\-_]{12,})["']?`, 'gi');
+  const assignmentRegex = new RegExp(`\\b(${labels})\\b(\\s*[:=]\\s*)(["']?)([a-zA-Z0-9\\-_]{12,})\\3`, 'gi');
   
-  redacted = redacted.replace(assignmentRegex, (match, label, value) => {
-    return `${label}: "[REDACTED_SECRET]"`;
+  redacted = redacted.replace(assignmentRegex, (match, label, separator, quote, value) => {
+    return `${label}${separator}${quote}[REDACTED_SECRET]${quote}`;
   });
 
   // 3. Generic High-Entropy Strings (Hex/Base64/Supabase JWTs)
@@ -234,6 +234,9 @@ async function fetchSystemMetrics() {
     // Overwrite simulated with real
     metrics.cpu = data.cpu;
     metrics.ram = data.ram;
+    if (data.errorCount !== undefined) {
+      metrics.errors = data.errorCount;
+    }
 
     // Update RAM tile with real values
     const ramTile = $('metric-ram');
@@ -590,7 +593,7 @@ function updateMetrics() {
 
   // KPI cards
   const kpiErrors = $('kpi-errors');
-  if (kpiErrors) kpiErrors.querySelector('.kpi-value').textContent = Math.round(metrics.errors + rand(-2, 2));
+  if (kpiErrors) kpiErrors.querySelector('.kpi-value').textContent = Math.round(metrics.errors);
 
   // GPU temperature color coding
   if (metricGpu) {

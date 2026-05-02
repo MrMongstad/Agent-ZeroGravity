@@ -21,8 +21,8 @@
   /* Text */
   --text-primary:   #dce6f0;
   --text-secondary: #a1b0c0;
-  --text-muted:     #7a8ba0;
-  --text-bright:    #f5faff;
+  --text-muted:     #94a3b8;
+  --text-bright:    #ffffff;
 
   /* Accents */
   --teal:           #4a9e8e;
@@ -50,7 +50,7 @@
 }
 
 html {
-  font-size: 42px; /* Set to 42px (150% of 28px) for maximum distance accessibility */
+  font-size: 30px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -139,7 +139,7 @@ body {
   border: none;
   color: var(--text-secondary);
   font-family: inherit;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 2px;
   padding: 0 24px;
@@ -224,7 +224,10 @@ body {
   display: flex;
   flex-direction: column;
   gap: var(--gap);
-  padding: var(--gap);
+  padding: var(--gap) 40px;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .row {
@@ -274,22 +277,22 @@ body {
 }
 
 .metric-label {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   color: var(--text-muted);
   text-transform: uppercase;
 }
 
 .metric-value {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 800;
   color: var(--text-bright);
   line-height: 1;
 }
 
 .metric-value small {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   color: var(--text-secondary);
 }
@@ -540,14 +543,14 @@ body {
 }
 
 .panel-title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 2.5px;
   color: var(--text-secondary);
 }
 
 .panel-badge {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 1px;
   padding: 3px 8px;
@@ -596,7 +599,7 @@ body {
 }
 
 .tree-status {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 1.5px;
   color: var(--text-muted);
@@ -611,13 +614,13 @@ body {
 }
 
 .ingestion-label {
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 2px;
   color: var(--text-muted);
 }
 
 .ingestion-value {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
   color: var(--text-bright);
 }
@@ -625,7 +628,7 @@ body {
 .ingestion-value.green { color: var(--green); }
 
 .ingestion-value small {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 400;
   color: var(--text-secondary);
 }
@@ -644,7 +647,7 @@ body {
 }
 
 .data-table th {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 2px;
   color: var(--text-muted);
@@ -708,7 +711,7 @@ body {
 /* Status badges */
 .status-badge {
   display: inline-block;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 1.5px;
   padding: 3px 8px;
@@ -778,7 +781,7 @@ body {
 }
 
 .stage-label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 2px;
   color: var(--text-secondary);
@@ -813,14 +816,14 @@ body {
 }
 
 .kpi-label {
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 2px;
   color: var(--text-muted);
 }
 
 .kpi-value {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
   color: var(--text-bright);
 }
@@ -839,7 +842,7 @@ body {
   gap: 8px;
   padding: 7px 6px;
   border-bottom: 1px solid var(--border);
-  font-size: 10px;
+  font-size: 12px;
   transition: background 0.1s;
 }
 
@@ -853,7 +856,7 @@ body {
 .alert-item.crit .alert-tri { color: var(--red); }
 
 .alert-tri {
-  font-size: 10px;
+  font-size: 12px;
   flex-shrink: 0;
 }
 
@@ -867,7 +870,7 @@ body {
 }
 
 .alert-time {
-  font-size: 9px;
+  font-size: 11px;
   color: var(--text-muted);
   flex-shrink: 0;
 }
@@ -884,13 +887,13 @@ body {
   gap: 8px;
   padding: 5px 4px;
   border-bottom: 1px solid var(--border);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .feed-item:last-child { border-bottom: none; }
 
 .feed-action {
-  font-size: 7px;
+  font-size: 9px;
   font-weight: 800;
   letter-spacing: 1px;
   padding: 2px 5px;
@@ -918,7 +921,7 @@ body {
 }
 
 .feed-time {
-  font-size: 9px;
+  font-size: 10px;
   color: var(--text-muted);
   flex-shrink: 0;
 }
@@ -947,7 +950,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   color: var(--teal);
   letter-spacing: 1px;
@@ -956,14 +959,14 @@ body {
 
 .member-name {
   flex: 1;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--text-primary);
 }
 
 /* ─── LOG TABLE (Row 5) ─── */
 .log-table {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 /* ════════════════════════════════════════
@@ -1036,7 +1039,10 @@ body {
 
 .tab-view {
   flex: 1;
-  padding: var(--gap);
+  padding: var(--gap) 40px;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .tab-view .row {
@@ -1052,7 +1058,7 @@ body {
   border: 1px solid var(--border);
   color: var(--text-primary);
   font-family: inherit;
-  font-size: 10px;
+  font-size: 12px;
   padding: 4px 10px;
   margin-left: auto;
   width: 200px;
@@ -1092,7 +1098,7 @@ body {
   padding: 24px;
   text-align: center;
   color: var(--text-muted);
-  font-size: 10px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }

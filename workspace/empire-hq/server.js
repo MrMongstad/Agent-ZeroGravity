@@ -32,7 +32,7 @@ if (fs.existsSync(envPath)) {
   });
 }
 
-const PORT = parseInt(process.env.PORT, 10) || 3739;
+const PORT = 3739;
 
 // ─── Configurable Paths ───────────────────────────────────────────────────────
 const SCAN_DIRS = [
@@ -126,12 +126,12 @@ function redactSensitiveData(text) {
   
   // 2. Assignment Patterns (key = "...", "token": "...")
   const labels = 'password|secret|token|apikey|api_key|auth|credential|sk|key|pat';
-  const assignmentRegex = new RegExp(`(${labels})\\s*[:=]\\s*["']?([a-zA-Z0-9\\-_]{12,})["']?`, 'gi');
+  const assignmentRegex = new RegExp(`\\b(${labels})\\b(\\s*[:=]\\s*)(["']?)([a-zA-Z0-9\\-_]{12,})\\3`, 'gi');
   
-  redacted = redacted.replace(assignmentRegex, (match, label, value) => {
-    // If the value looks like a real secret (not a common word), redact it
-    return `${label}: "[REDACTED_SECRET]"`;
+  redacted = redacted.replace(assignmentRegex, (match, label, separator, quote, value) => {
+    return `${label}${separator}${quote}[REDACTED_SECRET]${quote}`;
   });
+
 
   // 3. Generic High-Entropy Strings (Hex/Base64/Supabase JWTs)
   // This catches raw keys that aren't prefixed or labeled
@@ -148,6 +148,16 @@ function redactSensitiveData(text) {
 }
 let lastCpuIdle = 0;
 let lastCpuTotal = 0;
+let serverErrorCount = 0;
+
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+  serverErrorCount++;
+});
+process.on('unhandledRejection', (reason) => {
+  console.error('Unhandled Rejection:', reason);
+  serverErrorCount++;
+});
 
 function getSystemInfo() {
   const cpus = os.cpus();
@@ -177,6 +187,7 @@ function getSystemInfo() {
     cpuModel: cpus[0]?.model || 'unknown',
     cpuCores: cpus.length,
     nodeVersion: process.version,
+    errorCount: serverErrorCount,
   };
 }
 
@@ -192,6 +203,7 @@ function serveStatic(res, filePath) {
 }
 
 function json(res, data, code = 200) {
+  if (code >= 500) serverErrorCount++;
   res.writeHead(code, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
   res.end(JSON.stringify(data));
 }
